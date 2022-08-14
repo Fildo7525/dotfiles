@@ -74,3 +74,8 @@ curl https://sh.rustup.rs -sSf | sh
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 # on scroll cycle between windows and change focus
 gsettings set org.gnome.shell.extensions.dash-to-dock scroll-action 'cycle-windows'
+
+git clone https://github.com/realh/multi-monitors-add-on.git
+cd multi-monitors-add-on
+cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
+gsettings set org.gnome.shell disable-extension-version-validation true
