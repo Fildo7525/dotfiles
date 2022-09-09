@@ -16,7 +16,6 @@ sudo snap install code --classic
 sudo apt install apt-transport-https \
 				 build-essential \
 				 ccache \
-				 ccmake \
 				 cmake \
 				 curl \
 				 exa \
@@ -32,7 +31,6 @@ sudo apt install apt-transport-https \
 				 python3-pip \
 				 qtbase5-dev \
 				 ripgrep \
-				 tee \
 				 tree \
 				 zsh -y
 
