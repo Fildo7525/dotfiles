@@ -144,6 +144,17 @@ fi
 	cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
 	gsettings set org.gnome.shell disable-extension-version-validation true
 
+# Use function keys as default. To use the actions use Fn+Fx where 'x' is a corresponding number
+#	fnmode	|	function	|	Description
+#	0		|	disabled	|	Disables the 'fn' key. This means that pressing F2 will trigger F2 to be pressed and not the special action key.
+#			|				|	Pressing 'fn' + F2 will just press the F2 key as normal.
+#	1		|	fkeyslast	|	Function keys are used as the last key. Pressing F2 will act as the special key. Pressing 'fn' + F2 will trigger F2.
+#	2		|	fkeysfirst	|	Function keys are used as the first key. Pressing F2 will act as triggering F2. Pressing 'fn' + F2 will act as the special key.
+#
+# To have a closer read: https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux
+echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+sudo update-initramfs -u -k all
+
 #############
 #  FLATPAK  #
 #############
