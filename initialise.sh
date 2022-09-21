@@ -23,10 +23,8 @@ sudo ubuntu-drivers autoinstall
 ################
 sudo apt install apt-transport-https \
 				 build-essential \
-				 ccache \
 				 cmake \
 				 curl \
-				 exa \
 				 fzf \
 				 git \
 				 gitk \
