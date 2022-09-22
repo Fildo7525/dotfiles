@@ -47,7 +47,8 @@ echo 'export PAGER=most' >> ~/.bashrc
 #############
 #  LAZYGIT  #
 #############
-if [[ $(which lazygit) != 0 ]]; then
+$(which lazygit)
+if [[ $? != 0 ]]; then
 	error "Installing lazygit"
 	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
 	MACHINE_NAME=$(uname --machine)
@@ -61,7 +62,8 @@ fi
 ###############
 #  XOURNAL++  #
 ###############
-if [[ $(which xournalpp) != 0 ]]; then
+which xournalpp
+if [[ $? != 0 ]]; then
 	error "Installing xournalpp"
 	sudo add-apt-repository ppa:apandada1/xournalpp-stable
 	sudo apt update
@@ -73,8 +75,8 @@ fi
 ############
 #  NEOVIM  #
 ############
-
-if [[ $(which nvim) != 0 ]]; then
+which nvim
+if [[ $? != 0 ]]; then
 	error "Installing nvim"
 	wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb
 	sudo apt install ./nvim-linux64.deb
@@ -85,9 +87,11 @@ fi
 	###########################
 	#  NODEJS - for nvim lsp  #
 	###########################
-	if [[ $(which node) != 0 ]]; then
+	which node
+	if [[ $? != 0 ]]; then
 		error "Installing nodejs"
 		curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+		sudo apt update
 		sudo apt install nodejs -y
 	else
 		alreadyDone "Nodejs is already insalled with version $(node --verison)"
@@ -96,7 +100,8 @@ fi
 	#####################
 	#  RUST - for nvim  #
 	#####################
-	if [[ $(which cargo) != 0 ]]; then
+	which cargo
+	if [[ $? != 0 ]]; then
 		error "Installing Rust (cargo)"
 		curl https://sh.rustup.rs -sSf | sh
 	else
@@ -106,11 +111,12 @@ fi
 ###########
 #  BRAVE  #
 ###########
-
-if [[ $(which brave-browser) != 0 ]]; then
+which brave-browser
+if [[ $? != 0 ]]; then
 	error "Installing brave"
 	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+	sudo apt update
 	sudo apt install brave-browser -y
 else
 	alreadyDone "Brave is already installed with version $(brave-browser --version)"
@@ -119,13 +125,26 @@ fi
 #############
 #  SPOTIFY  #
 #############
-if [[ $(which spotify) != 0 ]]; then
+which spotify
+if [[ $? != 0 ]]; then
 	error "Installing spotify"
 	curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add -
 	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+	sudo apt update
 	sudo apt install spotify-client -y
 else
 	alreadyDone "Spotify is already installed with verison $(spotify --version)"
+fi
+
+###########
+#  TEAMS  #
+###########
+if [[ $? != 0 ]]; then
+	error "Installing Microsoft teams"
+	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+	sudo apt update
+	sudo apt install teams
 fi
 
 ###########
