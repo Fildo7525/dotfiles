@@ -40,6 +40,7 @@ sudo apt install apt-transport-https \
 				 qtbase5-dev \
 				 ripgrep \
 				 tree \
+				 zathura \
 				 zsh -y
 
 echo 'export PAGER=most' >> ~/.bashrc
