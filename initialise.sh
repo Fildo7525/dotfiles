@@ -199,3 +199,14 @@ sudo update-initramfs -u -k all
 
 #flatpak install com.brave.Browser com.discordapp.Discord com.spotify.Client
 
+#########
+#  Git  #
+#########
+read -p "Git user email: " email
+git --global user.email "$email"
+read -p "Git user name: " name
+git --global user.name "$name"
+
+alreadyDone "Setting up the ssh key"
+ssh-keygen -t ed25519 -C "$email"
+
