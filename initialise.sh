@@ -110,6 +110,16 @@ fi
 		alreadyDone "Rust is already intalled with version $(cargo --version)"
 	fi
 
+	###############
+	#  Nerd font  #
+	###############
+	log"Downloading BitstreamVeraSansMono nerd font"
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/BitstreamVeraSansMono.zip
+	mkdir BitstreamVeraSansMono
+	unzip -qq BitstreamVeraSansMono.zip -d BitstreamVeraSansMono
+	cd BitstreamVeraSansMono; find . -name "* Windows *" -delete ; cd ..
+	sudo mv BitstreamVeraSansMono /usr/local/share/fonts/
+
 ###########
 #  BRAVE  #
 ###########
