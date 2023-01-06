@@ -51,7 +51,7 @@ echo 'export PAGER=most' >> ~/.bashrc
 #############
 $(which lazygit)
 if [[ $? != 0 ]]; then
-	log"Installing lazygit"
+	log "Installing lazygit"
 	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
 	MACHINE_NAME=$(uname --machine)
 	curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_${MACHINE_NAME}.tar.gz"
@@ -66,7 +66,7 @@ fi
 ###############
 which xournalpp
 if [[ $? != 0 ]]; then
-	log"Installing xournalpp"
+	log "Installing xournalpp"
 	sudo add-apt-repository ppa:apandada1/xournalpp-stable
 	sudo apt update
 	sudo apt install xournalpp -y
@@ -79,7 +79,7 @@ fi
 ############
 which nvim
 if [[ $? != 0 ]]; then
-	log"Installing nvim"
+	log "Installing nvim"
 	wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb
 	sudo apt install ./nvim-linux64.deb
 else
@@ -91,7 +91,7 @@ fi
 	###########################
 	which node
 	if [[ $? != 0 ]]; then
-		log"Installing nodejs"
+		log "Installing nodejs"
 		curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
 		sudo apt update
 		sudo apt install nodejs -y
@@ -104,7 +104,7 @@ fi
 	#####################
 	which cargo
 	if [[ $? != 0 ]]; then
-		log"Installing Rust (cargo)"
+		log "Installing Rust (cargo)"
 		curl https://sh.rustup.rs -sSf | sh
 	else
 		alreadyDone "Rust is already intalled with version $(cargo --version)"
@@ -113,7 +113,7 @@ fi
 	###############
 	#  Nerd font  #
 	###############
-	log"Downloading BitstreamVeraSansMono nerd font"
+	log "Downloading BitstreamVeraSansMono nerd font"
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/BitstreamVeraSansMono.zip
 	mkdir BitstreamVeraSansMono
 	unzip -qq BitstreamVeraSansMono.zip -d BitstreamVeraSansMono
@@ -125,7 +125,7 @@ fi
 ###########
 which brave-browser
 if [[ $? != 0 ]]; then
-	log"Installing brave"
+	log "Installing brave"
 	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 	sudo apt update
@@ -139,7 +139,7 @@ fi
 #############
 which spotify
 if [[ $? != 0 ]]; then
-	log"Installing spotify"
+	log "Installing spotify"
 	curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add -
 	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 	sudo apt update
@@ -153,11 +153,13 @@ fi
 ###########
 which teams
 if [[ $? != 0 ]]; then
-	log"Installing Microsoft teams"
+	log "Installing Microsoft teams"
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
 	sudo apt update
 	sudo apt install teams
+else
+	alreadyDone "Microsoft Teams is already installed."
 fi
 
 ###########
