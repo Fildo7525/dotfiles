@@ -210,3 +210,13 @@ git --global user.name "$name"
 alreadyDone "Setting up the ssh key"
 ssh-keygen -t ed25519 -C "$email"
 
+########################
+#  Distribute configs  #
+########################
+ln -s zsh/.zshrc ~
+
+mkdir ~/.config/lazygit/
+ln -s lalazygit/config.yaml ~/.config/lazygit
+
+ln -s ./nvim ~/.config/
+
