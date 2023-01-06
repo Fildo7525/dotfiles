@@ -26,6 +26,7 @@ sudo apt install apt-transport-https \
 				 ccache \
 				 cmake \
 				 curl \
+				 doxygen \
 				 exa \
 				 fzf \
 				 git \
@@ -140,6 +141,7 @@ fi
 ###########
 #  TEAMS  #
 ###########
+which teams
 if [[ $? != 0 ]]; then
 	error "Installing Microsoft teams"
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
