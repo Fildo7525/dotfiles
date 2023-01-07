@@ -201,6 +201,19 @@ sudo update-initramfs -u -k all
 
 #flatpak install com.brave.Browser com.discordapp.Discord com.spotify.Client
 
+#############
+#  Discord  #
+#############
+which discord
+if [[ $? != 0 ]]; then
+	log "Installing discord"
+	wget https://discord.com/api/download?platform=linux&format=deb
+	dis = $(ls -1 | grep discord)
+	sudo apt install ./$dis
+else
+	alreadyDone "Discord is already installed"
+fi
+
 #########
 #  Git  #
 #########
