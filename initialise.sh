@@ -199,8 +199,6 @@ sudo update-initramfs -u -k all
 #sudo apt install plasma-discover-backend-flatpak
 #flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#flatpak install com.brave.Browser com.discordapp.Discord com.spotify.Client
-
 #############
 #  Discord  #
 #############
