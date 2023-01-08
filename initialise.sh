@@ -169,6 +169,10 @@ fi
 	gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 	# on scroll cycle between windows and change focus
 	gsettings set org.gnome.shell.extensions.dash-to-dock scroll-action 'cycle-windows'
+	# on stay quiet on screenshot (silent screenshot)
+	# reenable it by using:
+	# 	gsettings reset org.gnome.desktop.sound event-sounds
+	gsettings set org.gnome.desktop.sound event-sounds false
 
 	###################
 	#  UPPER PANNERL  #
