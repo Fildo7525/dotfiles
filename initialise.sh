@@ -239,7 +239,7 @@ ssh-keygen -t ed25519 -C "$email"
 #  Latex  #
 ###########
 log "LATEX"
-read -p "Do you want to downlaod latex?[Y/n]" ans
+read -p "Do you want to downlaod latex? [Y/n]" ans
 if [[ $ans != "n" ]]; then
 	sudo apt install texlive-latex-recomended latexmk biber texlive-lang-czechslovak texlive-bibtex-extra texlive-science
 fi
