@@ -254,3 +254,11 @@ ln -s lalazygit/config.yaml ~/.config/lazygit
 
 ln -s ./nvim ~/.config/
 
+#############
+#  VS Code  #
+#############
+log "VS Code"
+read -p "Do you want to install VS Code from web? [Y/n]" ans
+if [[ $ans != 'n' ]]; then
+	firefox https://code.visualstudio.com/download
+fi
