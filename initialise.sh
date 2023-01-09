@@ -42,6 +42,7 @@ sudo apt install apt-transport-https \
 				 ripgrep \
 				 tree \
 				 zathura \
+				 htop \
 				 zsh -y
 
 echo 'export PAGER=most' >> ~/.bashrc
