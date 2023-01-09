@@ -204,12 +204,13 @@ fi
 #############
 #  FLATPAK  #
 #############
-
-#sudo add-apt-repository ppa:alexlarsson/flatpak
-#sudo apt update
-#sudo apt install flatpak
-#sudo apt install plasma-discover-backend-flatpak
-#flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# NOTE: This is only for situation that the flatpak will be more suitable than downloading .deb file
+#
+# sudo add-apt-repository ppa:alexlarsson/flatpak
+# sudo apt update
+# sudo apt install flatpak
+# sudo apt install plasma-discover-backend-flatpak
+# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #############
 #  Discord  #
