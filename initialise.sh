@@ -47,6 +47,10 @@ sudo apt install apt-transport-https \
 
 echo 'export PAGER=most' >> ~/.bashrc
 
+if [[ $1 = 'minimal' ]]; then
+	exit 0;
+fi
+
 #############
 #  LAZYGIT  #
 #############
@@ -264,3 +268,4 @@ read -p "Do you want to install VS Code from web? [Y/n]" ans
 if [[ $ans != 'n' ]]; then
 	firefox https://code.visualstudio.com/download
 fi
+
