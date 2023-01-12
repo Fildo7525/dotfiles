@@ -107,7 +107,7 @@ fi
 	#####################
 	#  RUST - for nvim  #
 	#####################
-	which cargo
+	which rustc
 	if [[ $? != 0 ]]; then
 		log "Installing Rust (cargo)"
 		curl https://sh.rustup.rs -sSf | sh
@@ -118,12 +118,16 @@ fi
 	###############
 	#  Nerd font  #
 	###############
-	log "Downloading BitstreamVeraSansMono nerd font"
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/BitstreamVeraSansMono.zip
-	mkdir BitstreamVeraSansMono
-	unzip -qq BitstreamVeraSansMono.zip -d BitstreamVeraSansMono
-	cd BitstreamVeraSansMono; find . -name "* Windows *" -delete ; cd ..
-	sudo mv BitstreamVeraSansMono /usr/local/share/fonts/
+	if [[ ! -d /usr/local/share/fonts/BitstreamVeraSansMono ]]; then
+		log "Downloading BitstreamVeraSansMono nerd font"
+		wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/BitstreamVeraSansMono.zip
+		mkdir BitstreamVeraSansMono
+		unzip -qq BitstreamVeraSansMono.zip -d BitstreamVeraSansMono
+		cd BitstreamVeraSansMono; find . -name "* Windows *" -delete ; cd ..
+		sudo cp -r BitstreamVeraSansMono /usr/local/share/fonts/
+	else
+		alreadyDone "Nerdfont BitstreamVeraSansMono is already installed"
+	fi
 
 ###########
 #  BRAVE  #
@@ -170,41 +174,47 @@ fi
 ###########
 #  GNOME  #
 ###########
-	# on click show all windows to choose
-	gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
-	# on scroll cycle between windows and change focus
-	gsettings set org.gnome.shell.extensions.dash-to-dock scroll-action 'cycle-windows'
-	# on stay quiet on screenshot (silent screenshot)
-	# reenable it by using:
-	# 	gsettings reset org.gnome.desktop.sound event-sounds
-	gsettings set org.gnome.desktop.sound event-sounds false
+	log "Setting gnome features"
+	action=$(gsettings get org.gnome.shell.extensions.dash-to-dock click-action)
+	if [[ "$action" != "minimize-or-previews" ]]; then
+		# on click show all windows to choose
+		gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
+		# on scroll cycle between windows and change focus
+		gsettings set org.gnome.shell.extensions.dash-to-dock scroll-action 'cycle-windows'
+		# on stay quiet on screenshot (silent screenshot)
+		# reenable it by using:
+		# 	gsettings reset org.gnome.desktop.sound event-sounds
+		gsettings set org.gnome.desktop.sound event-sounds false
 
-	###################
-	#  UPPER PANNERL  #
-	###################
-	# BUG: Does not work for gnome version 42
-	#
-	# git clone https://github.com/realh/multi-monitors-add-on.git
-	# cd multi-monitors-add-on
-	# cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
-	# gsettings set org.gnome.shell disable-extension-version-validation true
+		###################
+		#  UPPER PANNERL  #
+		###################
+		# BUG: Does not work for gnome version 42
+		#
+		# git clone https://github.com/realh/multi-monitors-add-on.git
+		# cd multi-monitors-add-on
+		# cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
+		# gsettings set org.gnome.shell disable-extension-version-validation true
 
-	# Use function keys as default. To use the actions use Fn+Fx where 'x' is a corresponding number
-	#	fnmode	|	function	|	Description
-	#------------------------------------------------------------------------------------------------------------------------
-	#	0		|	disabled	|	Disables the 'fn' key. This means that pressing F2 will trigger F2 to be pressed
-	#			|				|	and not the special action key. Pressing 'fn' + F2 will just press the F2 key as normal.
-	#------------------------------------------------------------------------------------------------------------------------
-	#	1		|	fkeyslast	|	Function keys are used as the last key. Pressing F2 will act as the special key.
-	#			|				|	Pressing 'fn' + F2 will trigger F2.
-	#------------------------------------------------------------------------------------------------------------------------
-	#	2		|	fkeysfirst	|	Function keys are used as the first key. Pressing F2 will act as triggering F2.
-	#			|				|	Pressing 'fn' + F2 will act as the special key.
-	#------------------------------------------------------------------------------------------------------------------------
-	#
-	# To have a closer read: https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux
-	echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
-	sudo update-initramfs -u -k all
+		# Use function keys as default. To use the actions use Fn+Fx where 'x' is a corresponding number
+		#	fnmode	|	function	|	Description
+		#------------------------------------------------------------------------------------------------------------------------
+		#	0		|	disabled	|	Disables the 'fn' key. This means that pressing F2 will trigger F2 to be pressed
+		#			|				|	and not the special action key. Pressing 'fn' + F2 will just press the F2 key as normal.
+		#------------------------------------------------------------------------------------------------------------------------
+		#	1		|	fkeyslast	|	Function keys are used as the last key. Pressing F2 will act as the special key.
+		#			|				|	Pressing 'fn' + F2 will trigger F2.
+		#------------------------------------------------------------------------------------------------------------------------
+		#	2		|	fkeysfirst	|	Function keys are used as the first key. Pressing F2 will act as triggering F2.
+		#			|				|	Pressing 'fn' + F2 will act as the special key.
+		#------------------------------------------------------------------------------------------------------------------------
+		#
+		# To have a closer read: https://www.hashbangcode.com/article/turning-or-fn-mode-ubuntu-linux
+		echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+		sudo update-initramfs -u -k all
+	else
+		alreadyDone "Gnome features are already set"
+	fi
 
 #############
 #  FLATPAK  #
@@ -224,8 +234,8 @@ which discord
 if [[ $? != 0 ]]; then
 	log "Installing discord"
 	wget https://discord.com/api/download?platform=linux&format=deb
-	dis = $(ls -1 | grep discord)
-	sudo apt install ./$dis
+	mv 'download?platform=linux&format=deb' discord.deb
+	sudo apt install "./discord.deb"
 else
 	alreadyDone "Discord is already installed"
 fi
@@ -233,13 +243,13 @@ fi
 #########
 #  Git  #
 #########
-read -p "Git user email: " email
-git --global user.email "$email"
-read -p "Git user name: " name
-git --global user.name "$name"
-
-alreadyDone "Setting up the ssh key"
-ssh-keygen -t ed25519 -C "$email"
+# read -p "Git user email: " email
+# git --global user.email "$email"
+# read -p "Git user name: " name
+# git --global user.name "$name"
+#
+# alreadyDone "Setting up the ssh key"
+# ssh-keygen -t ed25519 -C "$email"
 
 ###########
 #  Latex  #
@@ -253,12 +263,18 @@ fi
 ########################
 #  Distribute configs  #
 ########################
-ln -s zsh/.zshrc ~
+if [[ ! -e ~/.zshrc ]]; then
+	ln -s ./zsh/.zshrc ~/.zshrc
+fi
 
-mkdir ~/.config/lazygit/
-ln -s lalazygit/config.yaml ~/.config/lazygit
+if [[ ! -d ~/.config/lazygit ]]; then
+	mkdir ~/.config/lazygit/
+	ln -s lalazygit/config.yaml ~/.config/lazygit
+fi
 
-ln -s ./nvim ~/.config/
+if [[ ! -d ~/.config/nvim ]]; then
+	ln -s ./nvim ~/.config/nvim
+fi
 
 #############
 #  VS Code  #
