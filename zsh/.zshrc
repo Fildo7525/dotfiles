@@ -87,8 +87,6 @@ setopt automenu
 unsetopt BEEP
 
 export PAGER=most
-export PATH="$PATH:$HOME/Documents/sourcing/Project-Builder"
-export PATH="$PATH:$HOME/.local/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ##################
@@ -106,8 +104,8 @@ alias ros="ros2"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/.local/bin:/usr/include/SDL2"
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
+export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:/usr/include/SDL2:$HOME/Project-Builder/build/build::/opt/ros/humble/bin:$SDL2_INCLUDE_DIRS:/usr/local/go/bin:$HOME/.local/lib/python3.10/site-packages:$HOME.local/share/nvim/mason/bin"
 
 export EDITOR="/usr/bin/nvim"
 export SUDO_EDITOR="/usr/bin/nvim"
@@ -124,14 +122,12 @@ export SUDO_EDITOR="/usr/bin/nvim"
 source /opt/ros/humble/setup.zsh
 # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
-export PATH=$PATH:/usr/local/go/bin
 # echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
 
 # Load bash completion functions
 fpath+=~/.zfunc
 autoload -Uz +X compinit && compinit
 autoload -Uz +X bashcompinit && bashcompinit
-export PATH="/opt/ros/humble/bin:$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/.local/bin:/usr/include/SDL2:/usr/local/go/bin:$HOME/Project-Builder/build/build:$HOME/.local/lib/python3.10/site-packages"
 
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
