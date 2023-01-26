@@ -121,7 +121,7 @@ XDG_CURRENT_DESKTOP=KDE
 #		ROS2	 #
 ##################
 source /opt/ros/humble/setup.zsh
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
 export PATH=$PATH:/usr/local/go/bin
 # echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
@@ -133,3 +133,11 @@ export PATH="/opt/ros/humble/bin:$HOME/.local/share/zinit/polaris/bin:$HOME/.car
 
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
+alias nv="nvim"
+alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
+
+
+# argcomplete for ros2 & colcon
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"
+
