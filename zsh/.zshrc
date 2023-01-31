@@ -136,6 +136,9 @@ alias nv="nvim"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
 
 
+alias vpnon="protonvpn-cli c"
+alias vpnoff="protonvpn-cli d"
+
 # argcomplete for ros2 & colcon
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
