@@ -109,7 +109,6 @@ export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sb
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
 
 export EDITOR="nvim"
-XDG_CURRENT_DESKTOP=KDE
 
 ##########################
 #	 MC zsh support	 #
