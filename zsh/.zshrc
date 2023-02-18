@@ -135,9 +135,10 @@ export PATH="/opt/ros/humble/bin:$HOME/.local/share/zinit/polaris/bin:$HOME/.car
 alias nv="nvim"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
 
-
 alias vpnon="protonvpn-cli c"
 alias vpnoff="protonvpn-cli d"
+
+export TERM="screen-256color"
 
 # argcomplete for ros2 & colcon
 eval "$(register-python-argcomplete3 ros2)"
