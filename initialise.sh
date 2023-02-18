@@ -216,6 +216,31 @@ fi
 		alreadyDone "Gnome features are already set"
 	fi
 
+	#############
+	#  TERMINAL #
+	#############
+	# To install alacritty:
+	#
+	# cargo install alacritty
+	# mkdir -p ~/.config/alacritty
+	# ln -s ~/.config/alacritty/alacritty.yml ./alacritty/alacritty.yml
+	# if [[ $SHELL == "/bin/bash" ]]; then
+	#  	echo "source ./alacritty/alacritty.bash" >> ~/.bashrc
+	# elif [[ $SHELL == "/usr/bin/zsh" ]]; then
+	# 	cp ./alacritty/_alacritty ~/.local/share/zinit/completions/
+	# fi
+	#
+	# To change the default terminal you have to firstly define a link to the executable:
+	#
+	# 	sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator <full/path/to/the/alternative> 1
+	#
+	# Than switch to the terminal using this command:
+	#
+	#	sudo update-alternatives --config x-terminal-emulator
+	#
+	# This command will show a table of possible terminals, from which you can choose.
+	#
+
 #############
 #  FLATPAK  #
 #############
