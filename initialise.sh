@@ -216,30 +216,22 @@ fi
 		alreadyDone "Gnome features are already set"
 	fi
 
-	#############
-	#  TERMINAL #
-	#############
-	# To install alacritty:
-	#
-	# cargo install alacritty
-	# mkdir -p ~/.config/alacritty
-	# ln -s ~/.config/alacritty/alacritty.yml ./alacritty/alacritty.yml
-	# if [[ $SHELL == "/bin/bash" ]]; then
-	#  	echo "source ./alacritty/alacritty.bash" >> ~/.bashrc
-	# elif [[ $SHELL == "/usr/bin/zsh" ]]; then
-	# 	cp ./alacritty/_alacritty ~/.local/share/zinit/completions/
-	# fi
-	#
-	# To change the default terminal you have to firstly define a link to the executable:
-	#
-	# 	sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator <full/path/to/the/alternative> 1
-	#
-	# Than switch to the terminal using this command:
-	#
-	#	sudo update-alternatives --config x-terminal-emulator
-	#
-	# This command will show a table of possible terminals, from which you can choose.
-	#
+	###############
+	#  ALACRITTY  #
+	###############
+	if [[ ! -f /usr/bin/alacritty ]]; then
+		log "Installing alacritty"
+		sudo apt install software-properties-common -y
+		sudo apt install alacritty tmux
+		sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator <full/path/to/the/alternative> 1
+		log "Do you want to set alacritty as default terminal? [Y/n]"
+		read -p ">> " answer
+		if [[ "$answer" == "Y" ]]; then
+			sudo update-alternatives --config x-terminal-emulator
+		fi
+	else
+		alreadyDone "Alacritty is already installed"
+	fi
 
 #############
 #  FLATPAK  #
@@ -268,13 +260,16 @@ fi
 #########
 #  Git  #
 #########
-# read -p "Git user email: " email
-# git --global user.email "$email"
-# read -p "Git user name: " name
-# git --global user.name "$name"
-#
-# alreadyDone "Setting up the ssh key"
-# ssh-keygen -t ed25519 -C "$email"
+read -r -p "Do you want to setup git? [Y/n]" ans
+if [[ $ans != "n" ]]; then
+	read -p "Git user email: " email
+	git --global user.email "$email"
+	read -p "Git user name: " name
+	git --global user.name "$name"
+
+	alreadyDone "Setting up the ssh key"
+	ssh-keygen -t ed25519 -C "$email"
+fi
 
 ###########
 #  Latex  #
@@ -288,6 +283,7 @@ fi
 ########################
 #  Distribute configs  #
 ########################
+log "Distributing configs"
 if [[ ! -e ~/.zshrc ]]; then
 	ln -s ./zsh/.zshrc ~/.zshrc
 fi
@@ -299,6 +295,19 @@ fi
 
 if [[ ! -d ~/.config/nvim ]]; then
 	ln -s ./nvim ~/.config/nvim
+fi
+
+if [[ ! -d ~/.config/alacritty ]]; then
+	ln -s ./alacritty ~/.config/alacritty
+	if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
+		ln -s ./alacritty/_alacritty ~/.local/share/zinit/completions/_alacritty
+	elif [[ "$SHELL" == "/bin/bash" ]]; then
+		echo "source $(pwd)/alacritty/alacritty.bash" >> ~/.bashrc
+	fi
+fi
+
+if [[ ! -f /etc/tmux.conf ]]; then
+	sudo ln ./tmux/tmux.conf /etc/tmux.conf
 fi
 
 #############
