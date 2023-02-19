@@ -125,7 +125,6 @@ shell:
 
 key_bindings:
   - { key: Return,    mods: Super,                      action: SpawnNewInstance }
-  - { key: L,         mods: Control,                    action: ClearLogNotice   }
   - { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp     }
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown   }
   - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop      }
