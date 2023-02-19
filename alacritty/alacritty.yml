@@ -119,9 +119,7 @@ cursor:
 live_config_reload: true
 
 shell:
- program: /usr/bin/zsh
- # program: /bin/bash
-
+ program: /usr/bin/tmux
 
 key_bindings:
   - { key: Return,    mods: Super,                      action: SpawnNewInstance }
