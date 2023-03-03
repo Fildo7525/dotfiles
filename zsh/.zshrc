@@ -101,7 +101,7 @@ alias lg="lazygit"
 alias hi="history"
 alias hg="history | grep"
 alias ros="ros2"
-alias m="SHELL=/bin/bash mc"
+alias mc="SHELL=/bin/bash mc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -144,3 +144,5 @@ export TERM="screen-256color"
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
+alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
