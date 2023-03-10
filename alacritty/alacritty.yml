@@ -68,7 +68,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 9.0
+  size: 12.0
   offset:
    x: 0
    y: 0
@@ -128,6 +128,9 @@ key_bindings:
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown   }
   - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop      }
   - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom   }
+
+mouse_bindings:
+  - { mouse: Middle, mode: ~Vi,     action: PasteSelection  }
 
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
