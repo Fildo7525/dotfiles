@@ -280,6 +280,14 @@ if [[ $ans != "n" ]]; then
 	sudo apt install texlive-latex-recomended latexmk biber texlive-lang-czechslovak texlive-bibtex-extra texlive-science
 fi
 
+###########
+#  Conky  #
+###########
+log "Conky"
+curl https://github.com/brndnmtthws/conky/releases/download/v1.18.3/conky-x86_64.AppImage
+chmod +x conky-x86_64.AppImage
+sudo mv conky-x86_64.AppImage /usr/bin/conky
+
 ########################
 #  Distribute configs  #
 ########################
@@ -308,6 +316,10 @@ fi
 
 if [[ ! -f /etc/tmux.conf ]]; then
 	sudo ln ./tmux/tmux.conf /etc/tmux.conf
+fi
+
+if [[ ! -f ~/.conkyrc ]]; then
+	ln -s ./conky/.conkyrc ~/.conkyrc
 fi
 
 #############
