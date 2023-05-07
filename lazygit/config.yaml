@@ -5,7 +5,7 @@ git:
   allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
   autoFetch: true
   autoRefresh: true
-  branchLogCmd: 'git-graph --color always'
+  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
   commit:
     signOff: true
     verbose: always # one of 'default' | 'always' | 'never'
