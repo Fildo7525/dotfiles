@@ -126,6 +126,7 @@ export PATH=$PATH:/usr/local/go/bin
 # echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
 
 # Load bash completion functions
+fpath+=~/.zfunc
 autoload -Uz +X compinit && compinit
 autoload -Uz +X bashcompinit && bashcompinit
 export PATH="/opt/ros/humble/bin:$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/.local/bin:/usr/include/SDL2:/usr/local/go/bin:$HOME/Project-Builder/build/build:$HOME/.local/lib/python3.10/site-packages"
