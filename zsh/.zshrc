@@ -89,6 +89,7 @@ unsetopt BEEP
 export PAGER=most
 export PATH="$PATH:$HOME/Documents/sourcing/Project-Builder"
 export PATH="$PATH:$HOME/.local/bin"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 ##################
 #	Aliases	 #
