@@ -120,7 +120,7 @@ cursor:
 live_config_reload: true
 
 shell:
- program: /usr/bin/tmux
+ program: /usr/bin/zsh
 
 key_bindings:
   - { key: Return,    mods: Super,                      action: SpawnNewInstance }
