@@ -109,7 +109,8 @@ alias mc="SHELL=/bin/bash mc"
 export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/.local/bin:/usr/include/SDL2"
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
 
-export EDITOR="nvim"
+export EDITOR="/usr/bin/nvim"
+export SUDO_EDITOR="/usr/bin/nvim"
 
 ##########################
 #	 MC zsh support	 #
@@ -149,3 +150,4 @@ eval "$(register-python-argcomplete3 colcon)"
 
 alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
 alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias miniterm="python3 -m serial.tools.miniterm"
