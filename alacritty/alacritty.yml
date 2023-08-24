@@ -114,7 +114,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Block
+    shape: Beam
 
 # Live config reload (changes require restart)
 live_config_reload: true
@@ -128,10 +128,10 @@ key_bindings:
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown   }
   - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop      }
   - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom   }
+  - { key: Right,     mods: Control,     chars: "\x1BF" }
+  - { key: Left,      mods: Control,     chars: "\x1BB" }
+  # Vi Mode
+  - { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
 
 mouse_bindings:
   - { mouse: Middle, mode: ~Vi,     action: PasteSelection  }
-
-  # Vi Mode
-  #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
- 
