@@ -137,7 +137,7 @@ export PATH="/opt/ros/humble/bin:$HOME/.local/share/zinit/polaris/bin:$HOME/.car
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
 alias nv="nvim"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
-alias mt="~/Documents/sourcing/matlab"
+alias matlab="~/Documents/sourcing/matlab"
 
 alias vpnon="protonvpn-cli c"
 alias vpnoff="protonvpn-cli d"
@@ -151,3 +151,19 @@ eval "$(register-python-argcomplete3 colcon)"
 alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
 alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
 alias miniterm="python3 -m serial.tools.miniterm"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/fildo7525/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/fildo7525/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/fildo7525/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/fildo7525/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
