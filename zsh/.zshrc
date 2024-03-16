@@ -102,7 +102,7 @@ alias lg="lazygit"
 alias hi="history"
 alias hg="history | grep"
 alias ros="ros2"
-alias mc="SHELL=/bin/bash mc"
+# alias mc="SHELL=/bin/bash mc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -167,3 +167,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
+alias gf="git fetch -pl --all"
+alias stu="cd $HOME/Documents/STU/LS"
