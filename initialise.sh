@@ -31,23 +31,24 @@ sudo apt install apt-transport-https \
 				 fzf \
 				 git \
 				 gitk \
+				 htop \
+				 jq \
 				 mc \
 				 most \
 				 ncdu \
 				 python2 \
 				 python3 \
-				 python3-venv \
 				 python3-pip \
+				 python3-venv \
 				 qtbase5-dev \
 				 ripgrep \
 				 tree \
 				 zathura \
-				 htop \
 				 zsh -y
 
 echo 'export PAGER=most' >> ~/.bashrc
 
-if [[ $1 = 'minimal' ]]; then
+if [[ $1 == 'minimal' ]]; then
 	exit 0;
 fi
 
