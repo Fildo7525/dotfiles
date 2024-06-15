@@ -149,5 +149,5 @@ alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:
 alias miniterm="python3 -m serial.tools.miniterm"
 
 alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
-alias gf="git fetch -pl --all"
+alias gf="git fetch -pt --all"
 alias stu="cd $HOME/Documents/STU/LS"
