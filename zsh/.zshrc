@@ -148,21 +148,6 @@ alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:0
 alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
 alias miniterm="python3 -m serial.tools.miniterm"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/fildo7525/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/fildo7525/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/fildo7525/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/fildo7525/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
 alias gf="git fetch -pl --all"
 alias stu="cd $HOME/Documents/STU/LS"
