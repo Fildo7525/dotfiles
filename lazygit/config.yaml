@@ -88,9 +88,10 @@ gui:
 keybinding:
     branches:
         checkoutBranchByName: c
+        copyPullRequestURL: <c-y>
         createPullRequest: o
         createTag: T
-        fastForward: f # fast-forward this branch from its upstream
+        fastForward: f
         fetchRemote: f
         forceCheckoutBranch: F
         mergeIntoCurrentBranch: M
@@ -98,6 +99,7 @@ keybinding:
         rebaseBranch: r
         renameBranch: R
         setUpstream: u # set as upstream of checked-out branch
+        sortOrder: s
         viewGitFlowOptions: i
         viewPullRequestOptions: O
     commitFiles:
@@ -106,19 +108,24 @@ keybinding:
         amendToCommit: A
         checkoutCommit: <space>
         cherryPickCopy: c
+        copyCommitAttributeToClipboard: "y"
         createFixupCommit: F # create fixup commit for this commit
+        markCommitAsBaseForRebase: B
         markCommitAsFixup: f
         moveDownCommit: <c-j> # move commit down one
         moveUpCommit: <c-k> # move commit up one
+        openInBrowser: o
         openLogMenu: <c-l>
         pasteCommits: v
         pickCommit: p # pick commit (when mid-rebase)
         renameCommit: r
         renameCommitWithEditor: R
-        resetCherryPick: '<c-R>'
+        resetCherryPick: <c-R>
+        resetCommitAuthor: a
         revertCommit: t
         squashAboveCommits: S
         squashDown: s
+        startInteractiveRebase: i
         tagCommit: T
         viewBisectOptions: b
         viewResetOptions: g
@@ -127,7 +134,10 @@ keybinding:
         commitChanges: c
         commitChangesWithEditor: C
         commitChangesWithoutHook: w # commit changes without pre-commit hook
+        confirmDiscard: x
+        copyFileInfoToClipboard: "y"
         fetch: f
+        findBaseCommitForFixup: <c-f>
         ignoreFile: i
         openMergeTool: M
         openStatusFilter: <c-b>
@@ -154,60 +164,74 @@ keybinding:
         update: u
     universal:
         confirm: <enter>
+        confirmInEditor: <a-enter>
         copyToClipboard: <c-o>
         createPatchOptionsMenu: <c-p>
         createRebaseOptionsMenu: m
         decreaseContextInDiffView: '{'
         diffingMenu: W
-        diffingMenu-alt: <c-W> # deprecated
+        diffingMenu-alt: <disabled> # deprecated
         edit: e
         executeCustomCommand: ':'
         extrasMenu: '@'
         filteringMenu: <c-s>
         goInto: <enter>
-        gotoBottom: '>' # go to bottom of list
-        gotoTop: '<' # go to top of list
+        gotoBottom: > # go to bottom of list
+        gotoTop: < # go to top of list
         increaseContextInDiffView: '}'
-        jumpToBlock: ['1', '2', '3', '4', '5'] # goto the Nth block / panel
+        jumpToBlock:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
         new: n
         nextBlock: <right> # goto the next block / panel
         nextBlock-alt: l # goto the next block / panel
+        nextBlock-alt2: <tab> # goto the next block / panel
         nextItem: <down> # go one line down
         nextItem-alt: j # go one line down
         nextMatch: n
-        nextPage: '.' # go to previous page in list
+        nextPage: . # go to previous page in list
         nextScreenMode: +
         nextTab: ']'
+        openDiffTool: <c-t>
         openFile: o
         openRecentRepos: <c-r>
         optionMenu: x # show help menu
         optionMenu-alt1: '?' # show help menu
         prevBlock: <left> # goto the previous block / panel
         prevBlock-alt: h # goto the previous block / panel
+        prevBlock-alt2: <backtab> # goto the previous block / panel
         prevItem: <up> # go one line up
         prevItem-alt: k # go one line up
         prevMatch: N
         prevPage: ',' # go to next page in list
         prevScreenMode: _
         prevTab: '['
+        # 'Files' appended for legacy reasons
         pullFiles: p
+        # 'Files' appended for legacy reasons
         pushFiles: P
         quit: q
         quit-alt1: <c-c> # alternative/alias of quit
         quitWithoutChangingDirectory: Q
+        rangeSelectDown: <s-down>
+        rangeSelectUp: <s-up>
         redo: <c-z>
         refresh: R
         remove: d
-        return: '<c-e>' # return to previous menu, will quit if there's nowhere to return
-        scrollDownMain: <pgdown> # main panel scroll down
+        return: <c-e> # return to previous menu, will quit if there's nowhere to return
         scrollDownMain-alt1: J # main panel scroll down
         scrollDownMain-alt2: <c-d> # main panel scroll down
+        scrollDownMain: <pgdown> # main panel scroll down
         scrollLeft: H # scroll left within list view
         scrollRight: L # scroll right within list view
         scrollUpMain: <pgup> # main panel scroll up
         scrollUpMain-alt1: K # main panel scroll up
         scrollUpMain-alt2: <c-u> # main panel scroll up
         select: <space>
+        startSearch: /
         submitEditorText: <enter>
         togglePanel: <tab> # goto the next panel
         toggleRangeSelect: V
