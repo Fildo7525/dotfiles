@@ -69,13 +69,18 @@ gui:
         defaultFgColor:
             - default
         inactiveBorderColor:
-            - white
+            - default
+        searchingActiveBorderColor:
+            - cyan
+            - bold
         optionsTextColor:
             - blue
         selectedLineBgColor:
-            - blue # set to `default` to have no background colour
-        selectedRangeBgColor:
             - blue
+        markedBaseCommitFgColor:
+            - blue
+        markedBaseCommitBgColor:
+            - yellow
         unstagedChangesColor:
             - red
     timeFormat: '02 Jan 06 15:04 MST' # https://pkg.go.dev/time#Time.Format
