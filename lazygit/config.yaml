@@ -87,133 +87,132 @@ gui:
     windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
 keybinding:
     branches:
-        checkoutBranchByName: 'c'
-        createPullRequest: 'o'
-        createTag: 'T'
-        fastForward: 'f' # fast-forward this branch from its upstream
-        fetchRemote: 'f'
-        forceCheckoutBranch: 'F'
-        mergeIntoCurrentBranch: 'M'
-        pushTag: 'P'
-        rebaseBranch: 'r'
-        renameBranch: 'R'
-        setUpstream: 'u' # set as upstream of checked-out branch
-        viewGitFlowOptions: 'i'
-        viewPullRequestOptions: 'O'
+        checkoutBranchByName: c
+        createPullRequest: o
+        createTag: T
+        fastForward: f # fast-forward this branch from its upstream
+        fetchRemote: f
+        forceCheckoutBranch: F
+        mergeIntoCurrentBranch: M
+        pushTag: P
+        rebaseBranch: r
+        renameBranch: R
+        setUpstream: u # set as upstream of checked-out branch
+        viewGitFlowOptions: i
+        viewPullRequestOptions: O
     commitFiles:
-        checkoutCommitFile: 'c'
+        checkoutCommitFile: c
     commits:
-        amendToCommit: 'A'
-        checkoutCommit: '<space>'
-        cherryPickCopy: 'c'
-        cherryPickCopyRange: 'C'
-        copyCommitMessageToClipboard: '<c-y>'
-        createFixupCommit: 'F' # create fixup commit for this commit
-        markCommitAsFixup: 'f'
-        moveDownCommit: '<c-j>' # move commit down one
-        moveUpCommit: '<c-k>' # move commit up one
-        openLogMenu: '<c-l>'
-        pasteCommits: 'v'
-        pickCommit: 'p' # pick commit (when mid-rebase)
-        renameCommit: 'r'
-        renameCommitWithEditor: 'R'
+        amendToCommit: A
+        checkoutCommit: <space>
+        cherryPickCopy: c
+        createFixupCommit: F # create fixup commit for this commit
+        markCommitAsFixup: f
+        moveDownCommit: <c-j> # move commit down one
+        moveUpCommit: <c-k> # move commit up one
+        openLogMenu: <c-l>
+        pasteCommits: v
+        pickCommit: p # pick commit (when mid-rebase)
+        renameCommit: r
+        renameCommitWithEditor: R
         resetCherryPick: '<c-R>'
-        revertCommit: 't'
-        squashAboveCommits: 'S'
-        squashDown: 's'
-        tagCommit: 'T'
-        viewBisectOptions: 'b'
-        viewResetOptions: 'g'
+        revertCommit: t
+        squashAboveCommits: S
+        squashDown: s
+        tagCommit: T
+        viewBisectOptions: b
+        viewResetOptions: g
     files:
-        amendLastCommit: 'A'
-        commitChanges: 'c'
-        commitChangesWithEditor: 'C'
-        commitChangesWithoutHook: 'w' # commit changes without pre-commit hook
-        fetch: 'f'
-        ignoreFile: 'i'
-        openMergeTool: 'M'
-        openStatusFilter: '<c-b>'
-        refreshFiles: 'r'
-        stashAllChanges: 's'
-        toggleStagedAll: 'a' # stage/unstage all
+        amendLastCommit: A
+        commitChanges: c
+        commitChangesWithEditor: C
+        commitChangesWithoutHook: w # commit changes without pre-commit hook
+        fetch: f
+        ignoreFile: i
+        openMergeTool: M
+        openStatusFilter: <c-b>
+        refreshFiles: r
+        stashAllChanges: s
+        toggleStagedAll: a # stage/unstage all
         toggleTreeView: '`'
-        viewResetOptions: 'D'
-        viewStashOptions: 'S'
+        viewResetOptions: D
+        viewStashOptions: S
     main:
-        pickBothHunks: 'b'
-        toggleDragSelect: 'v'
-        toggleDragSelect-alt: 'V'
-        toggleSelectHunk: 'a'
+        pickBothHunks: b
+        editSelectHunk: E
+        toggleSelectHunk: a
     stash:
-        popStash: 'g'
-        renameStash: 'r'
+        popStash: g
+        renameStash: r
     status:
-        checkForUpdate: 'u'
-        recentRepos: '<enter>'
+        checkForUpdate: u
+        recentRepos: <enter>
+        allBranchesLogGraph: a
     submodules:
-        bulkMenu: 'b'
-        init: 'i'
-        update: 'u'
+        bulkMenu: b
+        init: i
+        update: u
     universal:
-        confirm: '<enter>'
-        copyToClipboard: '<c-o>'
-        createPatchOptionsMenu: '<c-p>'
-        createRebaseOptionsMenu: 'm'
+        confirm: <enter>
+        copyToClipboard: <c-o>
+        createPatchOptionsMenu: <c-p>
+        createRebaseOptionsMenu: m
         decreaseContextInDiffView: '{'
-        diffingMenu: 'W'
-        diffingMenu-alt: '<c-W>' # deprecated
-        edit: 'e'
+        diffingMenu: W
+        diffingMenu-alt: <c-W> # deprecated
+        edit: e
         executeCustomCommand: ':'
         extrasMenu: '@'
-        filteringMenu: '<c-s>'
-        goInto: '<enter>'
+        filteringMenu: <c-s>
+        goInto: <enter>
         gotoBottom: '>' # go to bottom of list
         gotoTop: '<' # go to top of list
         increaseContextInDiffView: '}'
         jumpToBlock: ['1', '2', '3', '4', '5'] # goto the Nth block / panel
-        new: 'n'
-        nextBlock: '<right>' # goto the next block / panel
-        nextBlock-alt: 'l' # goto the next block / panel
-        nextItem: '<down>' # go one line down
-        nextItem-alt: 'j' # go one line down
-        nextMatch: 'n'
+        new: n
+        nextBlock: <right> # goto the next block / panel
+        nextBlock-alt: l # goto the next block / panel
+        nextItem: <down> # go one line down
+        nextItem-alt: j # go one line down
+        nextMatch: n
         nextPage: '.' # go to previous page in list
-        nextScreenMode: '+'
+        nextScreenMode: +
         nextTab: ']'
-        openFile: 'o'
-        openRecentRepos: '<c-r>'
-        optionMenu: 'x' # show help menu
+        openFile: o
+        openRecentRepos: <c-r>
+        optionMenu: x # show help menu
         optionMenu-alt1: '?' # show help menu
-        prevBlock: '<left>' # goto the previous block / panel
-        prevBlock-alt: 'h' # goto the previous block / panel
-        prevItem: '<up>' # go one line up
-        prevItem-alt: 'k' # go one line up
-        prevMatch: 'N'
+        prevBlock: <left> # goto the previous block / panel
+        prevBlock-alt: h # goto the previous block / panel
+        prevItem: <up> # go one line up
+        prevItem-alt: k # go one line up
+        prevMatch: N
         prevPage: ',' # go to next page in list
-        prevScreenMode: '_'
+        prevScreenMode: _
         prevTab: '['
-        pullFiles: 'p'
-        pushFiles: 'P'
-        quit: 'q'
-        quit-alt1: '<c-c>' # alternative/alias of quit
-        quitWithoutChangingDirectory: 'Q'
-        redo: '<c-z>'
-        refresh: 'R'
-        remove: 'd'
+        pullFiles: p
+        pushFiles: P
+        quit: q
+        quit-alt1: <c-c> # alternative/alias of quit
+        quitWithoutChangingDirectory: Q
+        redo: <c-z>
+        refresh: R
+        remove: d
         return: '<c-e>' # return to previous menu, will quit if there's nowhere to return
-        scrollDownMain: '<pgdown>' # main panel scroll down
-        scrollDownMain-alt1: 'J' # main panel scroll down
-        scrollDownMain-alt2: '<c-d>' # main panel scroll down
-        scrollLeft: 'H' # scroll left within list view
-        scrollRight: 'L' # scroll right within list view
-        scrollUpMain: '<pgup>' # main panel scroll up
-        scrollUpMain-alt1: 'K' # main panel scroll up
-        scrollUpMain-alt2: '<c-u>' # main panel scroll up
-        select: '<space>'
-        submitEditorText: '<enter>'
-        togglePanel: '<tab>' # goto the next panel
-        toggleWhitespaceInDiffView: '<c-w>'
-        undo: 'z'
+        scrollDownMain: <pgdown> # main panel scroll down
+        scrollDownMain-alt1: J # main panel scroll down
+        scrollDownMain-alt2: <c-d> # main panel scroll down
+        scrollLeft: H # scroll left within list view
+        scrollRight: L # scroll right within list view
+        scrollUpMain: <pgup> # main panel scroll up
+        scrollUpMain-alt1: K # main panel scroll up
+        scrollUpMain-alt2: <c-u> # main panel scroll up
+        select: <space>
+        submitEditorText: <enter>
+        togglePanel: <tab> # goto the next panel
+        toggleRangeSelect: V
+        toggleWhitespaceInDiffView: <c-w>
+        undo: z
 notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip' | 'quit'
 os:
     edit: ''
