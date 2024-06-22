@@ -10,9 +10,8 @@ git:
         autoWrapCommitMessage: true
         autoWrapWidth: 72
         signOff: true
-        verbose: always # one of 'default' | 'always' | 'never'
-    diffContextSize: 5 # how many lines of context are shown around a change in diffs
     disableForcePushing: false
+    fetchAll: true
     log:
         # one of date-order, author-date-order, topo-order or default.
         # topo-order makes it easier to read the git log graph, but commits may not
@@ -20,7 +19,7 @@ git:
         order: 'topo-order'
         # one of always, never, when-maximised
         # this determines whether the git graph is rendered in the commits panel
-        showGraph: 'when-maximised'
+        showGraph: 'always'
         # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
         showWholeGraph: false
     merging:
@@ -41,7 +40,6 @@ gui:
     commitLength:
         show: true
     expandFocusedSidePanel: true
-    experimentalShowBranchHeads: true # visualize branch heads with (*) in commits list
     language: 'auto' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl' | 'ja' | 'ko'
     mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
     mouseEvents: true
@@ -239,12 +237,19 @@ keybinding:
         undo: z
 notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip' | 'quit'
 os:
-    edit: ''
-    editAtLine: ''
+    copyToClipboardCmd: ""
+    edit: 'nvim {{filename}}'
+    editAtLine: 'nvim +{{line}} {{filename}}'
     editAtLineAndWait: ''
+    editCommand: ""
+    editCommandTemplate: ""
+    editInTerminal: true
     editPreset: 'nvim' # see 'Configuring File Editing' section
     open: ''
+    openCommand: ""
+    openDirInEditor: 'nvim {{dir}}'
     openLink: ''
+    openLinkCommand: ""
 promptToReturnFromSubprocess: true # display confirmation when subprocess terminates
 quitOnTopLevelReturn: false
 refresher:
