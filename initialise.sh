@@ -176,6 +176,9 @@ fi
 #  GNOME  #
 ###########
 	log "Setting gnome features"
+	# show week number in calendar
+	gsettings set org.gnome.desktop.calendar show-weekdate true
+
 	action=$(gsettings get org.gnome.shell.extensions.dash-to-dock click-action)
 	if [[ "$action" != "minimize-or-previews" ]]; then
 		# on click show all windows to choose
