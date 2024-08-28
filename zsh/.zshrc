@@ -150,6 +150,5 @@ alias miniterm="python3 -m serial.tools.miniterm"
 
 alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
 alias gf="git fetch -pt --all"
-alias stu="cd $HOME/Documents/STU/LS"
-alias sdu="cd $HOME/Documents/SDU/1Rocnik/ZS/"
+alias sdu="cd $HOME/SDU/year1/WS"
 export PATH="$PATH:/usr/local/go/bin:$HOME/node_modules/.bin/"
