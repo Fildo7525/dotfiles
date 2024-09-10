@@ -133,7 +133,8 @@ autoload -Uz +X bashcompinit && bashcompinit
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
 alias nv="nvim"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
-alias matlab="~/Documents/sourcing/matlab"
+# Installed files are stored in ~/.matlab/R2024a
+alias matlab="~/.local/bin/matlab"
 
 alias vpnon="protonvpn-cli c"
 alias vpnoff="protonvpn-cli d"
