@@ -92,15 +92,27 @@ export XDG_CONFIG_HOME="$HOME/.config"
 ##################
 #	Aliases	 #
 ##################
-alias nv="nvim"
-alias ls="ls --color=auto"
-alias ll="ls -alt --color=auto"
 alias cpp="cd ~/Desktop/Cpp/"
-alias lg="lazygit"
-alias hi="history"
+alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
+alias gf="git fetch -pt --all"
+alias gk="gitk --all &"
 alias hg="history | grep"
-alias ros="ros2"
+alias hi="history"
+alias lg="lazygit"
+alias ll="ls -alt --color=auto"
+alias ls="ls --color=auto"
+# Installed files are stored in ~/.matlab/R2024a
+alias matlab="~/.local/bin/matlab"
 alias mc="SHELL=/bin/bash mc"
+alias miniterm="python3 -m serial.tools.miniterm"
+alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
+alias nv="nvim"
+alias ros="ros2"
+alias sdu="cd $HOME/SDU/year1/WS"
+alias vpnoff="protonvpn-cli d"
+alias vpnon="protonvpn-cli c"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -110,18 +122,13 @@ export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sb
 export EDITOR="/usr/bin/nvim"
 export SUDO_EDITOR="/usr/bin/nvim"
 
-##########################
-#	 MC zsh support	 #
-##########################
-# mc's subshell relies on ZDOTDIR to be initialized. Otherwise the subshell doesn't work.
-# export ZDOTDIR="~/.zshrc"
-
 ##################
 #		ROS2	 #
 ##################
 source /opt/ros/humble/setup.zsh
-# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
+# Set the mode of the function keys on the keyboard
 # echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
 
 # Load bash completion functions
@@ -131,13 +138,6 @@ autoload -Uz +X bashcompinit && bashcompinit
 
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
-alias nv="nvim"
-alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
-# Installed files are stored in ~/.matlab/R2024a
-alias matlab="~/.local/bin/matlab"
-
-alias vpnon="protonvpn-cli c"
-alias vpnoff="protonvpn-cli d"
 
 export TERM="screen-256color"
 
@@ -145,13 +145,4 @@ export TERM="screen-256color"
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
-alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-alias miniterm="python3 -m serial.tools.miniterm"
-
-alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
-alias gf="git fetch -pt --all"
-alias sdu="cd $HOME/SDU/year1/WS"
-alias gk="gitk --all &"
-alias gf="git fetch -pt --all"
 export PATH="$PATH:/usr/local/go/bin:$HOME/node_modules/.bin/"
