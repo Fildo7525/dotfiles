@@ -174,7 +174,7 @@ keybinding:
         extrasMenu: '@'
         filteringMenu: <c-s>
         goInto: <enter>
-        gotoBottom: > # go to bottom of list
+        gotoBottom: '>' # go to bottom of list
         gotoTop: < # go to top of list
         increaseContextInDiffView: '}'
         jumpToBlock:
