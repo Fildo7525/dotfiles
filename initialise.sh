@@ -98,9 +98,10 @@ fi
 	which node
 	if [[ $? != 0 ]]; then
 		log "Installing nodejs"
-		curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-		sudo apt update
-		sudo apt install nodejs -y
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+		nvm install 23
+		node -v
+		npm -v
 	else
 		alreadyDone "Nodejs is already insalled with version $(node --verison)"
 	fi
