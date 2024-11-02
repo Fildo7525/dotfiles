@@ -170,7 +170,7 @@ keybinding:
         diffingMenu: W
         diffingMenu-alt: <disabled> # deprecated
         edit: e
-        executeCustomCommand: ':'
+        executeShellCommand: ':'
         extrasMenu: '@'
         filteringMenu: <c-s>
         goInto: <enter>
@@ -178,11 +178,11 @@ keybinding:
         gotoTop: < # go to top of list
         increaseContextInDiffView: '}'
         jumpToBlock:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "5"
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
         new: n
         nextBlock: <right> # goto the next block / panel
         nextBlock-alt: l # goto the next block / panel
