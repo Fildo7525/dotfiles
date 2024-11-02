@@ -22,9 +22,12 @@ sudo ubuntu-drivers autoinstall
 #  ESSENTAILS  #
 ################
 sudo apt install apt-transport-https \
+				 alacritty \
 				 build-essential \
 				 ccache \
+				 clang-format \
 				 cmake \
+				 cmake-format \
 				 curl \
 				 doxygen \
 				 exa \
@@ -42,7 +45,9 @@ sudo apt install apt-transport-https \
 				 python3-venv \
 				 qtbase5-dev \
 				 ripgrep \
+				 tmux \
 				 tree \
+				 wl-clipboard \
 				 zathura \
 				 zsh -y
 
