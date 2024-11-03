@@ -145,4 +145,11 @@ export TERM="screen-256color"
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
-export PATH="$PATH:/usr/local/go/bin:$HOME/node_modules/.bin/"
+export PATH="$PATH:$HOME/node_modules/.bin/"
+
+export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
+
+export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home
+/fildo7525/.luarocks/lib/lua/5.1/?.so'
+
+export PATH="$PATH:$HOME/.luarocks/bin"
