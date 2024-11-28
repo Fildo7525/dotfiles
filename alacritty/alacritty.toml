@@ -120,6 +120,7 @@ dynamic_title = true
 opacity = 0.85
 startup_mode = "Windowed"
 title = "Alacritty"
+decorations = "Full"
 
 [window.class]
 general = "Alacritty"
