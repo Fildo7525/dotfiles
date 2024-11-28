@@ -145,7 +145,7 @@ export TERM="screen-256color"
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
-export PATH="$PATH:$HOME/node_modules/.bin/"
+export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin"
 
 export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
 
