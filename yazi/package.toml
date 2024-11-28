@@ -1,0 +1,7 @@
+[plugin]
+deps = [
+	{ use = "yazi-rs/plugins:lsar", rev = "38418dd" },
+]
+
+[flavor]
+deps = []
