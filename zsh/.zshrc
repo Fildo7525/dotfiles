@@ -125,8 +125,8 @@ export SUDO_EDITOR="/usr/bin/nvim"
 ##################
 #		ROS2	 #
 ##################
-source /opt/ros/humble/setup.zsh
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+source /opt/ros/rolling/setup.zsh
+# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
 # Set the mode of the function keys on the keyboard
 # echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
@@ -142,8 +142,8 @@ autoload -Uz +X bashcompinit && bashcompinit
 export TERM="screen-256color"
 
 # argcomplete for ros2 & colcon
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
+eval "$(register-python-argcomplete ros2)"
+eval "$(register-python-argcomplete colcon)"
 
 export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin"
 
