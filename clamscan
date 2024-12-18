@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+LOG_DIR="/var/log/clamav"
+LOG_FILE="$LOG_DIR/clamscan.log"
+SUMMARY="ClamAV scan"
+
+# Stop the clamav-daemon and clamav-freshclam services
+systemctl restart clamav-daemon.service
+systemctl stop clamav-freshclam.service
+
+# Update the virus definitions
+freshclam
+
+# Start the clamav-daemon and clamav-freshclam services
+systemctl start clamav-freshclam.service
+
+# Scan the /home/fildo7525 directory and log the output
+clamscan --infected --recursive /home/fildo7525 -l $LOG_FILE
+
+clam_output=$?
+
+function run-as-root() {
+	#Detect the name of the display in use
+	local display=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | head -n 1)"
+
+	#Detect the user using such display
+	local user=$(who | grep '('$display')' | awk '{print $1}' | head -n 1)
+
+	#Detect the id of the user
+	local uid=$(id -u $user)
+
+	sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus "$@"
+}
+
+function notify-send() {
+	run-as-root notify-send "$@"
+}
+
+function xdg-open() {
+	run-as-root xdg-open "$@"
+}
+
+case "$clam_output" in
+	0)
+		notify-send --app-name="ClamAV" --icon=~/Documents/sourcing/Icons/clamav.png "$SUMMARY" "No infected files found"
+		;;
+	1)
+		action=$(notify-send --app-name="ClamAV" --urgency=critical --icon=~/Documents/sourcing/Icons/clamav.png -A "xdg-open $LOG_DIR"="Open log file" "$SUMMARY" "Infected files found. Check /var/log/clamav/clamscan.log for more information")
+		$action &
+		;;
+	2)
+		echo "Some error(s) occurred"
+		;;
+	*)
+		echo "Unknown error"
+		;;
+esac
