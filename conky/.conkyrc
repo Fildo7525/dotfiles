@@ -71,6 +71,11 @@ ${color grey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar 4}
 ${color grey}CPU Usage:$color $cpu% ${cpubar 4}
 ${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes
 $hr
+${color CC9900}GPU:$color $alignr ${nvidia modelname} : ${nvidia driverversion}
+${color CC9900}Used:$color $alignr ${nvidia memused} / ${nvidia memtotal} MiB
+${color CC9900}Memory frequency:$color  $alignr ${nvidia memfreq} Mhz
+${color CC9900}Temperature:$color $alignr ${nvidia temp} C
+$hr
 ${color grey}File systems:
  / $color${fs_used /}/${fs_size /} ${fs_bar 6 /}
  ${color grey}/home$color $color${fs_used /home}/${fs_size /home} ${fs_bar 6 /home}
