@@ -71,10 +71,10 @@ ${color grey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar 4}
 ${color grey}CPU Usage:$color $cpu% ${cpubar 4}
 ${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes
 $hr
-${color CC9900}GPU:$color $alignr ${nvidia modelname} : ${nvidia driverversion}
-${color CC9900}Used:$color $alignr ${nvidia memused} / ${nvidia memtotal} MiB
-${color CC9900}Memory frequency:$color  $alignr ${nvidia memfreq} Mhz
-${color CC9900}Temperature:$color $alignr ${nvidia temp} C
+${color CC9900}GPU:$color $alignr ${exec nvidia-smi --query-gpu=name --format=csv,noheader} : ${exec nvidia-smi --query-gpu=driver_version --format=csv,noheader}
+${color CC9900}Used:$color $alignr ${execi 60 nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits} / ${execi 60 nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits} MiB
+${color CC9900}Memory frequency:$color  $alignr ${execi 60 nvidia-smi --query-gpu=clocks.mem --format=csv,noheader,nounits} Mhz
+${color CC9900}Temperature:$color $alignr ${execi 60 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits} C
 $hr
 ${color grey}File systems:
  / $color${fs_used /}/${fs_size /} ${fs_bar 6 /}
