@@ -7,7 +7,7 @@ on = "<C-e>"
 run = 'arrow 10%'
 
 [[manager.prepend_keymap]]
-on   = "!"
+on   = "<C-o>"
 run  = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
 
