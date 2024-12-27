@@ -86,7 +86,7 @@ setopt listpacked
 setopt automenu
 unsetopt BEEP
 
-export PAGER=most
+export PAGER=less
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ##################
@@ -98,8 +98,8 @@ alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:0
 alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
 alias gf="git fetch -pt --all"
 alias gk="gitk --all &"
-alias hg="history | grep"
-alias hi="history"
+alias hg="history 0 | grep"
+alias hi="history 0"
 alias lg="lazygit"
 alias ll="ls -alt --color=auto"
 alias ls="ls --color=auto"
