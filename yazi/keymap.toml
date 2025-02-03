@@ -13,7 +13,7 @@ desc = "Open shell here"
 
 [[manager.prepend_keymap]]
 on = ["g", "s"]
-run = "cd ~/SDU/year1/WS"
+run = "cd ~/SDU/year1/SS"
 desc = "Go to the current semester at SDU"
 
 [[manager.prepend_keymap]]
