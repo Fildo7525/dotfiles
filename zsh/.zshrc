@@ -1,3 +1,5 @@
+export TMPDIR="/tmp"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh'# Created by newuser for 5.8rc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -167,3 +169,5 @@ alias pip='function _pip(){
 	else pip "$@";
 	fi;
 };_pip'
+
+export UEBERZUGPP_TMPDIR="${TMPDIR}/ueberzugpp"
