@@ -110,7 +110,7 @@ alias miniterm="python3 -m serial.tools.miniterm"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
 alias nv="nvim"
 alias ros="ros2"
-alias sdu="cd $HOME/SDU/year1/WS"
+alias sdu="cd $HOME/SDU/year1/SS"
 alias vpnoff="protonvpn-cli d"
 alias vpnon="protonvpn-cli c"
 
