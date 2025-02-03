@@ -104,7 +104,7 @@ alias lg="lazygit"
 alias ll="ls -alt --color=auto"
 alias ls="ls --color=auto"
 # Installed files are stored in ~/.matlab/R2024a
-alias matlab="~/.local/bin/matlab"
+alias matlab="~/.local/bin/matlab -softwareopengl"
 alias mc="SHELL=/bin/bash mc"
 alias miniterm="python3 -m serial.tools.miniterm"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
