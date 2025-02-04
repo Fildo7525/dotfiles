@@ -21,3 +21,23 @@ on = ["g", "w"]
 run = "cd ~/work"
 desc = "Go to the work directory"
 
+[[manager.prepend_keymap]]
+on = ["R", "h"]
+run = "shell \"pdftk $@ rotate 1-endwest output rotated; mv rotated $@\" --confirm"
+desc = "Rotate left"
+
+[[manager.prepend_keymap]]
+on = ["R", "j"]
+run = "shell \"pdftk $@ rotate 1-endsouth output rotated; mv rotated $@\" --confirm"
+desc = "Rotate down"
+
+[[manager.prepend_keymap]]
+on = ["R", "k"]
+run = "shell \"pdftk $@ rotate 1-endnorth output rotated; mv rotated $@\" --confirm"
+desc = "Rotate up"
+
+[[manager.prepend_keymap]]
+on = ["R", "l"]
+run = "shell \"pdftk $@ rotate 1-endeast output rotated; mv rotated $@\" --confirm"
+desc = "Rotate right"
+
