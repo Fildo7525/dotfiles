@@ -95,8 +95,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #	Aliases	 #
 ##################
 alias cpp="cd ~/Desktop/Cpp/"
-alias cvm_off="sudo echo \"0\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-alias cvm_on="sudo echo \"1\" > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias cvm_off="echo 0 | sudo tee -a /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias cvm_on="echo 1 | sudo tee -a /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
 alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
 alias gf="git fetch -pt --all"
 alias gk="gitk --all &"
