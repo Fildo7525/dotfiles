@@ -1,7 +1,6 @@
 -- ~/.config/yazi/init.lua
 function Linemode:size_and_mtime()
-	local time = math.floor(self._file.cha.modified or 0)
-
+	local time = math.floor(self._file.cha.mtime or 0)
 	if time == 0 then
 		time = ""
 	elseif os.date("%Y", time) == os.date("%Y") then
@@ -11,6 +10,5 @@ function Linemode:size_and_mtime()
 	end
 
 	local size = self._file:size()
-	local perms = self._file.cha:permissions()
-	return ui.Line(string.format("%s %s %s", size and ya.readable_size(size) or "-", perms or "-" , time))
-end
+	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
+end-- ~/.config/yazi/init.lua
