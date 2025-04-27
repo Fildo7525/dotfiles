@@ -107,6 +107,7 @@ alias ll="ls -alt --color=auto"
 alias ls="ls --color=auto"
 # Installed files are stored in ~/.matlab/R2024a
 alias matlab="~/.local/bin/matlab -softwareopengl"
+# alias matlab="~/.local/bin/matlab"
 alias mc="SHELL=/bin/bash mc"
 alias miniterm="python3 -m serial.tools.miniterm"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
@@ -121,8 +122,10 @@ alias vpnon="protonvpn-cli c"
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
 export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:/usr/include/SDL2:$HOME/Project-Builder/build/build::/opt/ros/humble/bin:$SDL2_INCLUDE_DIRS:/usr/local/go/bin:$HOME/.local/lib/python3.10/site-packages:$HOME.local/share/nvim/mason/bin"
 
-export EDITOR="/usr/bin/nvim"
-export SUDO_EDITOR="/usr/bin/nvim"
+# Setup zsh to take the desired version of nvim
+source "$HOME/.local/share/bob/env/env.sh"
+export EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
+export SUDO_EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
 
 ##################
 #		ROS2	 #
