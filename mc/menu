@@ -36,7 +36,7 @@ shell_patterns=0
 
 0       Edit a bug report and send it to root
         I=`mktemp "${MC_TMPDIR:-/tmp}/mail.XXXXXX"` || exit 1
-        ${EDITOR-vi} "$I"
+        ${EDITOR-nvim} "$I"
         test -r "$I" && mail root < "$I"
         rm -f "$I"
 
