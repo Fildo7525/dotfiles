@@ -1,4 +1,4 @@
 [submodule "nvim"]
 	path = nvim
-	url = https://github.com/Fildo7525/nvim
+	url = git@github.com:Fildo7525/nvim.git
 	branch = master
