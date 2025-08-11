@@ -130,7 +130,7 @@ export SUDO_EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
 ##################
 #		ROS2	 #
 ##################
-source /opt/ros/rolling/setup.zsh
+source /opt/ros/jazzy/setup.zsh
 # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
 # Set the mode of the function keys on the keyboard
