@@ -103,7 +103,7 @@ alias gk="gitk --all &"
 alias hg="history 0 | grep"
 alias hi="history 0"
 alias lg="lazygit"
-alias ll="ls -alt --color=auto"
+alias ll="exa --icons -alhs name --group-directories-first"
 alias ls="ls --color=auto"
 # Installed files are stored in ~/.matlab/R2024a
 alias matlab="~/.local/bin/matlab -softwareopengl"
