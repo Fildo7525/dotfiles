@@ -127,7 +127,7 @@ fi
 	###############
 	if [[ ! -d /usr/local/share/fonts/BitstreamVeraSansMono ]]; then
 		log "Downloading BitstreamVeraSansMono nerd font"
-		wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/BitstreamVeraSansMono.zip
+		wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/BitstreamVeraSansMono.zip
 		mkdir BitstreamVeraSansMono
 		unzip -qq BitstreamVeraSansMono.zip -d BitstreamVeraSansMono
 		cd BitstreamVeraSansMono; find . -name "* Windows *" -delete ; cd ..
