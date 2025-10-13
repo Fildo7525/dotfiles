@@ -1,0 +1,12 @@
+
+new_tab
+layout splits
+enabled_layouts splits,stack
+set_layout_state {"pairs": {"horizontal": false, "one": {"one": 2, "two": 7}, "two": {"one": 5, "two": 6}}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 3, "active_group_history": [3, 1, 4, 2, 7, 6, 5], "window_groups": [{"id": 2, "window_ids": [2]}, {"id": 7, "window_ids": [7]}, {"id": 5, "window_ids": [5]}, {"id": 6, "window_ids": [6]}]}}
+cd ../../work/Muslingevagt/ros2_ws
+
+launch 'kitty-unserialize-data={"id": 2}'
+launch 'kitty-unserialize-data={"id": 7}'
+launch 'kitty-unserialize-data={"id": 5}'
+launch 'kitty-unserialize-data={"id": 6}'
+focus
