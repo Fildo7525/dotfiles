@@ -25,12 +25,16 @@ xournal = [
 hex = [
 	{ run = 'objdump -x "$@" | gedit -', orphan = true, for = "linux" },
 ]
+readelf = [
+	{ run = 'readelf -a "$@" | gedit -', orphan = true, for = "linux" },
+]
 
 [open]
 prepend_rules = [
 	{ name = "*.pdf", use = [ "pdff", "xournal", "reveal", "open" ] },
 	{ name = "*.xopp", use = "xournal" },
 	{ name = "*.exe", use = "hex" },
+	{ name = "*.so", use = "readelf" },
 ]
 
 [[plugin.prepend_previewers]]
