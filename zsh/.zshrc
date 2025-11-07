@@ -1,4 +1,5 @@
 export TMPDIR="/tmp"
+export SHELL="/usr/bin/zsh"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh'# Created by newuser for 5.8rc.
 # Initialization code that may require console input (password prompts, [y/n]
