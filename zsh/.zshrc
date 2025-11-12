@@ -169,16 +169,36 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+FOXGLOVE_DIRS="$HOME/work/Muslingevagt/ros2_ws:$HOME/work/Muslingevagt/boat_sim_vrx/vrx:$HOME/SDU/EiT/EiRT-AscenD-Robotics/ros2_ws"
+
 function foxglove() {
+	# Kill any existing foxglove processes
+	kill -9 $(ps aux | grep foxglove | awk '{print $2}') 2> /dev/null
+
 	source /opt/ros/jazzy/setup.zsh
 
-	# work
-	source $HOME/work/Muslingevagt/ros2_ws/install/setup.zsh
-	source $HOME/work/Muslingevagt/boat_sim_vrx/vrx/install/setup.zsh
+	for dir in ${(s.:.)FOXGLOVE_DIRS}; do
+		if [ -f "$dir/install/setup.zsh" ]; then
+			source "$dir/install/setup.zsh"
+		fi
+	done
 
-	# uni
-	source $HOME/SDU/EiT/EiRT-AscenD-Robotics/ros2_ws/install/setup.zsh
+	pids=()
 
-	ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+	# Start both processes in their own process group
+	ros2 launch foxglove_bridge foxglove_bridge_launch.xml > /dev/null 2>&1 &
+	pids+=($!)
+
+	foxglove-studio > /dev/null 2>&1 &
+	pids+=($!)
+
+	function cleanup() {
+		kill -TERM "${pids[@]}" 2>/dev/null
+		echo "Foxglove Bridge and Studio have been terminated."
+	}
+
+	# Ensure cleanup when terminal exits or interrupted
+	trap cleanup EXIT INT TERM HUP
+	wait
 }
 
