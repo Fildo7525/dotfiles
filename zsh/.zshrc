@@ -1,5 +1,5 @@
-export TMPDIR="/tmp"
 export SHELL="/usr/bin/zsh"
+export TMPDIR="/tmp"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh'# Created by newuser for 5.8rc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -89,7 +89,7 @@ setopt listpacked
 setopt automenu
 unsetopt BEEP
 
-export PAGER=less
+export PAGER="less --use-color -Rw -Ddr -DPg -DNw -DSy"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ##################
@@ -114,14 +114,15 @@ alias miniterm="python3 -m serial.tools.miniterm"
 alias nmrefresh="sudo nmcli networking off; sudo nmcli networking on"
 alias nv="nvim"
 alias ros="ros2"
-alias sdu="cd $HOME/SDU/year1/SS"
+alias sdu="cd $HOME/SDU/"
 alias vpnoff="protonvpn-cli d"
 alias vpnon="protonvpn-cli c"
+alias ip="ip --color=auto"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
-export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/Project-Builder:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:/usr/include/SDL2:$HOME/Project-Builder/build/build::/opt/ros/humble/bin:$SDL2_INCLUDE_DIRS:/usr/local/go/bin:$HOME/.local/lib/python3.10/site-packages:$HOME.local/share/nvim/mason/bin"
+export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:/usr/include/SDL2:/opt/ros/humble/bin:$SDL2_INCLUDE_DIRS:/usr/local/go/bin:$HOME/.local/lib/python3.10/site-packages:$HOME/.local/share/nvim/mason/bin:$HOME/Applications"
 
 # Setup zsh to take the desired version of nvim
 source "$HOME/.local/share/bob/env/env.sh"
@@ -131,6 +132,7 @@ export SUDO_EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
 ##################
 #		ROS2	 #
 ##################
+# source /opt/ros/rolling/setup.zsh
 source /opt/ros/jazzy/setup.zsh
 # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
@@ -145,13 +147,13 @@ autoload -Uz +X bashcompinit && bashcompinit
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
 
-export TERM="screen-256color"
+# export TERM="xterm-256color"
 
 # argcomplete for ros2 & colcon
 eval "$(register-python-argcomplete ros2)"
 eval "$(register-python-argcomplete colcon)"
 
-export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin"
+export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin:/usr/local/lib"
 
 export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
 
@@ -166,3 +168,17 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+function foxglove() {
+	source /opt/ros/jazzy/setup.zsh
+
+	# work
+	source $HOME/work/Muslingevagt/ros2_ws/install/setup.zsh
+	source $HOME/work/Muslingevagt/boat_sim_vrx/vrx/install/setup.zsh
+
+	# uni
+	source $HOME/SDU/EiT/EiRT-AscenD-Robotics/ros2_ws/install/setup.zsh
+
+	ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+}
+
