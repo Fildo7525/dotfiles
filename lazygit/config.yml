@@ -27,9 +27,9 @@ git:
     # only applicable to unix users
     manualCommit: false
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
-  paging:
-    colorArg: always
-    useConfig: false
+  pagers:
+    - colorArg: always
+      useConfig: false
   parseEmoji: false
   skipHookPrefix: WIP
   allBranchesLogCmds:
@@ -138,7 +138,7 @@ keybinding:
     fetch: f
     findBaseCommitForFixup: <c-f>
     ignoreFile: i
-    openMergeTool: M
+    openMergeOptions: M
     openStatusFilter: <c-b>
     refreshFiles: r
     stashAllChanges: s
