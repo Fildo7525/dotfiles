@@ -51,7 +51,7 @@ sudo apt install apt-transport-https \
 				 zathura \
 				 zsh -y
 
-echo 'export PAGER=most' >> ~/.bashrc
+echo 'export PAGER=less' >> ~/.bashrc
 
 if [[ $1 == 'minimal' ]]; then
 	exit 0;
