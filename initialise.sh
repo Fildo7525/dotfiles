@@ -13,7 +13,7 @@ sudo apt update
 sudo apt upgrade -y
 
 # Install all drivers just to be sure.
-sudo ubuntu-drivers autoinstall
+# sudo ubuntu-drivers autoinstall
 
 # This will no longer be needed when I setup debugger in nvim.
 # sudo snap install code --classic
@@ -30,7 +30,6 @@ sudo apt install apt-transport-https \
 				 cmake-format \
 				 curl \
 				 doxygen \
-				 exa \
 				 fzf \
 				 git \
 				 gitk \
@@ -39,7 +38,6 @@ sudo apt install apt-transport-https \
 				 mc \
 				 most \
 				 ncdu \
-				 python2 \
 				 python3 \
 				 python3-pip \
 				 python3-venv \
