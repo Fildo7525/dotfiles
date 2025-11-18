@@ -303,7 +303,8 @@ sudo mv conky-x86_64.AppImage /usr/bin/conky
 ########################
 log "Distributing configs"
 if [[ ! -e ~/.zshrc ]]; then
-	ln -s ./zsh/.zshrc ~/.zshrc
+	ln -s "$(pwd)/zsh/.zshrc" ~/.zshrc
+	ln -s "$(pwd)/zsh/.LESS_TERMCAP" ~/.LESS_TERMCAP
 fi
 
 if [[ ! -d ~/.config/lazygit ]]; then
