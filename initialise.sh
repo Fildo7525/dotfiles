@@ -234,7 +234,7 @@ fi
 		sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator <full/path/to/the/alternative> 1
 		log "Do you want to set alacritty as default terminal? [Y/n]"
 		read -p ">> " answer
-		if [[ "$answer" == "Y" ]]; then
+		if [[ "$answer" != "n" ]]; then
 			sudo update-alternatives --config x-terminal-emulator
 		fi
 	else
@@ -269,7 +269,7 @@ fi
 #  Git  #
 #########
 read -r -p "Do you want to setup git? [Y/n]" ans
-if [[ $ans != "n" ]]; then
+if [[ "$ans" != "n" ]]; then
 	read -p "Git user email: " email
 	git --global user.email "$email"
 	read -p "Git user name: " name
