@@ -205,3 +205,6 @@ function foxglove() {
 export LESS="--RAW-CONTROL-CHARS"
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
