@@ -6,8 +6,8 @@ sudo swapoff -a
 
 # Create an empty swapfile
 # Note that "1M" is basically just the unit and count is an integer.
-# Together, they define the size. In this case 8GiB.
-sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+# Together, they define the size. In this case 16GiB.
+sudo dd if=/dev/zero of=/swapfile bs=1M count=16384
 
 # Set the correct permissions
 sudo chmod 0600 /swapfile
