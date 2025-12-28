@@ -118,6 +118,7 @@ alias sdu="cd $HOME/SDU/"
 alias vpnoff="protonvpn-cli d"
 alias vpnon="protonvpn-cli c"
 alias ip="ip --color=auto"
+alias bat="batcat"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -153,7 +154,7 @@ autoload -Uz +X bashcompinit && bashcompinit
 eval "$(register-python-argcomplete ros2)"
 eval "$(register-python-argcomplete colcon)"
 
-export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin:/usr/local/lib"
+export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin:/usr/local/lib:$HOME/Documents/sourcing/Project-Builder/build"
 
 export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
 
@@ -208,3 +209,9 @@ export LESS="--RAW-CONTROL-CHARS"
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
+
+# Edit current command line in $EDITOR
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
