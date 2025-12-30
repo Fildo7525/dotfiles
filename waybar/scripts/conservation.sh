@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+FILE=/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
+state=$(cat "$FILE")
+
+if [ "$1" = "toggle" ]; then
+    if [ "$state" -eq 1 ]; then
+        echo 0 | sudo tee "$FILE" > /dev/null
+    else
+        echo 1 | sudo tee "$FILE" > /dev/null
+    fi
+fi
+
+# Output for Waybar
+if [ "$state" -eq 1 ]; then
+    echo -e "{\"class\": \"conserv_on\", \"alt\":\"conserv_on\", \"text\": \"ON\"}"
+else
+    echo -e "{\"class\": \"conserv_off\", \"alt\":\"conserv_off\", \"text\": \"OFF\"}"
+fi
+
+pkill -RTMIN+1 waybar

@@ -1,0 +1,253 @@
+{
+	"layer": "top",
+	"position": "top",
+	"autohide": true,
+	"autohide-blocked": false,
+	"exclusive": true,
+	"passthrough": false,
+	"gtk-layer-shell": true,
+	"spacing": 2,
+
+	// Choose the order of the modules
+	"modules-left": [
+		"sway/workspaces",
+		"group/hardware",
+		"sway/mode",
+		"sway/scratchpad",
+	],
+	"modules-center": [
+		"clock",
+		"custom/notification",
+	],
+	"modules-right": [
+		"network",
+		"bluetooth",
+		"group/pulseaudio",
+		"backlight",
+		// "keyboard-state",
+		"group/power",
+		"custom/language",
+		"tray",
+	],
+
+	/* ===== Modules Left ===== */
+	"group/hardware": {
+		"modules": [
+			"cpu",
+			"memory",
+			"disk",
+		],
+		"separator": " | ",
+		"orientation": "horizontal",
+	},
+	"cpu": {
+		"format": "{usage}% ",
+		"tooltip": true,
+		"tooltip-format": "Uso de CPU: {usage}%\nNúcleos: {cores}",
+		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
+	},
+	"memory": {
+		"format": "{}% ",
+		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
+	},
+	"disk": {
+		"interval": 30,
+		"format": "{specific_free:0.0f} GB / {specific_total:0.0f} GB",
+		"unit": "GB",
+		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
+	},
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>",
+	},
+	"sway/scratchpad": {
+		"format": "{icon} {count}",
+		"show-empty": false,
+		"format-icons": ["", ""],
+		"tooltip": true,
+		"tooltip-format": "{app}: {title}",
+	},
+
+	/* ===== Modules Center ===== */
+	"clock": {
+		"timezone": "Europe/Copenhagen",
+		"tooltip-format": "<big>{:%Y}</big>\n<tt><small>{calendar}</small></tt>",
+		"format": "<big>{:%H:%M}</big>",
+		"format-alt": "<big>{:%H:%M	%Y-%m-%d}</big>",
+		"on-click-middle": "gnome-calendar",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",
+			"mode-mon-col": 3,
+			"weeks-pos" : "left",
+			"on-scroll" : 1,
+			"format": {
+				"months": "<span color='#cdd6f4'><b>{}</b></span>",
+				"days": "<span color='#b4befe'><b>{}</b></span>",
+				"weeks": "<span color='#a6e3a1'><b>W{}</b></span>",
+				"weekdays": "<span color='#fab387'><b>{}</b></span>",
+				"today": "<span color='#f38ba8'><b><u>{}</u></b></span>",
+			},
+		},
+	},
+	"custom/notification": {
+		"tooltip": true,
+		"format": "<span size='16pt'>{icon}</span>",
+		"format-icons": {
+			"notification": "󱅫",
+			"none": "󰂜",
+			"dnd-notification": "󰂠",
+			"dnd-none": "󰪓",
+			"inhibited-notification": "󰂛",
+			"inhibited-none": "󰪑",
+			"dnd-inhibited-notification": "󰂛",
+			"dnd-inhibited-none": "󰪑",
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true,
+	},
+
+	/* ===== Modules Right ===== */
+	"custom/powerprofile": {
+		"format": "{icon}",
+		"format-icons": {
+			"performance": "󰊗",
+			"balanced": "",
+			"power-saver": "",
+		},
+		"exec": "~/.config/waybar/scripts/powerprofile.py",
+		"on-click": "~/.config/waybar/scripts/powerprofile.py menu",
+		"return-type": "json",
+		"signal": 1,
+	},
+	"custom/conservation": {
+		"format": "{icon}",
+		"format-icons": {
+			"conserv_on": "󰂄",
+			"conserv_off": "",
+		},
+		"exec": "~/.config/waybar/scripts/conservation.sh",
+		"on-click": "~/.config/waybar/scripts/conservation.sh toggle",
+		"return-type": "json",
+		"signal": 1,
+	},
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "󰈁 {ifname}",
+		"tooltip-format": " {ifname} via {gwaddr}",
+		"format-linked": " {ifname} (No IP)",
+		"format-disconnected": "Disconnected ⚠ {ifname}",
+		"format-alt": " {ifname}: {ipaddr}/{cidr}",
+		"on-click-middle": "~/.config/waybar/scripts/wifi.sh",
+		"on-click-right": "~/.config/waybar/scripts/wifi_menu.sh",
+	},
+	"bluetooth": {
+		"format": " {status}",
+		"format-alt": " {status}",
+		"format-connected": " {device_alias}",
+		"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+		"on-click": "blueman-manager",
+	},
+	"group/pulseaudio": {
+		"modules": [
+			"pulseaudio#output",
+			"pulseaudio#input",
+		],
+		"separator": " | ",
+		"orientation": "horizontal",
+	},
+	"pulseaudio#input": {
+		"format-source": " {volume}%",
+		"format-source-muted": "",
+		"format-source-bluetooth": "  {volume}%",
+		"format-source-bluetooth-muted": " ",
+		"format": "{format_source}",
+		"on-click": "pavucontrol",
+		"on-click-middle": "~/.config/waybar/scripts/volume.sh source toggle",
+		"on-scroll-up": "~/.config/waybar/scripts/volume.sh source up",
+		"on-scroll-down": "~/.config/waybar/scripts/volume.sh source down",
+		"tooltip": false
+	},
+	"pulseaudio#output": {
+		"format": "{icon} {volume}%",
+		"format-bluetooth": " {icon} {volume}%",
+		"format-bluetooth-muted": " 󰝟",
+		"max-volume": 153,
+		"format-icons": {
+			"default": [
+				"",
+				"",
+				"",
+				""
+			]
+		},
+		"on-click": "pavucontrol",
+		"on-click-middle": "~/.config/waybar/scripts/volume.sh sink toggle",
+		"on-scroll-up": "~/.config/waybar/scripts/volume.sh sink up",
+		"on-scroll-down": "~/.config/waybar/scripts/volume.sh sink down",
+		"tooltip": false
+	},
+	"backlight": {
+		"device": "acpi_video1",
+		"format": "{icon} {percent}%",
+		"format-icons": ["", "", "", "", "", "", "", "", ""],
+	},
+	"keyboard-state": {
+		"numlock": true,
+		"capslock": true,
+		"format": "{name} {icon}",
+		"format-icons": {
+			"locked": "",
+			"unlocked": "",
+		}
+	},
+	"group/power": {
+		"modules": [
+			// "custom/powerprofile",
+			"custom/conservation",
+			"battery",
+		],
+		"separator": " | ",
+		"orientation": "horizontal",
+	},
+	"battery": {
+		"bat": "BAT0",
+		"states": {
+			"good": 55,
+			"warning": 30,
+			"critical": 15,
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": "{capacity}% 󰂄",
+		"format-plugged": "{capacity}% ",
+		"tooltip-format": "{timeTo}",
+		"format-icons": ["", "", "", "", ""],
+		"interval": 30,
+		"signal": 1,
+	},
+	"custom/language": {
+		"format": " {}",
+		"exec": "~/.config/waybar/scripts/language.sh",
+		"interval": 1,
+	},
+	"tray": {
+		// "icon-size": 21,
+		"spacing": 10
+	},
+	"inhibitor": {
+		"what": "handle-lid-switch",
+		"format": "{icon}",
+		"format-icons": {
+			 "activated": "",
+			 "deactivated": "",
+		},
+	},
+}
