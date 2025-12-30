@@ -42,6 +42,7 @@ exec_always pkill swaync; systemctl --user start swaync
 bindsym $mod+Shift+n exec swaync-client -t -sw
 
 exec_always --no-startup-id blueman-applet
+exec_always export XDG_CURRENT_DESKTOP=sway
 
 ########################
 # Output configuration #
@@ -315,5 +316,9 @@ bar {
 }
 
 exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
+
+# Screen sharing support on https://elis.nu/blog/2021/02/detailed-setup-of-screen-sharing-in-sway/
+exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment WAYLAND_DISPLAY
 
 include /etc/sway/config.d/*
