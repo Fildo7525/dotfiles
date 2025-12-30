@@ -45,6 +45,8 @@ bindsym $mod+Shift+n exec swaync-client -t -sw
 
 exec_always --no-startup-id blueman-applet
 exec_always export XDG_CURRENT_DESKTOP=sway
+exec_always export WLR_RENDER_NO_EXPLICIT_SYNC=1
+exec_always export WLR_RENDERER=vulkan
 
 ########################
 # Output configuration #
@@ -157,7 +159,7 @@ bindsym $mod+BackSpace input type:keyboard xkb_switch_layout next
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -302,6 +304,7 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+exec_always --no-startup-id pkill waybar
 bar {
     position top
     swaybar_command waybar
