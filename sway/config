@@ -2,6 +2,8 @@
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
+# You can start sway with:
+# WLR_RENDER_NO_EXPLICIT_SYNC=1 WLR_RENDERER=vulkan XDG_RENDER_DESKTOP=sway XCURSOR_SIZE=15 WLR_NO_HARDWARE_CURSORS=1 sway --unsupported-gpu
 #
 # Read `man 5 sway` for a complete reference.
 
