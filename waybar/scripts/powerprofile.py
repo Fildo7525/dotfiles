@@ -74,7 +74,7 @@ output = subprocess.run(
 out = {}
 out["class"] = output.stdout.strip()
 out["alt"] = output.stdout.strip()
-out["text"] = output.stdout.strip().capitalize() + " ⚡"
+out["text"] = output.stdout.strip().capitalize()
 
 json_data = json.dumps(out)
 print(json_data)
