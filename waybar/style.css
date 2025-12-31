@@ -212,7 +212,7 @@ widget > label {
 #custom-conservation {
     background-color: #94e2d5;
     color: #1e1e2e;
-    border-radius: 0 0 0 8px;
+    border-radius: 0 0 0 0;
 }
 
 #custom-conservation.conserv_on {

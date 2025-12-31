@@ -211,7 +211,7 @@
 	},
 	"group/power": {
 		"modules": [
-			// "custom/powerprofile",
+			"custom/powerprofile",
 			"custom/conservation",
 			"battery",
 		],

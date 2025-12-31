@@ -27,21 +27,37 @@ if len(sys.argv) > 1:
             self.set_keep_above(True)
             self.activate_default()
 
+            screen = Gdk.Screen.get_default()
+            style_provider = Gtk.CssProvider()
+            style_context = Gtk.StyleContext()
+            style_context.add_provider_for_screen(screen, style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+            style_provider.load_from_data(b"""
+                * {
+                    font-family: "BitstromWera Nerd Font Mono", monospace;
+                    font-size: 18px;
+                }
+                .background {
+                    margin: 0;
+                    padding: 0;
+                    box-shadow: 0 0 0 0;
+                }
+            """)
+
+
             box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
             self.add(box)
 
             profiles = [
-                ("Performance", "performance"),
-                ("Balanced", "balanced"),
-                ("Power Saver", "power-saver"),
+                ("󰊗 Performance", "performance"),
+                (" Balanced", "balanced"),
+                (" Power Saver", "power-saver"),
             ]
 
             for label, profile in profiles:
                 btn = Gtk.Button(label=label)
                 btn.connect("clicked", lambda _, p=profile: set_profile(p))
                 box.pack_start(btn, True, True, 0)
-
-            # self.connect("focus-out-event", lambda *_: Gtk.main_quit())
 
             self.show_all()
 
