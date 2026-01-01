@@ -304,7 +304,7 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-exec_always --no-startup-id pkill waybar
+exec_always pkill waybar
 bar {
     position top
     swaybar_command waybar
