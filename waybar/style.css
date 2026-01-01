@@ -4,7 +4,7 @@
 * {
     border: none;
     border-radius: 0;
-    padding: 0;
+    padding: 1px;
     margin: 0;
     min-height: 0;
 
@@ -16,7 +16,6 @@
    Waybar root
    ========================= */
 window#waybar {
-    /* background-color: #1e1e2e; */
     background-color: transparent;
     color: #cdd6f4;
 }
@@ -24,7 +23,8 @@ window#waybar {
 /* Common padding for label-based modules */
 widget > label {
     padding: 0 8px;
-    border-radius: 0 0 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    background-color: #313340;
 }
 
 /* =========================
@@ -55,35 +55,36 @@ widget > label {
    Left modules
    ========================= */
 #cpu {
-    background-color: #45475a;
-    border-radius: 0 0 0 8px;
+    border-radius: 8px 0 0 8px;
 }
 
 #memory {
-    background-color: #45475a;
     border-radius: 0 0 0 0;
 }
 
-#disk {
-    background-color: #45475a;
-    border-radius: 0 0 8px 0;
+#custom-disk {
+    border-radius: 0 8px 8px 0;
 }
 
 #mode {
-    background-color: #f9e2af;
-    color: #1e1e2e;
+    color: #f9e2af;
 }
 
 #scratchpad {
-    background-color: #585b70;
+    color: #585b70;
 }
 
 /* =========================
    Center
    ========================= */
 #clock {
-    background-color: #313244;
+    color: #c1c2d2;
     padding: 0 12px;
+}
+
+#custom-notification {
+    font-family: "NotoSansMono Nerd Font";
+    background-color: transparent;
 }
 
 /* =========================
@@ -94,13 +95,11 @@ widget > label {
    Network
    ========================= */
 #network {
-    background-color: #89b4fa;
-    color: #1e1e2e;
+    color: #89b4fa;
 }
 
 #network.disconnected {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+    color: #f38ba8;
 }
 
 /* =========================
@@ -108,154 +107,116 @@ widget > label {
    ========================= */
 
 #bluetooth {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+    color: #f38ba8;
 }
 
 #bluetooth.disconnected {
-    background-color: #585b70;
-    color: #cdd6f4;
+    color: #585b70;
 }
 
 /* =========================
    Audio
    ========================= */
-#pulseaudio {
-    background-color: #a6e3a1;
-    color: #1e1e2e;
-    border-radius: 0 0 8px 8px;
+
+/* INPUT */
+#pulseaudio.input {
+    border-radius: 0 8px 8px 0;
 }
 
 #pulseaudio.input.source-muted {
-    background-color: #585b70;
-    color: #cdd6f4;
+    color: #585b70;
 }
 
 #pulseaudio.input.source-bluetooth {
-	background-color: #94e2d5;
-	color: #1e1e2e;
+	color: #94e2d5;
 }
 
 #pulseaudio.input.source-bluetooth.source-muted {
-	background-color: #585b70;
-	color: #cdd6f4;
+	color: #585b70;
+}
+
+/* OUTPUT */
+#pulseaudio.output {
+    border-radius: 8px 0 0 8px;
 }
 
 #pulseaudio.output.muted {
-    background-color: #585b70;
-    color: #cdd6f4;
+    color: #585b70;
 }
 
 #pulseaudio.output.bluetooth {
-	background-color: #94e2d5;
-	color: #1e1e2e;
+	color: #94e2d5;
 }
 
 #pulseaudio.output.bluetooth.muted {
-	background-color: #585b70;
-	color: #cdd6f4;
+	color: #585b70;
 }
 
 /* =========================
    Backlight
    ========================= */
 #backlight {
-    background-color: #cba6f7;
-    color: #1e1e2e;
-}
-
-/* =========================
-   Keyboard state
-   ========================= */
-#keyboard-state label {
-    padding: 0 6px;
-    border-radius: 0 0 8px 8px;
-}
-
-#keyboard-state label.capslock {
-    background-color: #f38ba8;
-    color: #1e1e2e;
-}
-
-#keyboard-state label.numlock {
-    background-color: #94e2d5;
-    color: #1e1e2e;
-}
-
-#custom-language {
-	background-color: #f9e2af;
-	color: #1e1e2e;
+    color: #cba6f7;
 }
 
 /* =========================
    Battery
    ========================= */
 #custom-powerprofile {
-    border-radius: 0 0 0 8px;
+    border-radius: 8px 0 0 8px;
     font-size: 20px;
 }
 #custom-powerprofile.performance {
-    background-color: #c14c3f;
-    color: #1e1e2e;
+    color: #c14c3f;
 }
 
 #custom-powerprofile.balanced {
-    background-color: #b2b2b2;
-    color: #1e1e2e;
+    color: #b2b2b2;
 }
 
 #custom-powerprofile.power-saver {
-    background-color: #74d464;
-    color: #1e1e2e;
+    color: #74d464;
 }
 
 #custom-conservation {
-    background-color: #94e2d5;
-    color: #1e1e2e;
+    color: #94e2d5;
     border-radius: 0 0 0 0;
 }
 
 #custom-conservation.conserv_on {
-    background-color: #b2b2b2;
-    color: #1e1e2e;
+    color: #b2b2b2;
 }
 
 #custom-conservation.conserv_off {
-    background-color: #a6e3a1;
-    color: #1e1e2e;
+    color: #a6e3a1;
 }
 
 #battery {
-    background-color: #b2b2b2;
-    color: #1e1e2e;
-    border-radius: 0 0 8px 0;
+    color: #b2b2b2;
+    border-radius:  0 8px 8px 0;
 }
 
 #battery.charging {
-    background-color: #a6e3a1;
-    color: #1e1e2e;
+    color: #a6e3a1;
 }
 
 #battery.discharging.warning {
-    background-color: #f9e2af;
-    color: #1e1e2e;
+    color: #f9e2af;
 }
 
 #battery.discharging.critical {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+    color: #f38ba8;
 }
 
 /* =========================
    Tray
    ========================= */
 #tray {
-    background-color: #313244;
+    color: #313244;
     padding: 0 6px;
 }
 
 #tray menu {
-    background-color: #1e1e2e;
-    color: #cdd6f4;
+    color: #1e1e2e;
 }
 
