@@ -24,7 +24,6 @@
 		"bluetooth",
 		"group/pulseaudio",
 		"backlight",
-		// "keyboard-state",
 		"group/power",
 		"custom/language",
 		"tray",
@@ -35,7 +34,7 @@
 		"modules": [
 			"cpu",
 			"memory",
-			"disk",
+			"custom/disk",
 		],
 		"separator": " | ",
 		"orientation": "horizontal",
@@ -50,10 +49,11 @@
 		"format": "{}% ",
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
-	"disk": {
-		"interval": 30,
-		"format": "{specific_free:0.0f} GB / {specific_total:0.0f} GB",
-		"unit": "GB",
+	"custom/disk": {
+		"format": "{}",
+		// 4 is used GB 2 it total GB, 5 is percentage used
+		"exec": "df -h /home | tail -1 | awk '{print $4\" / \"$2 \" \"}'",
+		"interval": 1,
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"sway/mode": {
@@ -111,6 +111,81 @@
 	},
 
 	/* ===== Modules Right ===== */
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "󰈁 {ifname}",
+		"tooltip-format": " {ifname} via {gwaddr}",
+		"format-linked": " {ifname} (No IP)",
+		"format-disconnected": "Disconnected ⚠ {ifname}",
+		"format-alt": " {ifname}: {ipaddr}/{cidr}",
+		"on-click-middle": "~/.config/waybar/scripts/wifi.sh",
+	},
+	"bluetooth": {
+		"format": "{status} ",
+		"format-alt": "{status} ",
+		"format-connected": "{device_alias} ",
+		"format-connected-battery": "{device_alias}  {device_battery_percentage}%",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+		"on-click": "~/.config/waybar/scripts/bluetooth.sh toggle",
+		"on-click-middle": "blueman-manager",
+	},
+	"group/pulseaudio": {
+		"modules": [
+			"pulseaudio#output",
+			"pulseaudio#input",
+		],
+		"separator": " | ",
+		"orientation": "horizontal",
+	},
+	"pulseaudio#input": {
+		"format-source": "{volume} ",
+		"format-source-muted": "󰍭",
+		"format-source-bluetooth": "{volume}  ",
+		"format-source-bluetooth-muted": "󰍭 ",
+		"format": "{format_source}",
+		"on-click": "pavucontrol",
+		"on-click-middle": "~/.config/waybar/scripts/volume.sh source toggle",
+		"on-scroll-up": "~/.config/waybar/scripts/volume.sh source up",
+		"on-scroll-down": "~/.config/waybar/scripts/volume.sh source down",
+		"tooltip": false
+	},
+	"pulseaudio#output": {
+		"format": "{volume} {icon}",
+		"format-bluetooth": "{volume} {icon} ",
+		"format-bluetooth-muted": "󰝟 ",
+		"max-volume": 153,
+		"format-icons": {
+			"default": [
+				"",
+				"",
+				"",
+				""
+			]
+		},
+		"on-click": "pavucontrol",
+		"on-click-middle": "~/.config/waybar/scripts/volume.sh sink toggle",
+		"on-scroll-up": "~/.config/waybar/scripts/volume.sh sink up",
+		"on-scroll-down": "~/.config/waybar/scripts/volume.sh sink down",
+		"tooltip": false
+	},
+	"backlight": {
+		"device": "acpi_video1",
+		"format": "{percent}% {icon}",
+		"format-icons": ["", "", "", "", "", "", "", "", ""],
+	},
+	"group/power": {
+		"modules": [
+			"custom/powerprofile",
+			"custom/conservation",
+			"battery",
+		],
+		"separator": " | ",
+		"orientation": "horizontal",
+	},
 	"custom/powerprofile": {
 		"format": "{icon}",
 		"format-icons": {
@@ -134,90 +209,6 @@
 		"return-type": "json",
 		"signal": 1,
 	},
-	"network": {
-		// "interface": "wlp2*", // (Optional) To force the use of this interface
-		"format-wifi": "{essid} ({signalStrength}%) ",
-		"format-ethernet": "󰈁 {ifname}",
-		"tooltip-format": " {ifname} via {gwaddr}",
-		"format-linked": " {ifname} (No IP)",
-		"format-disconnected": "Disconnected ⚠ {ifname}",
-		"format-alt": " {ifname}: {ipaddr}/{cidr}",
-		"on-click-middle": "~/.config/waybar/scripts/wifi.sh",
-	},
-	"bluetooth": {
-		"format": " {status}",
-		"format-alt": " {status}",
-		"format-connected": " {device_alias}",
-		"format-connected-battery": " {device_alias} {device_battery_percentage}%",
-		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-		"on-click": "~/.config/waybar/scripts/bluetooth.sh toggle",
-		"on-click-middle": "blueman-manager",
-	},
-	"group/pulseaudio": {
-		"modules": [
-			"pulseaudio#output",
-			"pulseaudio#input",
-		],
-		"separator": " | ",
-		"orientation": "horizontal",
-	},
-	"pulseaudio#input": {
-		"format-source": " {volume}%",
-		"format-source-muted": "",
-		"format-source-bluetooth": "  {volume}%",
-		"format-source-bluetooth-muted": " ",
-		"format": "{format_source}",
-		"on-click": "pavucontrol",
-		"on-click-middle": "~/.config/waybar/scripts/volume.sh source toggle",
-		"on-scroll-up": "~/.config/waybar/scripts/volume.sh source up",
-		"on-scroll-down": "~/.config/waybar/scripts/volume.sh source down",
-		"tooltip": false
-	},
-	"pulseaudio#output": {
-		"format": "{icon} {volume}%",
-		"format-bluetooth": " {icon} {volume}%",
-		"format-bluetooth-muted": " 󰝟",
-		"max-volume": 153,
-		"format-icons": {
-			"default": [
-				"",
-				"",
-				"",
-				""
-			]
-		},
-		"on-click": "pavucontrol",
-		"on-click-middle": "~/.config/waybar/scripts/volume.sh sink toggle",
-		"on-scroll-up": "~/.config/waybar/scripts/volume.sh sink up",
-		"on-scroll-down": "~/.config/waybar/scripts/volume.sh sink down",
-		"tooltip": false
-	},
-	"backlight": {
-		"device": "acpi_video1",
-		"format": "{icon} {percent}%",
-		"format-icons": ["", "", "", "", "", "", "", "", ""],
-	},
-	"keyboard-state": {
-		"numlock": true,
-		"capslock": true,
-		"format": "{name} {icon}",
-		"format-icons": {
-			"locked": "",
-			"unlocked": "",
-		}
-	},
-	"group/power": {
-		"modules": [
-			"custom/powerprofile",
-			"custom/conservation",
-			"battery",
-		],
-		"separator": " | ",
-		"orientation": "horizontal",
-	},
 	"battery": {
 		"bat": "BAT0",
 		"states": {
@@ -225,7 +216,7 @@
 			"warning": 30,
 			"critical": 15,
 		},
-		"format": "{icon} {capacity}%",
+		"format": "{capacity}% {icon}",
 		"format-charging": "{capacity}% 󰂄",
 		"format-plugged": "{capacity}% ",
 		"tooltip-format": "{timeTo}",
@@ -241,13 +232,5 @@
 	"tray": {
 		// "icon-size": 21,
 		"spacing": 10
-	},
-	"inhibitor": {
-		"what": "handle-lid-switch",
-		"format": "{icon}",
-		"format-icons": {
-			 "activated": "",
-			 "deactivated": "",
-		},
 	},
 }
