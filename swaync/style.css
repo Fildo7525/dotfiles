@@ -75,7 +75,7 @@
 }
 
 .control-center {
-	background: alpha(@background, 0.9);
+	background: alpha(@background, 0.98);
 	border-radius: 10px;
 	padding: 10px 30px;
 }
