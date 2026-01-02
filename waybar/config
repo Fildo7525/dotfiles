@@ -42,11 +42,12 @@
 	"cpu": {
 		"format": "{usage}% ",
 		"tooltip": true,
-		"tooltip-format": "Uso de CPU: {usage}%\nNúcleos: {cores}",
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"memory": {
 		"format": "{}% ",
+		"tooltip": true,
+		"tooltip-format": "Percentage: {percentage}%\nUsed: {used} GiB\nAvailable: {avail} GiB\nTotal: {total} GiB\n\nSwap Percentage: {swapPercentage}%\nSwap Used: {swapUsed} GiB\nSwap Available: {swapAvail} GiB\nSwap Total: {swapTotal} GiB",
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"custom/disk": {
