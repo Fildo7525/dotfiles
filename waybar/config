@@ -6,7 +6,7 @@
 	"exclusive": true,
 	"passthrough": false,
 	"gtk-layer-shell": true,
-	"spacing": 2,
+	"spacing": 1,
 
 	// Choose the order of the modules
 	"modules-left": [
