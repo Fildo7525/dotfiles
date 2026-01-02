@@ -5,7 +5,28 @@ import subprocess
 import sys
 import json
 
+output = subprocess.run(
+    ["powerprofilesctl", "get"],
+    capture_output=True,
+    text=True
+).stdout.strip()
+
+profile_dic = {
+    "previous": {
+        "performance": "power-saver",
+        "balanced": "performance",
+        "power-saver": "balanced",
+    },
+    "next": {
+        "performance": "balanced",
+        "balanced": "power-saver",
+        "power-saver": "performance",
+    },
+}
+
 if len(sys.argv) > 1:
+    action = sys.argv[1]
+
     gi.require_version("Gtk", "3.0")
     from gi.repository import Gtk, Gdk
 
@@ -65,19 +86,23 @@ if len(sys.argv) > 1:
             """)
 
 
-    win = PowerPopup()
-    Gtk.main()
+    if action == "menu":
+        win = PowerPopup()
+        Gtk.main()
+    elif action == "previous" or action == "next":
+        set_profile( profile_dic[action][output])
+
 
 output = subprocess.run(
     ["powerprofilesctl", "get"],
     capture_output=True,
     text=True
-)
+).stdout.strip()
 
 out = {}
-out["class"] = output.stdout.strip()
-out["alt"] = output.stdout.strip()
-out["text"] = output.stdout.strip().capitalize()
+out["class"] = output
+out["alt"] = output
+out["text"] = output.capitalize()
 
 json_data = json.dumps(out)
 print(json_data)

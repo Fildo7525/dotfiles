@@ -212,6 +212,8 @@
 		},
 		"exec": "~/.config/waybar/scripts/powerprofile.py",
 		"on-click": "~/.config/waybar/scripts/powerprofile.py menu",
+		"on-scroll-up": "~/.config/waybar/scripts/powerprofile.py previous",
+		"on-scroll-down": "~/.config/waybar/scripts/powerprofile.py next",
 		"return-type": "json",
 		"signal": 1,
 	},
