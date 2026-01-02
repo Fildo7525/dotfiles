@@ -1,12 +1,30 @@
 #!/usr/bin/env bash
 
-chosen=$(nmcli -t -f IN-USE,SSID,SECURITY,SIGNAL dev wifi list \
-  | sed 's/^*/ /' \
-  | wofi --dmenu --prompt "Wi-Fi")
+OPERATION=$1
+enabled_network=s=$(nmcli radio wifi)
 
-[ -z "$chosen" ] && exit
+case $OPERATION in
+	toggle)
+		# The compared value was checked via notify-send
+		action=$([[ "$enabled_network" == "s=enabled" ]] && echo off || echo on)
+		nmcli radio wifi $action
+		;;
+	wofi)
+		chosen=$(nmcli -t -f IN-USE,SSID,SECURITY,SIGNAL dev wifi list \
+		  | sed 's/^*/ /' \
+		  | wofi --dmenu --prompt "Wi-Fi")
 
-ssid=$(echo "$chosen" | sed 's/^ //' | cut -d: -f1)
+		[ -z "$chosen" ] && exit
 
-nmcli dev wifi connect "$ssid"
+		ssid=$(echo "$chosen" | sed 's/^ //' | cut -d: -f1)
+
+		nmcli dev wifi connect "$ssid"
+		;;
+
+	*)
+		echo "No known command $0 [toggle, wofi]"
+		;;
+esac
+
+
 
