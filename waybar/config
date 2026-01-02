@@ -247,7 +247,7 @@
 	"custom/language": {
 		"format": " {}",
 		"exec": "~/.config/waybar/scripts/language.sh",
-		"interval": 1,
+		"signal": 2,
 	},
 	"tray": {
 		// "icon-size": 21,
