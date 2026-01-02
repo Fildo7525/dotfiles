@@ -27,6 +27,26 @@ if len(sys.argv) > 1:
             self.set_keep_above(True)
             self.activate_default()
 
+            self._format_css()
+
+            box_layout = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+            self.add(box_layout)
+
+            profiles = [
+                ("󰊗 Performance", "performance"),
+                (" Balanced", "balanced"),
+                (" Power Saver", "power-saver"),
+            ]
+
+            for label, profile in profiles:
+                btn = Gtk.Button(label=label)
+                btn.connect("clicked", lambda _, p=profile: set_profile(p))
+                box_layout.pack_start(btn, True, True, 0)
+
+            self.show_all()
+
+
+        def _format_css(self):
             screen = Gdk.Screen.get_default()
             style_provider = Gtk.CssProvider()
             style_context = Gtk.StyleContext()
@@ -43,23 +63,6 @@ if len(sys.argv) > 1:
                     box-shadow: 0 0 0 0;
                 }
             """)
-
-
-            box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-            self.add(box)
-
-            profiles = [
-                ("󰊗 Performance", "performance"),
-                (" Balanced", "balanced"),
-                (" Power Saver", "power-saver"),
-            ]
-
-            for label, profile in profiles:
-                btn = Gtk.Button(label=label)
-                btn.connect("clicked", lambda _, p=profile: set_profile(p))
-                box.pack_start(btn, True, True, 0)
-
-            self.show_all()
 
 
     win = PowerPopup()
