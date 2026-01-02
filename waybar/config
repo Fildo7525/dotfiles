@@ -50,9 +50,9 @@
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"custom/disk": {
-		"format": "{}",
-		// 4 is used GB 2 it total GB, 5 is percentage used
-		"exec": "df -h /home | tail -1 | awk '{print $4\" / \"$2 \" \"}'",
+		"exec": "~/.config/waybar/scripts/disk.sh",
+		"tooltip": true,
+		"return-type": "json",
 		"interval": 1,
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
