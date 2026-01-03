@@ -164,8 +164,8 @@
 		"format-source-bluetooth": "{volume}  ",
 		"format-source-bluetooth-muted": "󰍭 ",
 		"format": "{format_source}",
-		"on-click": "pavucontrol",
-		"on-click-middle": "~/.config/waybar/scripts/volume.sh source toggle",
+		"on-click-middle": "pavucontrol",
+		"on-click-right": "~/.config/waybar/scripts/volume.sh source toggle",
 		"on-scroll-up": "~/.config/waybar/scripts/volume.sh source up",
 		"on-scroll-down": "~/.config/waybar/scripts/volume.sh source down",
 		"tooltip": false
@@ -183,8 +183,8 @@
 				""
 			]
 		},
-		"on-click": "pavucontrol",
-		"on-click-middle": "~/.config/waybar/scripts/volume.sh sink toggle",
+		"on-click-middle": "pavucontrol",
+		"on-click-right": "~/.config/waybar/scripts/volume.sh sink toggle",
 		"on-scroll-up": "~/.config/waybar/scripts/volume.sh sink up",
 		"on-scroll-down": "~/.config/waybar/scripts/volume.sh sink down",
 		"tooltip": false
