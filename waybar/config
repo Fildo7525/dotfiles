@@ -126,7 +126,7 @@
 			"disabled": "󰖪",
 		},
 		"tooltip": true,
-		"tooltip-format": "{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
+		"tooltip-format": "{ifname}\n{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
 		"on-click-middle": "SHELL=/usr/bin/bash foot -a nmtui nmtui",
 		"on-click-right": "~/.config/waybar/scripts/wifi.sh toggle",
 	},
