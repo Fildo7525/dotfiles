@@ -73,6 +73,21 @@ bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
+# Audio playback controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Touchpad toggle
+bindsym XF86TouchpadToggle input type:touchpad events toggle
+bindsym XF86TouchpadOn input type:touchpad events enable
+bindsym XF86TouchpadOff input type:touchpad events disable
+
+# Calculator
+bindsym XF86Calculator exec gnome-calculator
+
+# Keykron K2: fn + F3 to open application menu
+bindsym Mod4+Tab exec $menu_cmd
 
 #
 # Display configuration
