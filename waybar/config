@@ -16,6 +16,7 @@
 		"sway/scratchpad",
 	],
 	"modules-center": [
+		"custom/spotify",
 		"clock",
 		"custom/notification",
 	],
@@ -36,7 +37,7 @@
 			"memory",
 			"custom/disk",
 		],
-		"separator": " | ",
+		"separator": "|",
 		"orientation": "horizontal",
 	},
 	"cpu": {
@@ -110,6 +111,20 @@
 		"on-click-right": "swaync-client -d -sw",
 		"escape": true,
 	},
+	"custom/spotify": {
+		"format": "{}",
+		"escape": true,
+		"return-type": "json",
+		"max-length": 20,
+		"restart-interval": 30,
+		"on-click": "playerctl -p spotify play-pause",
+		"on-click-right": "killall spotify",
+		"smooth-scrolling-threshold": 10,
+		"on-scroll-up" : "playerctl -p spotify next",
+		"on-scroll-down" : "playerctl -p spotify previous",
+		"exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null",
+		"exec-if": "pgrep spotify"
+	},
 
 	/* ===== Modules Right ===== */
 	"network": {
@@ -155,7 +170,7 @@
 			"pulseaudio#output",
 			"pulseaudio#input",
 		],
-		"separator": " | ",
+		"separator": "|",
 		"orientation": "horizontal",
 	},
 	"pulseaudio#input": {
@@ -200,7 +215,7 @@
 			"custom/conservation",
 			"battery",
 		],
-		"separator": " | ",
+		"separator": "|",
 		"orientation": "horizontal",
 	},
 	"custom/powerprofile": {
