@@ -24,8 +24,9 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $menu wofi --show drun --allow-cancel
-set $menu_cmd wofi --show run --allow-cancel
+set $menu ~/.config/rofi/launch
+set $menu_cmd ~/.config/rofi/launch run
+set $menu_fs ~/.config/rofi/launch filebrowser
 # set $menu rofi -show drun -display 1
 # set $menu_cmd rofi -show run
 
@@ -165,6 +166,7 @@ bindsym $mod+BackSpace input type:keyboard xkb_switch_layout next; exec "pkill -
     # Start your launcher
     bindsym $mod+d exec $menu
     bindsym $mod+c exec $menu_cmd
+    bindsym $mod+Shift+f exec $menu_fs
 
     # Switching linux power profile
     bindsym $mod+Shift+p exec ~/.config/waybar/scripts/powerprofile.py toggle

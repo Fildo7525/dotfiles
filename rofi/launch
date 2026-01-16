@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="$HOME/.config/rofi"
+
+COMMAND=$1
+if [[ -z $1 ]]; then
+    COMMAND='drun'
+fi
+
+## Run
+rofi \
+    -show $COMMAND \
+    -theme ${CONFIG_DIR}/style.rasi \
+    -monitor $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused) | .output')
