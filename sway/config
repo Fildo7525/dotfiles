@@ -27,6 +27,7 @@ set $term kitty
 set $menu ~/.config/rofi/launch
 set $menu_cmd ~/.config/rofi/launch run
 set $menu_fs ~/.config/rofi/launch filebrowser
+set $menu_win ~/.config/rofi/launch window
 # set $menu rofi -show drun -display 1
 # set $menu_cmd rofi -show run
 
@@ -182,6 +183,7 @@ bindsym $mod+BackSpace input type:keyboard xkb_switch_layout next; exec "pkill -
     bindsym $mod+d exec $menu
     bindsym $mod+c exec $menu_cmd
     bindsym $mod+Shift+f exec $menu_fs
+    bindsym $mod+Tab exec $menu_win
 
     # Switching linux power profile
     bindsym $mod+Shift+p exec ~/.config/waybar/scripts/powerprofile.py toggle
