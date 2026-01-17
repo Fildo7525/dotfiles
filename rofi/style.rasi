@@ -19,8 +19,8 @@ configuration {
     background:     #1E1D2FFF;
     background-alt: #282839FF;
     foreground:     #D9E0EEFF;
-    selected:       #7AA2F7FF;
-    active:         #ABE9B3FF;
+    selected:       #4F84F4FF;
+    active:         #83de8eff;
     urgent:         #F28FADFF;
 }
 
@@ -32,6 +32,7 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       1000px;
+    height:                      500px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -81,6 +82,7 @@ inputbar {
     text-color:                  @foreground;
     children:                    [ "textbox-prompt-colon", "entry" ];
 }
+
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
