@@ -55,7 +55,7 @@ mainbox {
 imagebox {
     padding:                     20px;
     background-color:            transparent;
-    background-image:            url("~/Pictures/Wallpapers/lighthouse.jpg", height);
+    background-image:            url("~/.config/rofi/lighthouse.jpg", height);
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
