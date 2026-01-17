@@ -70,7 +70,7 @@
                 },
                 {
                     "label": "",
-                    "command": "~/.local/bin/kitty --title \"bluetui\" ~/Documents/bluetui/target/release/bluetui & swaync-client -t"
+                    "command": "~/.local/bin/kitty --title \"bluetui\" ~/.cargo/bin/bluetui & swaync-client -t"
                 },
                 {
                     "label": "󰝚",
