@@ -83,7 +83,7 @@ widget > label {
 }
 
 #workspaces button.urgent {
-    background-color: #f38ba8;
+    background-color: @red;
 }
 
 /* =========================
@@ -102,11 +102,12 @@ widget > label {
 }
 
 #mode {
-    color: #f9e2af;
+    color: @peach;
 }
 
 #scratchpad {
-    color: #585b70;
+    color: @flamingo;
+    margin: 1px
 }
 
 /* =========================
@@ -130,11 +131,11 @@ widget > label {
    Network
    ========================= */
 #network {
-    color: #89b4fa;
+    color: @blue;
 }
 
 #network.disconnected {
-    color: #f38ba8;
+    color: @red;
 }
 
 /* =========================
@@ -142,11 +143,11 @@ widget > label {
    ========================= */
 
 #bluetooth {
-    color: #f38ba8;
+    color: @red;
 }
 
 #bluetooth.disconnected {
-    color: #585b70;
+    color: @surface2;
 }
 
 /* =========================
@@ -163,7 +164,7 @@ widget > label {
 }
 
 #pulseaudio.input.source-bluetooth {
-	color: #94e2d5;
+	color: @teal;
 }
 
 #pulseaudio.input.source-bluetooth.source-muted {
@@ -180,7 +181,7 @@ widget > label {
 }
 
 #pulseaudio.output.bluetooth {
-	color: #94e2d5;
+	color: @teal;
 }
 
 #pulseaudio.output.bluetooth.muted {
@@ -191,7 +192,7 @@ widget > label {
    Backlight
    ========================= */
 #backlight {
-    color: #cba6f7;
+    color: @mauve;
 }
 
 /* =========================
@@ -202,11 +203,11 @@ widget > label {
     font-size: 20px;
 }
 #custom-powerprofile.performance {
-    color: #c14c3f;
+    color: @red;
 }
 
 #custom-powerprofile.power-saver {
-    color: #74d464;
+    color: @green;
 }
 
 #custom-conservation {
@@ -214,7 +215,7 @@ widget > label {
 }
 
 #custom-conservation.conserv_off {
-    color: #a6e3a1;
+    color: @green;
 }
 
 #battery {
@@ -222,22 +223,22 @@ widget > label {
 }
 
 #battery.charging {
-    color: #a6e3a1;
+    color: @green;
 }
 
 #battery.discharging.warning {
-    color: #f9e2af;
+    color: @yellow;
 }
 
 #battery.discharging.critical {
-    color: #f38ba8;
+    color: @red;
 }
 
 /* =========================
    Tray
    ========================= */
 #tray {
-    color: #313244;
+    color: @surface0;
     padding: 0 6px;
 }
 
