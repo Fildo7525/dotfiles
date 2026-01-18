@@ -27,6 +27,7 @@
 		"backlight",
 		"group/power",
 		"custom/language",
+		"custom/clipboard",
 		"tray",
 	],
 
@@ -225,10 +226,10 @@
 			"balanced": "",
 			"power-saver": "",
 		},
-		"exec": "~/.config/waybar/scripts/powerprofile.py",
-		"on-click": "~/.config/waybar/scripts/powerprofile.py menu",
-		"on-scroll-up": "~/.config/waybar/scripts/powerprofile.py previous",
-		"on-scroll-down": "~/.config/waybar/scripts/powerprofile.py next",
+		"exec": "~/.config/waybar/scripts/powerprofile",
+		"on-click": "~/.config/waybar/scripts/powerprofile menu",
+		"on-scroll-up": "~/.config/waybar/scripts/powerprofile previous",
+		"on-scroll-down": "~/.config/waybar/scripts/powerprofile next",
 		"return-type": "json",
 		"signal": 1,
 	},
@@ -262,6 +263,15 @@
 		"format": " {}",
 		"exec": "~/.config/waybar/scripts/language.sh",
 		"signal": 2,
+	},
+	"custom/clipboard": {
+		"format": "{}",
+		"return-type": "json",
+		"exec": "~/.config/waybar/scripts/clipboard",
+		"exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
+		"on-click": "~/.config/waybar/scripts/clipboard choose",
+		"on-click-right": "cliphist wipe",
+		"signal": 9
 	},
 	"tray": {
 		// "icon-size": 21,

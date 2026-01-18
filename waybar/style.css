@@ -59,7 +59,7 @@ window#waybar {
 widget > label {
     padding: 0 8px;
     border-radius: 8px 8px 8px 8px;
-    background-color: #313340;
+    background-color: @base;
     color: @text;
 }
 
