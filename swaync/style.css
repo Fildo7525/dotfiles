@@ -1,15 +1,34 @@
-@define-color text #839395;
-@define-color background #001419;
-@define-color background-alt #001419;
-@define-color selected #268bd3;
-@define-color selected-alt #002c38;
-@define-color urgent #db302d;
-
+@define-color rosewater #f5e0dc;
+@define-color flamingo #f2cdcd;
+@define-color pink #f5c2e7;
+@define-color mauve #cba6f7;
+@define-color red #f38ba8;
+@define-color maroon #eba0ac;
+@define-color peach #fab387;
+@define-color yellow #f9e2af;
+@define-color green #a6e3a1;
+@define-color teal #94e2d5;
+@define-color sky #89dceb;
+@define-color sapphire #74c7ec;
+@define-color blue #89b4fa;
+@define-color lavender #b4befe;
+@define-color text #cdd6f4;
+@define-color subtext1 #bac2de;
+@define-color subtext0 #a6adc8;
+@define-color overlay2 #9399b2;
+@define-color overlay1 #7f849c;
+@define-color overlay0 #6c7086;
+@define-color surface2 #585b70;
+@define-color surface1 #45475a;
+@define-color surface0 #313244;
+@define-color base #1e1e2e;
+@define-color mantle #181825;
+@define-color crust #11111b;
 /* NOTIFICATIONS ------------------------------------------------------------------------ */
 
 * {
 	color: @text;
-	background: alpha(@background, 0.9);
+	background: alpha(@base, 0.9);
 	all: unset;
 	font-size: 16px;
 	font-family: "BitstromWera Nerd Font Mono", monospace;
@@ -23,7 +42,7 @@
 }
 
 .floating-notifications.background .notification-row .notification-background {
-	background: alpha(@background, 0.9);
+	background: alpha(@crust, 0.9);
 	border-radius: 16px;
 	padding: 11px;
 	margin: 12px 12px 0 0;
@@ -32,15 +51,18 @@
 .image {
 	margin: 0px 20px 0px 0px;
 	border-radius: 8px;
+	/* border: 1px solid red; */
 }
 
 .summary {
 	font-weight: 800;
 	font-size: 1rem;
+	/* border: 1px solid red; */
 }
 
 .body {
 	font-size: 1rem;
+	/* border: 1px solid red; */
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button {
@@ -51,20 +73,55 @@
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
-	background-color: alpha(@background, 0.9);
+	background-color: alpha(@base, 0.9);
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:active {
-	background-color: @selected-alt;
+	background-color: @overlay0-alt;
 }
 
+.floating-notifications.background
+.notification-row
+.notification-background
+.notification
+.notification-action {
+    background: alpha(@overlay0, 0.4);
+    color: @text;
+    border-radius: 12px;
+    padding: 6px 12px;
+    margin: 6px 4px;
+}
+
+.floating-notifications.background
+.notification-row
+.notification-background
+.notification
+.notification-action:hover {
+    background: @overlay0;
+}
+
+.floating-notifications.background
+.notification-row
+.notification-background
+.notification
+> *:last-child > * {
+    min-height: 3em;
+}
+
+/* .notification { */
+/* 	border-radius: 16px; */
+/* 	padding: 11px; */
+/* 	margin: 12px 20px 0px 0px; */
+/* 	font-size: 20px; */
+/* } */
+
 .notification.critical progress {
-	background-color: @selected-alt;
+	background-color: @overlay0-alt;
 }
 
 .notification.low progress,
 .notification.normal progress {
-	background-color: @selected-alt;
+	background-color: @overlay0-alt;
 }
 
 /* CONTROL CENTER ------------------------------------------------------------------------ */
@@ -75,7 +132,7 @@
 }
 
 .control-center {
-	background: alpha(@background, 0.98);
+	background: alpha(@crust, 0.98);
 	border-radius: 10px;
 	padding: 10px 30px;
 }
@@ -83,14 +140,14 @@
 /* Notifications	*/
 .control-center .notification-row .notification-background,
 .control-center .notification-row .notification-background .notification.critical {
-	background-color: alpha(@background-alt, 0.9);
+	background-color: alpha(@base, 0.9);
 	border-radius: 16px;
 	padding: 11px;
 	margin: 12px 20px 0px 0px;
 }
 
 .control-center .notification-row .notification-background .notification.critical {
-	color: @urgent;
+	color: @red;
 }
 
 .control-center .notification-row .notification-background .notification .notification-content {
@@ -102,7 +159,7 @@
 }
 
 .control-center .notification-row .notification-background .notification>*:last-child>* .notification-action {
-	background: alpha(@selected, 0.4);
+	background: alpha(@overlay0, 0.4);
 	color: @text;
 	border-radius: 12px;
 	margin: 6px;
@@ -115,7 +172,7 @@
 
 .control-center .notification-row .notification-background .notification>*:last-child>* .notification-action:hover,
 .control-center .notification-row .notification-background .notification>*:last-child>* .notification-action:active {
-	background-color: alpha(@background, 0.9);
+	background-color: alpha(@base, 0.9);
 }
 
 .control-center .notification-row .notification-background .close-button {
@@ -128,7 +185,7 @@
 
 .control-center .notification-row .notification-background .close-button:hover,
 .control-center .notification-row .notification-background .close-button:active {
-	background-color: alpha(@background, 0.9);
+	background-color: alpha(@base, 0.9);
 	color: #ffffff;
 }
 
@@ -157,11 +214,11 @@ trough {
 }
 
 .widget-title button:hover {
-	background-color: @selected;
+	background-color: @overlay0;
 }
 
 .widget-title button:active {
-	background-color: @background;
+	background-color: @base;
 }
 
 /* NOTIFICATION GROUPS --------------------------------------------------------------- */
@@ -174,7 +231,7 @@ trough {
 
 .notification-group-header,
 .group-header {
-	background: alpha(@background-alt, 0.9);
+	background: alpha(@base-alt, 0.9);
 	border-radius: 12px;
 	padding: 8px 12px;
 	margin: 4px 0;
@@ -201,7 +258,7 @@ trough {
 .group-header button:hover,
 .group-header .collapse-button:hover,
 .notification-group-buttons button:hover {
-	background: alpha(@selected, 0.4);
+	background: alpha(@overlay0, 0.4);
 	color: #ffffff;
 }
 
@@ -210,7 +267,7 @@ trough {
 .group-header button:active,
 .group-header .collapse-button:active,
 .notification-group-buttons button:active {
-	background: @selected;
+	background: @overlay0;
 	color: #ffffff;
 }
 
@@ -219,7 +276,7 @@ trough {
 .clear-group-button,
 .group-header .clear-button,
 .notification-group .clear-all-button {
-	background: alpha(@urgent, 0.3);
+	background: alpha(@red, 0.3);
 	border-radius: 8px;
 	padding: 4px 8px;
 	font-size: 12px;
@@ -231,7 +288,7 @@ trough {
 .clear-group-button:hover,
 .group-header .clear-button:hover,
 .notification-group .clear-all-button:hover {
-	background: alpha(@urgent, 0.6);
+	background: alpha(@red, 0.6);
 	color: #ffffff;
 }
 
@@ -239,7 +296,7 @@ trough {
 .clear-group-button:active,
 .group-header .clear-button:active,
 .notification-group .clear-all-button:active {
-	background: @urgent;
+	background: @red;
 	color: #ffffff;
 }
 
@@ -277,11 +334,11 @@ trough {
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-	background: @selected;
+	background: @overlay0;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
-	background: @selected;
+	background: @overlay0;
 }
 
 /* Volume widget */
@@ -314,7 +371,7 @@ trough {
 }
 
 trough highlight {
-	background: @selected;
+	background: @overlay0;
 	border: none;
 	border-radius: 8px;
 }
@@ -387,7 +444,7 @@ trough slider {
 }
 
 .widget-mpris .widget-mpris-player>box>button:hover {
-	background-color: alpha(@background, 0.9);
+	background-color: alpha(@base, 0.9);
 }
 
 .widget-dnd {
@@ -407,7 +464,7 @@ trough slider {
 }
 
 .widget-dnd>switch:checked {
-	background: @selected;
+	background: @overlay0;
 	border: none;
 }
 
