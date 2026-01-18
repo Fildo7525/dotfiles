@@ -50,6 +50,10 @@ exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always export WLR_RENDER_NO_EXPLICIT_SYNC=1
 exec_always export WLR_RENDERER=vulkan
 
+# Start cliphist in the background
+exec_always --no-startup-id wl-paste -t text --watch sh -c "cliphist store && pkill -RTMIN+9 waybar"
+exec_always --no-startup-id wl-paste -t image --watch sh -c "cliphist store && pkill -RTMIN+9 waybar"
+
 ########################
 # Output configuration #
 ########################
@@ -89,6 +93,9 @@ bindsym XF86Calculator exec gnome-calculator
 
 # Keykron K2: fn + F3 to open application menu
 bindsym Mod4+Tab exec $menu_cmd
+
+bindsym $mod+Shift+Q exec ~/.config/waybar/scripts/powerprofile menu
+bindsym Mod4+period exec ~/.config/waybar/scripts/clipboard choose
 
 #
 # Display configuration
