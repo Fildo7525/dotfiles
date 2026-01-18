@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+input="${1:-exec}"
+profile=$(powerprofilesctl get)
+profiles=("power-saver" "balanced" "performance")
+
+get_profile_index() {
+	for i in "${!profiles[@]}"; do
+		if [[ "${profiles[$i]}" == "$profile" ]]; then
+			echo $i
+			return
+		fi
+	done
+	echo -1
+}
+
+declare -A profile_options=(
+	["power-saver"]="󰊗 Performance"
+	["balanced"]=" Balanced"
+	["performance"]=" Power Saver"
+)
+
+declare -A reverse_profile_options=(
+	["󰊗 Performance"]="performance"
+	[" Balanced"]="balanced"
+	[" Power Saver"]="power-saver"
+)
+
+case "$input" in
+	"exec")
+		printf '{"text":"%s","alt":"%s","class":"%s"}\n' "$profile" "$profile" "$profile"
+		;;
+
+	"next")
+		current_index=$(get_profile_index)
+		next_index=$(( (current_index + 1) % ${#profiles[@]} ))
+		next_profile=${profiles[$next_index]}
+		powerprofilesctl set "$next_profile"
+		;;
+
+	"previous")
+		current_index=$(get_profile_index)
+		next_index=$(( (current_index - 1) % ${#profiles[@]} ))
+		next_profile=${profiles[$next_index]}
+		powerprofilesctl set "$next_profile"
+		;;
+
+	"menu")
+		options=()
+
+		for profile_option in "${profiles[@]}"; do
+			icon=${profile_options[$profile_option]}
+			options+=("$icon")
+		done
+
+		choice=$(printf "%s\n%s\n%s\n" "${options[@]}" \
+			| rofi \
+				-dmenu \
+				-theme $XDG_CONFIG_HOME/rofi/alt/powerprofile.rasi \
+				-monitor $(
+					swaymsg -t get_workspaces \
+					| jq -r '.[] | select(.focused) | .output'
+				)
+			)
+		if [[ -n "$choice" ]]; then
+			powerprofilesctl set "${reverse_profile_options[$choice]}"
+		fi
+		;;
+	*)
+		echo "Unknown command: $input"
+		;;
+esac
+
+pkill -RTMIN+1 waybar
