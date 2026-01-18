@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+COMMAND=$1
+
+if [[ -z $1 ]]; then
+	COMMAND='exec'
+fi
+
+
+case "$COMMAND" in
+	"exec")
+		N_ENTRIES=$(cliphist list | wc -l)
+		if [ -z "$N_ENTRIES" ]; then
+		  N_ENTRIES=0
+		fi
+
+		printf '{"text":"%s ","alt":"%s","class":"clipboard"}' $N_ENTRIES $N_ENTRIES
+		exit 0
+		;;
+	"choose")
+		choice=$(cliphist list \
+			| rofi \
+				-dmenu \
+				-p "Clipboard:" \
+				-theme $XDG_CONFIG_HOME/rofi/alt/clipboard.rasi \
+				-monitor $(
+					swaymsg -t get_workspaces \
+					| jq -r '.[] | select(.focused) | .output') \
+					| cliphist decode
+				)
+
+		echo $choice | cliphist store
+		echo $choice | wl-copy
+		;;
+	*)
+		exit 1
+		;;
+esac
+
