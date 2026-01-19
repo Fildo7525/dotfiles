@@ -28,7 +28,6 @@
 		"group/power",
 		"custom/language",
 		"custom/clipboard",
-		"tray",
 	],
 
 	/* ===== Modules Left ===== */
@@ -272,9 +271,5 @@
 		"on-click": "~/.config/waybar/scripts/clipboard choose",
 		"on-click-right": "cliphist wipe",
 		"signal": 9
-	},
-	"tray": {
-		// "icon-size": 21,
-		"spacing": 10
 	},
 }
