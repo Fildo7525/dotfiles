@@ -6,7 +6,6 @@ if [[ -z $1 ]]; then
 	COMMAND='exec'
 fi
 
-
 case "$COMMAND" in
 	"exec")
 		N_ENTRIES=$(cliphist list | wc -l)
@@ -15,7 +14,6 @@ case "$COMMAND" in
 		fi
 
 		printf '{"text":"%s ","alt":"%s","class":"clipboard"}' $N_ENTRIES $N_ENTRIES
-		exit 0
 		;;
 	"choose")
 		choice=$(cliphist list \
@@ -37,3 +35,4 @@ case "$COMMAND" in
 		;;
 esac
 
+exit 0
