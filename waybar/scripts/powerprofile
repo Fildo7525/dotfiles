@@ -4,6 +4,18 @@ input="${1:-exec}"
 profile=$(powerprofilesctl get)
 profiles=("power-saver" "balanced" "performance")
 
+declare -A profile_options=(
+	["power-saver"]=" Power Saver"
+	["balanced"]=" Balanced"
+	["performance"]="󰊗 Performance"
+)
+
+declare -A reverse_profile_options=(
+	["󰊗 Performance"]="performance"
+	[" Balanced"]="balanced"
+	[" Power Saver"]="power-saver"
+)
+
 get_profile_index() {
 	for i in "${!profiles[@]}"; do
 		if [[ "${profiles[$i]}" == "$profile" ]]; then
@@ -14,18 +26,18 @@ get_profile_index() {
 	echo -1
 }
 
-declare -A profile_options=(
-	["power-saver"]="󰊗 Performance"
-	["balanced"]=" Balanced"
-	["performance"]=" Power Saver"
-)
 current_index=$(get_profile_index)
 
-declare -A reverse_profile_options=(
-	["󰊗 Performance"]="performance"
-	[" Balanced"]="balanced"
-	[" Power Saver"]="power-saver"
-)
+get_pp_state() {
+	local step=$1
+
+	[[ -z $step ]] && step=0
+
+	index=$(( (current_index + $step) % ${#profiles[@]} ))
+	profile_tag=${profiles[$index]}
+	profile=${profile_options[$profile_tag]}
+	echo "$profile_tag"
+}
 
 case "$input" in
 	"exec")
@@ -33,15 +45,13 @@ case "$input" in
 		;;
 
 	"next")
-		next_index=$(( (current_index + 1) % ${#profiles[@]} ))
-		next_profile=${profiles[$next_index]}
-		powerprofilesctl set "$next_profile"
+		profile=$(get_pp_state 1)
+		powerprofilesctl set "$profile"
 		;;
 
 	"previous")
-		next_index=$(( (current_index - 1) % ${#profiles[@]} ))
-		next_profile=${profiles[$next_index]}
-		powerprofilesctl set "$next_profile"
+		profile=$(get_pp_state -1)
+		powerprofilesctl set "$profile"
 		;;
 
 	"menu")
@@ -62,6 +72,7 @@ case "$input" in
 					| jq -r '.[] | select(.focused) | .output'
 				)
 			)
+
 		if [[ -n "$choice" ]]; then
 			powerprofilesctl set "${reverse_profile_options[$choice]}"
 		fi
