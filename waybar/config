@@ -52,7 +52,7 @@
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"custom/disk": {
-		"exec": "~/.config/waybar/scripts/disk.sh",
+		"exec": "~/.config/waybar/scripts/disk",
 		"tooltip": true,
 		"return-type": "json",
 		"interval": 1,
@@ -143,7 +143,7 @@
 		"tooltip": true,
 		"tooltip-format": "{ifname}\n{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
 		"on-click-middle": "SHELL=/usr/bin/bash foot -a nmtui nmtui",
-		"on-click-right": "~/.config/waybar/scripts/wifi.sh toggle",
+		"on-click-right": "~/.config/waybar/scripts/wifi toggle",
 	},
 	"bluetooth": {
 		"format": "{icon}",
@@ -153,7 +153,7 @@
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
 		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-		"on-click-right": "~/.config/waybar/scripts/bluetooth.sh toggle",
+		"on-click-right": "~/.config/waybar/scripts/bluetooth toggle",
 		"on-click-middle": "blueman-manager",
 		"format-icons": {
 			"disabled": " 󰂲",
@@ -180,9 +180,9 @@
 		"format-source-bluetooth-muted": "󰍭 ",
 		"format": "{format_source}",
 		"on-click-middle": "pavucontrol",
-		"on-click-right": "~/.config/waybar/scripts/volume.sh source toggle",
-		"on-scroll-up": "~/.config/waybar/scripts/volume.sh source up",
-		"on-scroll-down": "~/.config/waybar/scripts/volume.sh source down",
+		"on-click-right": "~/.config/waybar/scripts/volume source toggle",
+		"on-scroll-up": "~/.config/waybar/scripts/volume source up",
+		"on-scroll-down": "~/.config/waybar/scripts/volume source down",
 		"tooltip": false
 	},
 	"pulseaudio#output": {
@@ -199,9 +199,9 @@
 			]
 		},
 		"on-click-middle": "pavucontrol",
-		"on-click-right": "~/.config/waybar/scripts/volume.sh sink toggle",
-		"on-scroll-up": "~/.config/waybar/scripts/volume.sh sink up",
-		"on-scroll-down": "~/.config/waybar/scripts/volume.sh sink down",
+		"on-click-right": "~/.config/waybar/scripts/volume sink toggle",
+		"on-scroll-up": "~/.config/waybar/scripts/volume sink up",
+		"on-scroll-down": "~/.config/waybar/scripts/volume sink down",
 		"tooltip": false
 	},
 	"backlight": {
@@ -238,8 +238,8 @@
 			"conserv_on": "󰂄",
 			"conserv_off": "",
 		},
-		"exec": "~/.config/waybar/scripts/conservation.sh",
-		"on-click": "~/.config/waybar/scripts/conservation.sh toggle",
+		"exec": "~/.config/waybar/scripts/conservation",
+		"on-click": "~/.config/waybar/scripts/conservation toggle",
 		"return-type": "json",
 		"signal": 1,
 	},
@@ -260,7 +260,7 @@
 	},
 	"custom/language": {
 		"format": " {}",
-		"exec": "~/.config/waybar/scripts/language.sh",
+		"exec": "~/.config/waybar/scripts/language",
 		"signal": 2,
 	},
 	"custom/clipboard": {

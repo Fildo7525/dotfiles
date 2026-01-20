@@ -9,9 +9,12 @@ if [ "$1" = "toggle" ]; then
     else
         echo 1 | sudo tee "$FILE" > /dev/null
     fi
+    ~/.config/waybar/scripts/powerprofile next
+    ~/.config/waybar/scripts/powerprofile previous
 fi
 
 # Output for Waybar
+state=$(cat "$FILE")
 if [ "$state" -eq 1 ]; then
     echo -e "{\"class\": \"conserv_on\", \"alt\":\"conserv_on\", \"text\": \"ON\"}"
 else
