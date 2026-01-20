@@ -134,6 +134,9 @@ exec swayidle -w \
 		timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 		before-sleep 'swaylock -f -c 000000'
 
+
+exec gammastep -l 55:10 -O 4500K -m wayland
+
 bindsym Mod4+l exec swaylock -f -c 000000
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
