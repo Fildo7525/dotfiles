@@ -270,6 +270,5 @@
 		"exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
 		"on-click": "~/.config/waybar/scripts/clipboard choose",
 		"on-click-right": "cliphist wipe",
-		"signal": 9
 	},
 }

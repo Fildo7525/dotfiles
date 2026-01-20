@@ -13,7 +13,7 @@ case "$COMMAND" in
 		  N_ENTRIES=0
 		fi
 
-		printf '{"text":"%s ","alt":"%s","class":"clipboard"}' $N_ENTRIES $N_ENTRIES
+		printf '{"text":"","alt":"%s","class":"clipboard"}' $N_ENTRIES
 		;;
 	"choose")
 		choice=$(cliphist list \

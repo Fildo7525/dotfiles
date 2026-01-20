@@ -51,8 +51,8 @@ exec_always export WLR_RENDER_NO_EXPLICIT_SYNC=1
 exec_always export WLR_RENDERER=vulkan
 
 # Start cliphist in the background
-exec_always --no-startup-id wl-paste -t text --watch sh -c "cliphist store && pkill -RTMIN+9 waybar"
-exec_always --no-startup-id wl-paste -t image --watch sh -c "cliphist store && pkill -RTMIN+9 waybar"
+exec_always --no-startup-id wl-paste -t text --watch cliphist store
+exec_always --no-startup-id wl-paste -t image --watch cliphist store
 
 ########################
 # Output configuration #
