@@ -19,6 +19,7 @@ declare -A profile_options=(
 	["balanced"]=" Balanced"
 	["performance"]=" Power Saver"
 )
+current_index=$(get_profile_index)
 
 declare -A reverse_profile_options=(
 	["󰊗 Performance"]="performance"
@@ -32,14 +33,12 @@ case "$input" in
 		;;
 
 	"next")
-		current_index=$(get_profile_index)
 		next_index=$(( (current_index + 1) % ${#profiles[@]} ))
 		next_profile=${profiles[$next_index]}
 		powerprofilesctl set "$next_profile"
 		;;
 
 	"previous")
-		current_index=$(get_profile_index)
 		next_index=$(( (current_index - 1) % ${#profiles[@]} ))
 		next_profile=${profiles[$next_index]}
 		powerprofilesctl set "$next_profile"
@@ -57,6 +56,7 @@ case "$input" in
 			| rofi \
 				-dmenu \
 				-theme $XDG_CONFIG_HOME/rofi/alt/powerprofile.rasi \
+				-selected-row $((current_index)) \
 				-monitor $(
 					swaymsg -t get_workspaces \
 					| jq -r '.[] | select(.focused) | .output'
