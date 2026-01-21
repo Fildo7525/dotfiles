@@ -49,6 +49,7 @@ zinit light Aloxaf/fzf-tab
 zstyle ":completion::git-checkout:" sort false
 zstyle ':completion::descriptions' format '[%d]'
 zstyle ':completion:' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' special-dirs true
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
 # export HISTFILE=~/.zshhistory
@@ -57,6 +58,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # setopt INC_APPEND_HISTORY #SHARE_HISTORY
 # setopt EXTENDED_HISTORY
 # setopt HIST_FIND_NO_DUPS
+
+# Set the mode of the function keys on the keyboard
+# echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
 
 #####################
 # HISTORY		   #
@@ -93,7 +97,7 @@ export PAGER="less --use-color -Rw -Ddr -DPg -DNw -DSy"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ##################
-#	Aliases	 #
+#	Aliases 	 #
 ##################
 alias cpp="cd ~/Desktop/Cpp/"
 alias cvm_off="echo 0 | sudo tee -a /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
@@ -119,26 +123,79 @@ alias vpnoff="protonvpn-cli d"
 alias vpnon="protonvpn-cli c"
 alias ip="ip --color=auto"
 alias bat="batcat"
+alias hl="rg --passthru"
+
+#################
+#	Keymaps 	#
+#################
+
+bindkey '^Xe' edit-command-line
+bindkey '^F' forward-word
+bindkey '^B' backward-word
+
+
+#################
+#	 Export 	#
+#################
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
-export PATH="$HOME/.local/share/zinit/polaris/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/Documents/sourcing/lazygit:$HOME/.local/bin:/usr/include/SDL2:/opt/ros/humble/bin:$SDL2_INCLUDE_DIRS:/usr/local/go/bin:$HOME/.local/lib/python3.10/site-packages:$HOME/.local/share/nvim/mason/bin:$HOME/Applications"
+export EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
+export SUDO_EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
+export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
+export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home
+/fildo7525/.luarocks/lib/lua/5.1/?.so'
+
+export LESS="--RAW-CONTROL-CHARS"
+[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+
+local PATH_EXTEND=(
+	"$HOME/.cargo/bin"
+	"$HOME/.local/bin"
+	"$HOME/.local/lib/python3.10/site-packages"
+	"$HOME/.local/share/nvim/mason/bin"
+	"$HOME/.local/share/zinit/polaris/bin"
+	"$HOME/.luarocks/bin"
+	"$HOME/.matlab/bin"
+	"$HOME/Applications"
+	"$HOME/Documents/sourcing/Project-Builder/build"
+	"$HOME/Documents/sourcing/bin"
+	"$HOME/Documents/sourcing/lazygit"
+	"$HOME/node_modules/.bin/"
+	"$SDL2_INCLUDE_DIRS"
+	"/bin"
+	"/opt/ros/humble/bin"
+	"/sbin"
+	"/snap/bin"
+	"/usr/bin"
+	"/usr/games"
+	"/usr/include/SDL2"
+	"/usr/local/bin"
+	"/usr/local/games"
+	"/usr/local/go/bin"
+	"/usr/local/lib"
+	"/usr/local/sbin"
+	"/usr/sbin"
+)
+
+export PATH="$PATH:$(print -R ${(j|:|)PATH_EXTEND})"
+
+# Ensure unique entries in PATH
+typeset -gU path
 
 # Setup zsh to take the desired version of nvim
 source "$HOME/.local/share/bob/env/env.sh"
-export EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
-export SUDO_EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
 
-##################
-#		ROS2	 #
-##################
-# source /opt/ros/rolling/setup.zsh
-source /opt/ros/jazzy/setup.zsh
-# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+##############
+#	 ROS2	 #
+##############
 
-# Set the mode of the function keys on the keyboard
-# echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
+[[ -f /opt/ros/jazzy/setup.zsh ]] &&
+	source /opt/ros/jazzy/setup.zsh
+
+[[ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh ]] &&
+	source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 
 # Load bash completion functions
 fpath+=~/.zfunc
@@ -154,13 +211,11 @@ autoload -Uz +X bashcompinit && bashcompinit
 eval "$(register-python-argcomplete ros2)"
 eval "$(register-python-argcomplete colcon)"
 
-export PATH="$PATH:$HOME/node_modules/.bin/:$HOME/.matlab/bin:$HOME/.luarocks/bin:$HOME/Documents/sourcing/bin:/usr/local/lib:$HOME/Documents/sourcing/Project-Builder/build"
+#########################
+# 	Helper functions 	#
+#########################
 
-export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
-
-export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home
-/fildo7525/.luarocks/lib/lua/5.1/?.so'
-
+# Yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -170,8 +225,8 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# Foxglove
 FOXGLOVE_DIRS="$HOME/work/Muslingevagt/ros2_ws:$HOME/work/Muslingevagt/boat_sim_vrx/vrx:$HOME/SDU/EiT/EiRT-AscenD-Robotics/ros2_ws"
-
 function foxglove() {
 	# Kill any existing foxglove processes
 	kill -9 $(ps aux | grep foxglove | awk '{print $2}') 2> /dev/null
@@ -203,15 +258,13 @@ function foxglove() {
 	wait
 }
 
-export LESS="--RAW-CONTROL-CHARS"
-[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
-
-
+# This needs to be at the end of the file due to compinit
 autoload -Uz compinit
 zstyle ':completion:*' menu select
+
+alias frx="MOZ_ENABLE_WAYLAND=1 firefox --new-instance"
+export PATH=$PATH:/home/fildo7525/Documents/bluetui/target/release:$HOME/develop/flutter/bin:$HOME/.surrealdb
 
 # Edit current command line in $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^Xe' edit-command-line
-
