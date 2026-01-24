@@ -20,8 +20,8 @@ configuration {
     background-alt: #11111BFF;
     foreground:     #CDD6F4FF;
     selected:       #4F84F4FF;
-    active:         #A6E3A1FF;
-    urgent:         #F38BA8FF;
+    active:         #3DAD34FF;
+    urgent:         #EC4674FF;
 }
 
 /*****----- Main Window -----*****/
