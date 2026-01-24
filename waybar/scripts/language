@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-LAYOUT=$(swaymsg -t get_inputs | jq -r '.[] | select(.name=="AT Translated Set 2 keyboard") | .xkb_active_layout_name')
+LAYOUT=
+which hyprctl > /dev/null
+if (( $? == 0)); then
+	LAYOUT=$(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap')
+else
+	LAYOUT=$(swaymsg -t get_inputs | jq -r '.[] | select(.name=="AT Translated Set 2 keyboard") | .xkb_active_layout_name')
+fi
+
 case $LAYOUT in
 	"English (US)")
 		echo "EN"
@@ -8,7 +15,7 @@ case $LAYOUT in
 	"Danish")
 		echo "DK"
 		;;
-	"Slovak")
+	"Slovak "|"Slovak (QWERTY)")
 		echo "SK"
 		;;
 	*)

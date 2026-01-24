@@ -16,19 +16,21 @@ case "$COMMAND" in
 		printf '{"text":"","alt":"%s","class":"clipboard"}' $N_ENTRIES
 		;;
 	"choose")
-		choice=$(cliphist list \
+		id=$(cliphist list \
 			| rofi \
 				-dmenu \
 				-p "Clipboard:" \
 				-theme $XDG_CONFIG_HOME/rofi/alt/clipboard.rasi \
 				-monitor $(
 					swaymsg -t get_workspaces \
-					| jq -r '.[] | select(.focused) | .output') \
-					| cliphist decode
-				)
+					| jq -r '.[] | select(.focused) | .output')
+			)
 
-		echo $choice | cliphist store
-		echo $choice | wl-copy
+		[[ -z "$id" ]] && exit 0
+
+		cliphist decode "$id" \
+			| tee >(wl-copy) \
+			| cliphist store
 		;;
 	*)
 		exit 1

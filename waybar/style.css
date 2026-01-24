@@ -77,7 +77,7 @@ widget > label {
     color: @text;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
     background-color: @blue;
     color: #060a19;
 }
