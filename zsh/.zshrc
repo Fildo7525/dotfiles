@@ -129,10 +129,12 @@ alias hl="rg --passthru"
 #	Keymaps 	#
 #################
 
-bindkey '^Xe' edit-command-line
-bindkey '^F' forward-word
-bindkey '^B' backward-word
-
+bindkey '^Xe'    edit-command-line
+bindkey '^F'     forward-word
+bindkey '^B'     backward-word
+bindkey "^[[H"   beginning-of-line
+bindkey "^[[F"   end-of-line
+bindkey "^[[3~"  delete-char
 
 #################
 #	 Export 	#
@@ -141,9 +143,9 @@ bindkey '^B' backward-word
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export SDL2_INCLUDE_DIRS="/usr/include/SDL2"
-export EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
-export SUDO_EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
-export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;/home/fildo7525/.luarocks/share/lua/5.1/?/init.lua"
+export EDITOR=$([[ -f "/usr/bin/nvim" ]] && echo /usr/bin/nvim || echo "$HOME/.local/share/bob/nvim-bin/nvim")
+export SUDO_EDITOR=$EDITOR
+export LUA_PATH="./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;$HOME/.luarocks/share/lua/5.1/?/init.lua"
 export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home
 /fildo7525/.luarocks/lib/lua/5.1/?.so'
 
@@ -185,31 +187,34 @@ export PATH="$PATH:$(print -R ${(j|:|)PATH_EXTEND})"
 typeset -gU path
 
 # Setup zsh to take the desired version of nvim
-source "$HOME/.local/share/bob/env/env.sh"
+if [[ -f "$HOME/.local/share/bob/env/env.sh" ]]; then
+	source "$HOME/.local/share/bob/env/env.sh"
+fi
 
 ##############
 #	 ROS2	 #
 ##############
 
-[[ -f /opt/ros/jazzy/setup.zsh ]] &&
-	source /opt/ros/jazzy/setup.zsh
-
-[[ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh ]] &&
-	source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+[[ -f /opt/ros/jazzy/setup.zsh ]] && source /opt/ros/jazzy/setup.zsh
 
 # Load bash completion functions
 fpath+=~/.zfunc
-autoload -Uz +X compinit && compinit
 autoload -Uz +X bashcompinit && bashcompinit
+autoload -Uz +X compinit && compinit
+
+if [[ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh ]]; then
+	source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+
+	# argcomplete for ros2 & colcon
+	eval "$(register-python-argcomplete ros2)"
+	eval "$(register-python-argcomplete colcon)"
+fi
 
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
 
 # export TERM="xterm-256color"
 
-# argcomplete for ros2 & colcon
-eval "$(register-python-argcomplete ros2)"
-eval "$(register-python-argcomplete colcon)"
 
 #########################
 # 	Helper functions 	#
@@ -263,7 +268,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 
 alias frx="MOZ_ENABLE_WAYLAND=1 firefox --new-instance"
-export PATH=$PATH:/home/fildo7525/Documents/bluetui/target/release:$HOME/develop/flutter/bin:$HOME/.surrealdb
+export PATH="$PATH:$HOME/Documents/bluetui/target/release:$HOME/develop/flutter/bin:$HOME/.surrealdb"
 
 # Edit current command line in $EDITOR
 autoload edit-command-line
