@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Create a new group called "ideapad" and add the current use to the group.
+sudo groupadd ideapad
+sudo usermod -aG ideapad $USER
+
+# Allow the group ideapad to use command tee on the supplied conservation_mode file.
+# This allows the uses to switch conservation mode on and off without entering the password.
+echo "%ideapad ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/bus/platform/drivers/ideapad_acpi/VPC????\:??/conservation_mode" | sudo tee /etc/sudoers.d/ideapad
+
