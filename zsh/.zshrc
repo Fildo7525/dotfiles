@@ -125,6 +125,18 @@ alias ip="ip --color=auto"
 alias bat="batcat"
 alias hl="rg --passthru"
 
+#########################
+# Functions for keymaps #
+#########################
+
+fzf-nvim-widget() {
+	local file
+	file=$(fd . | fzf) || return
+	nvim "$file"
+}
+
+zle -N fzf-nvim-widget
+
 #################
 #	Keymaps 	#
 #################
@@ -135,6 +147,7 @@ bindkey '^B'     backward-word
 bindkey "^[[H"   beginning-of-line
 bindkey "^[[F"   end-of-line
 bindkey "^[[3~"  delete-char
+bindkey "^\\"    fzf-nvim-widget
 
 #################
 #	 Export 	#
