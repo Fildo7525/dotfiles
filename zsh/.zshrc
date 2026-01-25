@@ -122,8 +122,21 @@ alias sdu="cd $HOME/SDU/"
 alias vpnoff="protonvpn-cli d"
 alias vpnon="protonvpn-cli c"
 alias ip="ip --color=auto"
-alias bat="batcat"
 alias hl="rg --passthru"
+# If bat does not exists then batcat is the rename
+[[ -x /usr/bin/bat ]] || alias bat="batcat"
+
+#########################
+# Functions for keymaps #
+#########################
+
+fzf-nvim-widget() {
+	local file
+	file=$(fd . | fzf) || return
+	nvim "$file"
+}
+
+zle -N fzf-nvim-widget
 
 #########################
 # Functions for keymaps #
