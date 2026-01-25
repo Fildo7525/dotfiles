@@ -168,6 +168,18 @@ fzf-cd() {
 zle -N fzf-nvim-widget
 zle -N fzf-cd
 
+#########################
+# Functions for keymaps #
+#########################
+
+fzf-nvim-widget() {
+	local file
+	file=$(fd . | fzf) || return
+	nvim "$file"
+}
+
+zle -N fzf-nvim-widget
+
 #################
 #	Keymaps 	#
 #################
