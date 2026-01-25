@@ -126,47 +126,6 @@ alias hl="rg --passthru"
 # If bat does not exists then batcat is the rename
 [[ -x /usr/bin/bat ]] || alias bat="batcat"
 
-#########################
-# Functions for keymaps #
-#########################
-
-fzf-nvim-widget() {
-	local file
-	file=$(fd . | fzf) || return 0
-	if [[ -d $file ]]; then
-		dir=$(realpath "${file%/}")
-
-		python_file=$(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir")
-		for sourceable in ${python_file[@]}; do
-			source $sourceable
-			if (( $? != 0)); then
-				notify-send -u critical "Sourcing error: $?" "File $(echo $sourceable)"
-			fi
-		done
-
-		cd "$dir"
-		zle accept-line
-
-		$EDITOR .
-		return 0
-
-	elif [[ -f $file ]]; then
-		$EDITOR $(realpath $file)
-		return 0
-	fi
-
-	return 1
-}
-
-fzf-cd() {
-	local dir
-	dir=$(fd --type=d . '/home/fildo/' | fzf) || return 0
-	cd "$dir" || return
-	zle accept-line
-}
-
-zle -N fzf-nvim-widget
-zle -N fzf-cd
 
 #########################
 # Functions for keymaps #
