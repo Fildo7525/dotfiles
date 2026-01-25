@@ -39,6 +39,16 @@ get_pp_state() {
 	echo "$profile_tag"
 }
 
+get_active_workspace() {
+	which hyprctl > /dev/null
+	if (( $? != 0 )); then
+		echo $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused) | .output')
+		return
+	fi
+	echo $(hyprctl activeworkspace -j | jq '.monitor')
+	return
+}
+
 case "$input" in
 	"exec")
 		printf '{"text":"%s","alt":"%s","class":"%s"}\n' "$profile" "$profile" "$profile"
@@ -67,10 +77,7 @@ case "$input" in
 				-dmenu \
 				-theme $XDG_CONFIG_HOME/rofi/alt/powerprofile.rasi \
 				-selected-row $((current_index)) \
-				-monitor $(
-					swaymsg -t get_workspaces \
-					| jq -r '.[] | select(.focused) | .output'
-				)
+				-monitor $(get_active_workspace)
 			)
 
 		if [[ -n "$choice" ]]; then
