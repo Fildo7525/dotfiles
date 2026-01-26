@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+workspace=$(hyprctl activeworkspace -j | jq '.id')
+clients=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id == $workspace) | .address")
+
+first=1
+anchor=""
+directions=(u r d l)
+
+for client in ${clients[@]}; do
+	hyprctl dispatch focuswindow address:$client
+	if [ $first -eq 1 ]; then
+		hyprctl dispatch togglegroup
+		anchor=$client
+		first=0
+	else
+		for dir in ${directions[@]}; do
+			hyprctl dispatch moveintogroup $dir
+		done
+	fi
+done
