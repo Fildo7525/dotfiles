@@ -4,17 +4,32 @@ input="${1:-exec}"
 profile=$(powerprofilesctl get)
 profiles=("power-saver" "balanced" "performance")
 
+print_dict() {
+	local -n dict=$1  # Use nameref to pass the associative array by reference
+	for key in "${!dict[@]}"; do
+		echo "$key: ${dict[$key]}"
+	done
+}
+
+reverse_dir() {
+	local -n dict=$1  # Use nameref to pass the associative array by reference
+
+	declare -A reverse
+
+	echo "("
+	for key in "${!dict[@]}"; do
+		echo "[\"${dict[$key]}\"]=\"$key\""
+	done
+	echo ")"
+}
+
 declare -A profile_options=(
-	["power-saver"]=" Power Saver"
-	["balanced"]=" Balanced"
-	["performance"]="󰊗 Performance"
+	["power-saver"]="	Power Saver"
+	["balanced"]="	Balanced"
+	["performance"]="󰊗	Performance"
 )
 
-declare -A reverse_profile_options=(
-	["󰊗 Performance"]="performance"
-	[" Balanced"]="balanced"
-	[" Power Saver"]="power-saver"
-)
+declare -A reverse_profile_options=$(reverse_dir profile_options)
 
 get_profile_index() {
 	for i in "${!profiles[@]}"; do
