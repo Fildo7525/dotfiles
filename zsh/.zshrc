@@ -179,6 +179,7 @@ fzf-nvim-widget() {
 }
 
 zle -N fzf-nvim-widget
+zle -N fzf-cd
 
 #################
 #	Keymaps 	#
@@ -192,7 +193,6 @@ bindkey "^[[F"   end-of-line
 bindkey "^[[3~"  delete-char
 bindkey "^\\"    fzf-nvim-widget
 bindkey "^p"     fzf-cd
-
 
 #################
 #	 Export 	#
