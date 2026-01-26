@@ -153,7 +153,15 @@ fzf-nvim-widget() {
 	return 1
 }
 
+fzf-cd() {
+	local dir
+	dir=$(fd --type=d . '/home/fildo/' | fzf) || return 0
+	cd "$dir" || return
+	zle accept-line
+}
+
 zle -N fzf-nvim-widget
+zle -N fzf-cd
 
 #################
 #	Keymaps 	#
@@ -166,6 +174,7 @@ bindkey "^[[H"   beginning-of-line
 bindkey "^[[F"   end-of-line
 bindkey "^[[3~"  delete-char
 bindkey "^\\"    fzf-nvim-widget
+bindkey "^p"     fzf-cd
 
 
 #################
