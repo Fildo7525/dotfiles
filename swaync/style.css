@@ -464,18 +464,18 @@ trough slider {
 }
 
 .widget-dnd>switch:checked {
-	background: @overlay0;
+	background: @sky;
 	border: none;
 }
 
 .widget-dnd>switch slider {
-	background: alpha(#FFFFFF, 0.6);
+	background: alpha(@subtext1, 0.6);
 	border-radius: 6px;
 	border: none;
 }
 
 .widget-dnd>switch:checked slider {
-	background: alpha(#FFFFFF, 0.6);
+	background: alpha(@surface0, 0.8);
 	border-radius: 6px;
 	border: none;
 }
