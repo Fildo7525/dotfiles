@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-powered=$(bluetoothctl show | grep Power | awk '{print $2}')
+powered=$(bluetoothctl show | grep Powered | awk '{print $2}')
 
 operation=$1
 
