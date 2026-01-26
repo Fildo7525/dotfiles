@@ -126,7 +126,6 @@ alias hl="rg --passthru"
 # If bat does not exists then batcat is the rename
 [[ -x /usr/bin/bat ]] || alias bat="batcat"
 
-
 #########################
 # Functions for keymaps #
 #########################
