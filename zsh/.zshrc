@@ -132,8 +132,25 @@ alias hl="rg --passthru"
 
 fzf-nvim-widget() {
 	local file
-	file=$(fd . | fzf) || return
-	nvim "$file"
+	file=$(fd . | fzf) || return 0
+	if [[ -d $file ]]; then
+		python_file=$(fd --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "./$file")
+		for sourceable in ${python_file[@]}; do
+			source $sourceable
+			if (( $? != 0)); then
+				notify-send -u critical "Sourcing error: $?" "File $(echo $sourceable)"
+			fi
+		done
+
+		$EDITOR "$file"
+		return 0
+
+	elif [[ -f $file ]]; then
+		$EDITOR $file
+		return 0
+	fi
+
+	return 1
 }
 
 zle -N fzf-nvim-widget
