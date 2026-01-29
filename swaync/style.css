@@ -267,7 +267,7 @@ trough {
 .group-header button:active,
 .group-header .collapse-button:active,
 .notification-group-buttons button:active {
-	background: @overlay0;
+	background: @lavender;
 	color: #ffffff;
 }
 
@@ -280,8 +280,8 @@ trough {
 	border-radius: 8px;
 	padding: 4px 8px;
 	font-size: 12px;
-	min-width: 24px;
-	min-height: 24px;
+	min-width: 18px;
+	min-height: 18px;
 }
 
 .notification-group-close-button:hover,
