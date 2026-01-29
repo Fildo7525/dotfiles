@@ -139,7 +139,6 @@ fzf-nvim-widget() {
 		python_file=($(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir"))
 
 		for sourceable in "${python_file[@]}"; do
-			echo $sourceable
 			source $sourceable
 			soruce_error=$?
 			if (( $soruce_error != 0)); then
