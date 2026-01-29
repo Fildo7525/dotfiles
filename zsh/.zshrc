@@ -134,19 +134,25 @@ fzf-nvim-widget() {
 	local file
 	file=$(fd . | fzf) || return 0
 	if [[ -d $file ]]; then
-		python_file=$(fd --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "./$file")
+		dir=$(realpath "${file%/}")
+
+		python_file=$(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir")
 		for sourceable in ${python_file[@]}; do
 			source $sourceable
-			if (( $? != 0)); then
-				notify-send -u critical "Sourcing error: $?" "File $(echo $sourceable)"
+			error_code=$?
+			if (( $error_code != 0)); then
+				notify-send -u critical "Sourcing error: $error_code" "File $(echo $sourceable)"
 			fi
 		done
 
-		$EDITOR "$file"
+		cd "$dir"
+		zle accept-line
+
+		$EDITOR .
 		return 0
 
 	elif [[ -f $file ]]; then
-		$EDITOR $file
+		$EDITOR $(realpath $file)
 		return 0
 	fi
 
