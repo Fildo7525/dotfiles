@@ -163,7 +163,7 @@ keybinding:
     update: u
   universal:
     confirm: <enter>
-    confirmInEditor: <a-enter>
+    confirmInEditor: <c-space>
     copyToClipboard: <c-o>
     createPatchOptionsMenu: <c-p>
     createRebaseOptionsMenu: m
