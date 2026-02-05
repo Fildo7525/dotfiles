@@ -142,6 +142,7 @@ fzf-nvim-widget() {
 			error_code=$?
 			if (( $error_code != 0)); then
 				notify-send -u critical "Sourcing error: $error_code" "File $(echo $sourceable)"
+				return 0
 			fi
 		done
 
@@ -179,11 +180,15 @@ fzf-nvim-widget() {
 	if [[ -d $file ]]; then
 		dir=$(realpath "${file%/}")
 
-		python_file=$(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir")
-		for sourceable in ${python_file[@]}; do
+		python_file=($(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir"))
+
+		for sourceable in "${python_file[@]}"; do
+			echo $sourceable
 			source $sourceable
-			if (( $? != 0)); then
-				notify-send -u critical "Sourcing error: $?" "File $(echo $sourceable)"
+			soruce_error=$?
+			if (( $soruce_error != 0)); then
+				notify-send -u critical "Sourcing error: $soruce_error" "File $(echo ${sourceable})"
+				return 1
 			fi
 		done
 
