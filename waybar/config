@@ -1,7 +1,7 @@
 {
 	"layer": "top",
 	"position": "top",
-	"autohide": true,
+	"autohide": false,
 	"autohide-blocked": false,
 	"exclusive": true,
 	"passthrough": false,
@@ -13,7 +13,6 @@
 		"hyprland/workspaces",
 		"group/hardware",
 		"hyprland/submap",
-		"sway/scratchpad",
 	],
 	"modules-center": [
 		"custom/spotify",
@@ -55,18 +54,8 @@
 		"exec": "~/.config/waybar/scripts/disk",
 		"tooltip": true,
 		"return-type": "json",
-		"interval": 1,
+		"interval": 3600,
 		"on-click": "SHELL=/usr/bin/bash foot -a btop btop",
-	},
-	"sway/mode": {
-		"format": "<span style=\"italic\">{}</span>",
-	},
-	"sway/scratchpad": {
-		"format": "{icon} {count}",
-		"show-empty": false,
-		"format-icons": ["", ""],
-		"tooltip": true,
-		"tooltip-format": "{app}: {title}",
 	},
 
 	/* ===== Modules Center ===== */
@@ -116,14 +105,12 @@
 		"escape": true,
 		"return-type": "json",
 		"max-length": 20,
-		"restart-interval": 30,
 		"on-click": "playerctl -p spotify play-pause",
 		"on-click-right": "killall spotify",
 		"smooth-scrolling-threshold": 10,
 		"on-scroll-up" : "playerctl -p spotify next",
 		"on-scroll-down" : "playerctl -p spotify previous",
-		"exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null",
-		"exec-if": "pgrep spotify"
+		"exec": "~/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null",
 	},
 
 	/* ===== Modules Right ===== */
@@ -140,6 +127,7 @@
 			"disconnected": "󰖪",
 			"disabled": "󰖪",
 		},
+		"interval": 2,
 		"tooltip": true,
 		"tooltip-format": "{ifname}\n{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
 		"on-click-middle": "SHELL=/usr/bin/bash foot -a nmtui nmtui",
@@ -183,7 +171,8 @@
 		"on-click-right": "~/.config/waybar/scripts/volume source toggle",
 		"on-scroll-up": "~/.config/waybar/scripts/volume source up",
 		"on-scroll-down": "~/.config/waybar/scripts/volume source down",
-		"tooltip": false
+		"tooltip": false,
+		"interval": 20,
 	},
 	"pulseaudio#output": {
 		"format": "{volume} {icon}",
@@ -195,7 +184,7 @@
 				"",
 				"",
 				"",
-				""
+				"",
 			]
 		},
 		"on-click-middle": "pavucontrol",
@@ -230,7 +219,7 @@
 		"on-scroll-up": "~/.config/waybar/scripts/powerprofile previous",
 		"on-scroll-down": "~/.config/waybar/scripts/powerprofile next",
 		"return-type": "json",
-		"signal": 1,
+		"interval": 1,
 	},
 	"custom/conservation": {
 		"format": "{icon}",
@@ -241,7 +230,7 @@
 		"exec": "~/.config/waybar/scripts/conservation",
 		"on-click": "~/.config/waybar/scripts/conservation toggle",
 		"return-type": "json",
-		"signal": 1,
+		"interval": 1,
 	},
 	"battery": {
 		"states": {
@@ -255,18 +244,19 @@
 		"tooltip-format": "{timeTo}",
 		"format-icons": ["", "", "", "", ""],
 		"interval": 30,
-		"signal": 1,
 	},
 	"custom/language": {
 		"format": " {}",
 		"exec": "~/.config/waybar/scripts/language",
-		"signal": 2,
+		"tooltip": false,
+		"interval": 1,
 	},
 	"custom/clipboard": {
 		"format": "{}",
 		"return-type": "json",
 		"exec": "~/.config/waybar/scripts/clipboard",
 		"exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
+		"interval": 3600,
 		"on-click": "~/.config/waybar/scripts/clipboard choose",
 		"on-click-right": "cliphist wipe",
 	},
