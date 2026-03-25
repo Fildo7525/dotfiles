@@ -74,11 +74,11 @@
 				},
 				{
 					"label": "󰝚",
-					"command": "/usr/bin/spotify; swaync-client -t"
+					"command": "/usr/bin/spotify-launcher; swaync-client -t"
 				},
 				{
 					"label": "",
-					"command": "kitty -e wlogout"
+					"command": "sh -c 'shutdown now'"
 				}
 			]
 		}

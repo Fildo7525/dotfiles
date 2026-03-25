@@ -363,6 +363,14 @@ trough {
 	min-height: 20px;
 }
 
+.widget-volume button:hover {
+	background: @overlay0;
+}
+
+.widget-volume button:checked {
+	background: alpha(@blue, 0.7);
+}
+
 .widget-volume trough,
 .per-app-volume trough {
 	background: alpha(@text, 0.3);
@@ -444,7 +452,7 @@ trough slider {
 }
 
 .widget-mpris .widget-mpris-player>box>button:hover {
-	background-color: alpha(@base, 0.9);
+	background: alpha(@base, 0.9);
 }
 
 .widget-dnd {
@@ -461,6 +469,10 @@ trough slider {
 	padding: 2px;
 	min-width: 60px;
 	min-height: 30px;
+}
+
+.widget-dnd>switch:hover {
+	background: @overlay0;
 }
 
 .widget-dnd>switch:checked {
@@ -493,4 +505,8 @@ trough slider {
 	background: transparent;
 	min-width: 1px;
 	margin-right: -100px;
+}
+
+.widget-notifications button:hover {
+	background: @overlay0;
 }
