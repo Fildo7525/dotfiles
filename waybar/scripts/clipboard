@@ -21,9 +21,7 @@ case "$COMMAND" in
 				-dmenu \
 				-p "Clipboard:" \
 				-theme $XDG_CONFIG_HOME/rofi/alt/clipboard.rasi \
-				-monitor $(
-					swaymsg -t get_workspaces \
-					| jq -r '.[] | select(.focused) | .output')
+				-monitor $(hyprctl activeworkspace -j | jq '.id')
 			)
 
 		[[ -z "$id" ]] && exit 0
