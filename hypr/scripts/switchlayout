@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+layout=$(hyprctl getoption general:layout | grep "str" | awk '{print $2}')
+new_layout=""
+case "$layout" in
+	dwindle)
+		new_layout="master"
+		;;
+	master)
+		new_layout="monocle"
+		;;
+	monocle)
+		new_layout="dwindle"
+		;;
+	*)
+		new_layout="dwindle"
+		;;
+esac
+
+
+hyprctl keyword general:layout $new_layout
