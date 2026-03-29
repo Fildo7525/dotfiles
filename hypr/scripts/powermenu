@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+get_active_workspace() {
+	which hyprctl > /dev/null
+	if (( $? != 0 )); then
+		echo $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused) | .output')
+		return
+	fi
+	echo $(hyprctl activeworkspace -j | jq '.monitor')
+	return
+}
+
+chosen=$(printf "\tSuspend\n󰒲\tHibernate\n<span color='#ff6b6b'>\tShutdown</span>\n\tReboot" \
+	| rofi \
+		-dmenu \
+		-p "Power" \
+		-markup-rows \
+		-theme $XDG_CONFIG_HOME/rofi/alt/powermenu.rasi \
+		-monitor $(get_active_workspace) \
+	| awk '{print $2}' \
+	| tr "[:upper:]" "[:lower:]"
+)
+
+if [[ "$chosen" == "color='#ff6b6b'>" ]]; then
+	shutdown now
+	exit 0
+fi
+
+systemctl ${chosen}
+
