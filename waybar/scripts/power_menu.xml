@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+	<object class="GtkMenu" id="menu">
+		<style>
+			<class name="menu-no-border"/>
+		</style>
+		<child>
+			<object class="GtkMenuItem" id="suspend">
+				<property name="label"> Suspend</property>
+				<style>
+					<class name="menu-large-text"/>
+				</style>
+			</object>
+		</child>
+		<child>
+			<object class="GtkMenuItem" id="hibernate">
+				<property name="label">󰒲 Hibernate</property>
+				<style>
+					<class name="menu-large-text"/>
+				</style>
+			</object>
+		</child>
+		<child>
+			<object class="GtkMenuItem" id="shutdown">
+				<property name="label"> Shutdown</property>
+				<style>
+					<class name="menu-large-text"/>
+				</style>
+			</object>
+		</child>
+		<child>
+			<object class="GtkSeparatorMenuItem" id="delimiter1"/>
+		</child>
+		<child>
+			<object class="GtkMenuItem" id="reboot">
+				<property name="label"> Reboot</property>
+				<style>
+					<class name="menu-large-text"/>
+				</style>
+			</object>
+		</child>
+	</object>
+</interface>

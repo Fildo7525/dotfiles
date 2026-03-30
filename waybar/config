@@ -27,6 +27,7 @@
 		"group/power",
 		"custom/language",
 		"custom/clipboard",
+		"tray",
 	],
 
 	/* ===== Modules Left ===== */
@@ -203,6 +204,7 @@
 			"custom/powerprofile",
 			"custom/conservation",
 			"battery",
+			"custom/power",
 		],
 		"separator": "|",
 		"orientation": "horizontal",
@@ -220,6 +222,18 @@
 		"on-scroll-down": "~/.config/waybar/scripts/powerprofile next",
 		"return-type": "json",
 		"interval": 1,
+	},
+	"custom/power": {
+		"format" : "⏻",
+		"tooltip": false,
+		"menu": "on-click",
+		"menu-file": "~/dotfiles/waybar/scripts/power_menu.xml",
+		"menu-actions": {
+			"shutdown": "shutdown",
+			"reboot": "reboot",
+			"suspend": "systemctl suspend",
+			"hibernate": "systemctl hibernate",
+		},
 	},
 	"custom/conservation": {
 		"format": "{icon}",
@@ -260,4 +274,12 @@
 		"on-click": "~/.config/waybar/scripts/clipboard choose",
 		"on-click-right": "cliphist wipe",
 	},
+	"tray": {
+		"icon-size": 21,
+		"spacing": 10,
+		"icons": {
+			"blueman": "bluetooth",
+			"TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+		}
+	}
 }
