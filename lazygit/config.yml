@@ -4,7 +4,7 @@ disableStartupPopups: false
 git:
   autoFetch: true
   autoRefresh: true
-  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
   commit:
     autoWrapCommitMessage: true
     autoWrapWidth: 72
@@ -35,6 +35,10 @@ git:
   allBranchesLogCmds:
     - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
 gui:
+  authorColors:
+    'Filip Lobpreis': '#0093ff'
+    # use blue for other authors
+    '*': '#ff0000'
   # stuff relating to the UI
   border: 'rounded' # one of 'single' | 'double' | 'rounded' | 'hidden'
   commandLogSize: 8
@@ -84,6 +88,7 @@ gui:
       - red
   timeFormat: '02 Jan 06 15:04 MST' # https://pkg.go.dev/time#Time.Format
   screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
+  nerdFontsVersion: "3"
 keybinding:
   branches:
     checkoutBranchByName: c
@@ -236,7 +241,7 @@ keybinding:
     toggleRangeSelect: V
     toggleWhitespaceInDiffView: <c-w>
     undo: z
-notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip' | 'quit'
+notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip' | 'quit'
 os:
   copyToClipboardCmd: ""
   edit: 'nvim {{filename}}'
