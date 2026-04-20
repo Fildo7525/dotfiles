@@ -136,13 +136,13 @@ fzf-nvim-widget() {
 	if [[ -d $file ]]; then
 		dir=$(realpath "${file%/}")
 
-		python_file=$(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir")
+		python_file=($(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir"))
 		for sourceable in ${python_file[@]}; do
 			source $sourceable
 			error_code=$?
-			if (( $error_code != 0)); then
+			if (( $error_code != 0 )); then
 				notify-send -u critical "Sourcing error: $error_code" "File $(echo $sourceable)"
-				return 0
+				return $error_code
 			fi
 		done
 
@@ -170,51 +170,10 @@ fzf-cd() {
 zle -N fzf-nvim-widget
 zle -N fzf-cd
 
-#########################
-# Functions for keymaps #
-#########################
 
-fzf-nvim-widget() {
-	local file
-	file=$(fd . | fzf) || return 0
-	if [[ -d $file ]]; then
-		dir=$(realpath "${file%/}")
-
-		python_file=($(fd --hidden --no-ignore --absolute-path --case-sensitive --regex --type=f "(\bactivate$|\bsetup\.${SHELL##*/})" "$dir"))
-
-		for sourceable in "${python_file[@]}"; do
-			echo $sourceable
-			source $sourceable
-			soruce_error=$?
-			if (( $soruce_error != 0)); then
-				notify-send -u critical "Sourcing error: $soruce_error" "File $(echo ${sourceable})"
-				return 1
-			fi
-		done
-
-		cd "$dir"
-		zle accept-line
-
-		$EDITOR .
-		return 0
-
-	elif [[ -f $file ]]; then
-		$EDITOR $(realpath $file)
-		return 0
-	fi
-
-	return 1
-}
-
-fzf-cd() {
-	local dir
-	dir=$(fd --type=d . '/home/fildo/' | fzf) || return 0
-	cd "$dir" || return
-	zle accept-line
-}
-
-zle -N fzf-nvim-widget
-zle -N fzf-cd
+# Edit current command line in $EDITOR
+autoload edit-command-line
+zle -N edit-command-line
 
 #################
 #	Keymaps 	#
@@ -348,7 +307,7 @@ function foxglove() {
 	pids=()
 
 	# Start both processes in their own process group
-	ros2 launch foxglove_bridge foxglove_bridge_launch.xml > /dev/null 2>&1 &
+	ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765 > /dev/null 2>&1 &
 	pids+=($!)
 
 	foxglove-studio > /dev/null 2>&1 &
@@ -370,7 +329,5 @@ zstyle ':completion:*' menu select
 
 alias frx="MOZ_ENABLE_WAYLAND=1 firefox --new-instance"
 export PATH="$PATH:$HOME/Documents/bluetui/target/release:$HOME/develop/flutter/bin:$HOME/.surrealdb"
+export ANDROID_HOME=$HOME/.android_home
 
-# Edit current command line in $EDITOR
-autoload edit-command-line
-zle -N edit-command-line
