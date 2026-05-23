@@ -21,75 +21,27 @@
 -- ################
 
 -- See https://wiki.hypr.land/Configuring/Monitors/
-hl.monitor({
-	output = "eDP-1",
-	mode = "1920x1080",
-	position = "0x0",
-	scale = 1,
-	bitdepth = 10,
-})
+local monitors = require("hyprland.monitor")
+monitors:setup()
 
-hl.monitor({
-	output = "DP-9",
-	mode = "1920x1080",
-	position = "1920x0",
-	scale = 1,
-	bitdepth = 10,
-})
-
-hl.monitor({
-	output = "DP-9",
-	mode = "1920x1080",
-	position = "1920x0",
-	scale = 1,
-	bitdepth = 10,
-})
-
-hl.monitor({
-	output = "HDMI-A-1",
-	mode = "1920x1080",
-	position = "1920x0",
-	scale = 1,
-	mirror = "eDP-1",
-	bitdepth = 10,
-})
-
--- ###################
--- ##-- MY PROGRAMS ###
--- ###################
-
--- See https://wiki.hypr.land/Configuring/Keywords/
-local terminal = "kitty"
-local fileManager = "dolphin"
-local menu = "pkill rofi || ~/.config/rofi/launch"
-local switch_win = "pkill rofi || ~/.config/rofi/launch window"
-local file_menu = "pkill rofi || ~/.config/rofi/launch filebrowser"
 
 -- #################
--- ##-- AUTOSTART ###
+-- ### AUTOSTART ###
 -- #################
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
-
--- exec-once = waybar
--- exec-once = systemctl --user start hyprpolkitagent
-
--- exec-once = wl-paste --type text --watch cliphist store -- Stores only text data
--- exec-once = wl-paste --type image --watch cliphist store -- Stores only image data
-
--- exec-once = $terminal
--- exec-once = nm-applet &
--- exec-once = waybar & hyprpaper & firefox
 hl.on("hyprland.start", function()
-	hl.exec_cmd(terminal)
+	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("nm-applet")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("hyprpaper") -- & firefox
+	hl.exec_cmd("wl-paste --type text --watch cliphist store") -- Stores only text data
+	hl.exec_cmd("wl-paste --type image --watch cliphist store") -- Stores only image data
 end)
 
 -- #############################
--- ##-- ENVIRONMENT VARIABLES ###
+-- ### ENVIRONMENT VARIABLES ###
 -- #############################
 
 -- See https://wiki.hypr.land/Configuring/Environment-variables/
@@ -100,29 +52,11 @@ hl.env("XCURSOR_SIZE", "13")
 hl.env("HYPRCURSOR_SIZE", "13")
 
 
--- ###################
--- ##-- PERMISSIONS ###
--- ###################
-
--- See https://wiki.hypr.land/Configuring/Permissions/
--- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
--- for security reasons
-
--- ecosystem {
---   enforce_permissions = 1
--- }
-
--- permission = /usr/(bin|local/bin)/grim, screencopy, allow
--- permission = /usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland, screencopy, allow
--- permission = /usr/(bin|local/bin)/hyprpm, plugin, allow
-
-
 -- #####################
--- ##-- LOOK AND FEEL ###
+-- ### LOOK AND FEEL ###
 -- #####################
 
 -- Refer to https://wiki.hypr.land/Configuring/Variables/
-
 -- https://wiki.hypr.land/Configuring/Variables/#general
 hl.config({
 	general = {
@@ -175,6 +109,81 @@ hl.config({
 	animations = {
 		enabled = true,
 	},
+
+	group = {
+		auto_group = true,
+		insert_after_current = true,
+		focus_removed_window = true,
+		col = {
+			border_active = 0x6694e2d5,
+			border_inactive = 0x66181825,
+			border_locked_active = 0x66ff5500,
+			border_locked_inactive = 0x66775500,
+		},
+
+		groupbar = {
+			enabled = true,
+			font_size = 13,
+			gradients = false,
+			indicator_gap = 1,
+			stacked = false,
+			rounding = 1,
+			gradient_rounding = 3,
+			round_only_edges = false,
+			gradient_round_only_edges = false,
+			col = {
+				active = 0x6694e2d5,
+				inactive = 0x66181825,
+				locked_active = 0x66ff5500,
+				locked_inactive = 0x66775500,
+			},
+		},
+	},
+
+	binds = {
+		workspace_back_and_forth = false,
+		allow_workspace_cycles = true,
+		pass_mouse_when_bound = false,
+	},
+
+	-- See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
+	dwindle = {
+		preserve_split = true -- You probably want this
+	},
+
+	-- See https://wiki.hypr.land/Configuring/Master-Layout/ for more
+	master = {
+		-- new_status = master
+	},
+
+	--- https://wiki.hypr.land/Configuring/Variables/#misc
+	misc = {
+		font_family = "BitstromWera Nerd Font Mono",
+		force_default_wallpaper = -1, -- Set to 0 or 1 to disable the anime mascot wallpapers
+		disable_autoreload = true,
+		disable_hyprland_logo = false,-- If true disables the random hyprland logo / anime girl background. :(
+		vrr = 3,
+		key_press_enables_dpms = true,
+	},
+
+	render = {
+		new_render_scheduling = false,
+	},
+
+	--- https://wiki.hypr.land/Configuring/Variables/#input
+	input = {
+		kb_layout = "us,sk,dk",
+		kb_variant = ",qwerty",
+
+		follow_mouse = 1,
+		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+
+		numlock_by_default = true,
+
+		touchpad = {
+			natural_scroll = true,
+		},
+	},
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -205,95 +214,6 @@ hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
-hl.config({
-	group = {
-		auto_group = true,
-		insert_after_current = true,
-		focus_removed_window = true,
-		col = {
-			border_active = 0x6694e2d5,
-			border_inactive = 0x66181825,
-			border_locked_active = 0x66ff5500,
-			border_locked_inactive = 0x66775500,
-		},
-
-		groupbar = {
-			enabled = true,
-			font_size = 13,
-			gradients = false,
-			indicator_gap = 1,
-			stacked = false,
-			rounding = 1,
-			gradient_rounding = 3,
-			round_only_edges = false,
-			gradient_round_only_edges = false,
-			col = {
-				active = 0x6694e2d5,
-				inactive = 0x66181825,
-				locked_active = 0x66ff5500,
-				locked_inactive = 0x66775500,
-			},
-		},
-	},
-})
-
-hl.config({
-	binds = {
-		workspace_back_and_forth = false,
-		allow_workspace_cycles = true,
-		pass_mouse_when_bound = false,
-	}
-})
-
-	-- See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
-hl.config({
-	dwindle = {
-		preserve_split = true -- You probably want this
-	},
-
-	-- See https://wiki.hypr.land/Configuring/Master-Layout/ for more
-	master = {
-		-- new_status = master
-	}
-})
-
--- https://wiki.hypr.land/Configuring/Variables/#misc
-hl.config({
-	misc = {
-		font_family = "BitstromWera Nerd Font Mono",
-		force_default_wallpaper = -1, -- Set to 0 or 1 to disable the anime mascot wallpapers
-		disable_autoreload = true,
-		disable_hyprland_logo = false,-- If true disables the random hyprland logo / anime girl background. :(
-		vrr = 3,
-		key_press_enables_dpms = true,
-	},
-})
-
-hl.config({
-	render = {
-		new_render_scheduling = false,
-	}
-})
-
--- #############
--- ### INPUT ###
--- #############
--- https://wiki.hypr.land/Configuring/Variables/#input
-hl.config({
-	input = {
-		kb_layout = "us,sk,dk",
-		kb_variant = ",qwerty",
-
-		follow_mouse = 1,
-		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
-
-		numlock_by_default = true,
-
-		touchpad = {
-			natural_scroll = true,
-		},
-	}
-})
 
 -- See https://wiki.hypr.land/Configuring/Gestures
 hl.gesture({
@@ -311,20 +231,17 @@ hl.device({
 
 
 -- ###################
--- ##-- KEYBINDINGS ###
+-- ### KEYBINDINGS ###
 -- ###################
 
 require("hyprkeymaps")
 
 -- ##############################
--- ##-- WINDOWS AND WORKSPACES ###
+-- ### WINDOWS AND WORKSPACES ###
 -- ##############################
 
 -- See https://wiki.hypr.land/Configuring/Window-Rules/ for more
 -- See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
-
--- Example windowrules that are useful
-
 hl.window_rule({
 	-- Ignore maximize requests from all apps. You'll probably like this.
 	name = "suppress-maximize-events",
