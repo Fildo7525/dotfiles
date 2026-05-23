@@ -18,4 +18,4 @@ case "$layout" in
 esac
 
 
-hyprctl keyword general:layout $new_layout
+hyprctl eval "hl.config({ general = { layout = \"$new_layout\"}})"

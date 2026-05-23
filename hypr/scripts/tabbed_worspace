@@ -4,18 +4,19 @@ workspace=$(hyprctl activeworkspace -j | jq '.id')
 clients=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id == $workspace) | .address")
 
 first=1
-anchor=""
-directions=(u r d l)
+directions=("up" "right" "down" "left")
 
 for client in ${clients[@]}; do
-	hyprctl dispatch focuswindow address:$client
-	if [ $first -eq 1 ]; then
-		hyprctl dispatch togglegroup
-		anchor=$client
+	# hyprctl dispatch focuswindow address:$client
+	hyprctl dispatch "hl.dsp.focus({window=\"address:$client\"})"
+	if [[ $first -eq 1 ]]; then
+		hyprctl dispatch "hl.dsp.group.toggle({window=\"address:$client\"})"
+		# notify-send "Toggle window $client"
 		first=0
 	else
 		for dir in ${directions[@]}; do
-			hyprctl dispatch moveintogroup $dir
+			# notify-send "Move $client to $dir"
+			hyprctl dispatch "hl.dsp.window.move({into_group=\"$dir\", window=\"address:$client\"})"
 		done
 	fi
 done
