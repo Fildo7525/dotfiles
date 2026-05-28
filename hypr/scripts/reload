@@ -2,4 +2,4 @@
 
 layout=$(hyprctl getoption general:layout | grep "str" | awk '{print $2}')
 hyprctl reload
-hyprctl keyword general:layout $layout
+hyprctl eval "hl.config{ general = { layout = \"$layout\"} }"
