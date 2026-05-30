@@ -148,7 +148,14 @@ alias hl="rg --passthru"
 
 fzf-nvim-widget() {
 	local file
-	file=$(fd . | fzf) || return 0
+	file=$(fd . \
+			| fzf --preview "if [[ -f {} ]]; then bat --force-colorization {}; else exa --colour=always -l {}; fi" \
+			  --bind "ctrl-/:change-preview-window(hidden|)" \
+			  --bind 'ctrl-h:transform:[[ ! $FZF_PROMPT =~ hidden ]] \
+					&& echo "change-prompt(hidden> )+reload(fd --hidden .)" \
+					|| echo "change-prompt(> )+reload(fd .)"') || return 0
+
+
 	if [[ -d $file ]]; then
 		dir=$(realpath "${file%/}")
 
@@ -185,7 +192,15 @@ fzf-nvim-widget() {
 
 fzf-cd() {
 	local dir
-	dir=$(fd --type=d . $HOME | fzf) || return 0
+	local base_cmd="fd --type=d . \"$HOME\""
+	local hidden_cmd="fd --hidden --type=d . \"$HOME\""
+
+	dir=$(fd --type=d . "$HOME" \
+		| fzf --preview "exa --colour=always --long {}" \
+			  --bind "ctrl-/:change-preview-window(hidden|)" \
+			  --bind 'ctrl-h:transform:[[ ! $FZF_PROMPT =~ hidden ]] \
+					&& echo "change-prompt(hidden> )+reload(fd --hidden --type=d . \"$HOME\")" \
+					|| echo "change-prompt(> )+reload(fd --type=d . \"$HOME\")"') || return 0
 	cd "$dir" || return
 	zle accept-line
 }
