@@ -31,10 +31,10 @@ readelf = [
 
 [open]
 prepend_rules = [
-	{ name = "*.pdf", use = [ "pdff", "xournal", "reveal", "open" ] },
-	{ name = "*.xopp", use = "xournal" },
-	{ name = "*.exe", use = "hex" },
-	{ name = "*.so", use = "readelf" },
+	{ url = "*.pdf", use = [ "pdff", "xournal", "reveal", "open" ] },
+	{ url = "*.xopp", use = "xournal" },
+	{ url = "*.exe", use = "hex" },
+	{ url = "*.so", use = "readelf" },
 ]
 
 [[plugin.prepend_previewers]]
@@ -47,5 +47,5 @@ run  = "lsar"
 
 
 [[plugin.prepend_previewers]]
-name = "*.exe"
+mime = "application/x-elf"
 run = "xxd"

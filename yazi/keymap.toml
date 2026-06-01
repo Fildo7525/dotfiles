@@ -1,43 +1,42 @@
-[[mgr.prepend_keymap]]
-on = "<C-y>"
-run = 'arrow -10%'
+[mgr]
+prepend_keymap = [
+	{ on = "<C-y>", run = 'arrow -10%', },
+	{ on = "<C-e>", run = 'arrow 10%', },
+	{ on = "<C-o>", run = 'shell "$SHELL" --block --confirm', desc = "Open shell here", },
 
-[[mgr.prepend_keymap]]
-on = "<C-e>"
-run = 'arrow 10%'
+	{ on = ["g", "s"], run = "cd ~/SDU/year1/SS", desc = "Go to the current semester at SDU", },
+	{ on = ["g", "w"], run = "cd ~/work", desc = "Go to the work directory", },
 
-[[mgr.prepend_keymap]]
-on   = "<C-o>"
-run  = 'shell "$SHELL" --block --confirm'
-desc = "Open shell here"
+	{ on = ["R", "h"], run = "shell \"pdftk $@ rotate 1-endwest output rotated; mv rotated $@\" --confirm", desc = "Rotate left", },
+	{ on = ["R", "j"], run = "shell \"pdftk $@ rotate 1-endsouth output rotated; mv rotated $@\" --confirm", desc = "Rotate down", },
+	{ on = ["R", "k"], run = "shell \"pdftk $@ rotate 1-endnorth output rotated; mv rotated $@\" --confirm", desc = "Rotate up", },
+	{ on = ["R", "l"], run = "shell \"pdftk $@ rotate 1-endeast output rotated; mv rotated $@\" --confirm", desc = "Rotate right", },
 
-[[mgr.prepend_keymap]]
-on = ["g", "s"]
-run = "cd ~/SDU/year1/SS"
-desc = "Go to the current semester at SDU"
+	{ on = [ "s", "A" ], run = "sort alphabetical --reverse=yes",                desc = "Sort alphabetically (reverse)" },
+	{ on = [ "s", "B" ], run = [ "sort btime --reverse=yes", "linemode btime" ], desc = "Sort by birth time (reverse)" },
+	{ on = [ "s", "E" ], run = "sort extension --reverse=yes",                   desc = "Sort by extension (reverse)" },
+	{ on = [ "s", "M" ], run = [ "sort mtime --reverse=yes", "linemode mtime" ], desc = "Sort by modified time (reverse)" },
+	{ on = [ "s", "N" ], run = "sort natural --reverse=yes",                     desc = "Sort naturally (reverse)" },
+	{ on = [ "s", "S" ], run = [ "sort size --reverse=yes", "linemode size" ],   desc = "Sort by size (reverse)" },
+	{ on = [ "s", "a" ], run = "sort alphabetical --reverse=no",                 desc = "Sort alphabetically" },
+	{ on = [ "s", "b" ], run = [ "sort btime --reverse=no", "linemode btime" ],  desc = "Sort by birth time" },
+	{ on = [ "s", "e" ], run = "sort extension --reverse=no",                    desc = "Sort by extension" },
+	{ on = [ "s", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime" ],  desc = "Sort by modified time" },
+	{ on = [ "s", "n" ], run = "sort natural --reverse=no",                      desc = "Sort naturally" },
+	{ on = [ "s", "r" ], run = "sort random --reverse=no",                       desc = "Sort randomly" },
+	{ on = [ "s", "s" ], run = [ "sort size --reverse=no", "linemode size" ],    desc = "Sort by size" },
 
-[[mgr.prepend_keymap]]
-on = ["g", "w"]
-run = "cd ~/work"
-desc = "Go to the work directory"
-
-[[mgr.prepend_keymap]]
-on = ["R", "h"]
-run = "shell \"pdftk $@ rotate 1-endwest output rotated; mv rotated $@\" --confirm"
-desc = "Rotate left"
-
-[[mgr.prepend_keymap]]
-on = ["R", "j"]
-run = "shell \"pdftk $@ rotate 1-endsouth output rotated; mv rotated $@\" --confirm"
-desc = "Rotate down"
-
-[[mgr.prepend_keymap]]
-on = ["R", "k"]
-run = "shell \"pdftk $@ rotate 1-endnorth output rotated; mv rotated $@\" --confirm"
-desc = "Rotate up"
-
-[[mgr.prepend_keymap]]
-on = ["R", "l"]
-run = "shell \"pdftk $@ rotate 1-endeast output rotated; mv rotated $@\" --confirm"
-desc = "Rotate right"
-
+	{ on = [ ",", "m" ], run = "noop", desc = "Sort by modified time" },
+	{ on = [ ",", "M" ], run = "noop", desc = "Sort by modified time (reverse)" },
+	{ on = [ ",", "b" ], run = "noop", desc = "Sort by birth time" },
+	{ on = [ ",", "B" ], run = "noop", desc = "Sort by birth time (reverse)" },
+	{ on = [ ",", "e" ], run = "noop", desc = "Sort by extension" },
+	{ on = [ ",", "E" ], run = "noop", desc = "Sort by extension (reverse)" },
+	{ on = [ ",", "a" ], run = "noop", desc = "Sort alphabetically" },
+	{ on = [ ",", "A" ], run = "noop", desc = "Sort alphabetically (reverse)" },
+	{ on = [ ",", "n" ], run = "noop", desc = "Sort naturally" },
+	{ on = [ ",", "N" ], run = "noop", desc = "Sort naturally (reverse)" },
+	{ on = [ ",", "s" ], run = "noop", desc = "Sort by size" },
+	{ on = [ ",", "S" ], run = "noop", desc = "Sort by size (reverse)" },
+	{ on = [ ",", "r" ], run = "noop", desc = "Sort randomly" },
+]
