@@ -90,7 +90,7 @@ which nvim
 if [[ $? != 0 ]]; then
 	log "Installing nvim"
 	wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb
-	sudo apt install ./nvim-linux64.deb
+	sudo apt install "$(pwd)nvim-linux64.deb
 else
 	alreadyDone "Neovim is already installed with version $(nvim --version)"
 fi
@@ -260,7 +260,7 @@ if [[ $? != 0 ]]; then
 	log "Installing discord"
 	wget https://discord.com/api/download?platform=linux&format=deb
 	mv 'download?platform=linux&format=deb' discord.deb
-	sudo apt install "./discord.deb"
+	sudo apt install "$(pwd)/discord.deb"
 else
 	alreadyDone "Discord is already installed"
 fi
@@ -307,28 +307,28 @@ fi
 
 if [[ ! -d ~/.config/lazygit ]]; then
 	mkdir ~/.config/lazygit/
-	ln -s lalazygit/config.yaml ~/.config/lazygit
+	ln -s "$(pwd)/lazygit/config.yaml" ~/.config/lazygit
 fi
 
 if [[ ! -d ~/.config/nvim ]]; then
-	ln -s ./nvim ~/.config/nvim
+	ln -s "$(pwd)/nvim" ~/.config/nvim
 fi
 
 if [[ ! -d ~/.config/alacritty ]]; then
-	ln -s ./alacritty ~/.config/alacritty
+	ln -s "$(pwd)/alacritty" ~/.config/alacritty
 	if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
-		ln -s ./alacritty/_alacritty ~/.local/share/zinit/completions/_alacritty
+		ln -s "$(pwd)/alacritty/_alacritty" ~/.local/share/zinit/completions/_alacritty
 	elif [[ "$SHELL" == "/bin/bash" ]]; then
 		echo "source $(pwd)/alacritty/alacritty.bash" >> ~/.bashrc
 	fi
 fi
 
 if [[ ! -f /etc/tmux.conf ]]; then
-	sudo ln ./tmux/tmux.conf /etc/tmux.conf
+	sudo ln "$(pwd)tmux/tmux.conf" /etc/tmux.conf
 fi
 
 if [[ ! -f ~/.conkyrc ]]; then
-	ln -s ./conky/.conkyrc ~/.conkyrc
+	ln -s "$(pwd)conky/.conkyrc" ~/.conkyrc
 fi
 
 #############
