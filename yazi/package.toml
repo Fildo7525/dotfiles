@@ -1,7 +1,12 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:lsar"
-rev = "38418dd"
-hash = "99aa06d3014798d86001c324468d497f"
+rev = "598cdb6"
+hash = "c1c66e28145e28e581e74e2d6da4fdf1"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "598cdb6"
+hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
 [flavor]
 deps = []
