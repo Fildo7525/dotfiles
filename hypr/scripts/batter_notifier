@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# We do not want to start at a specific number. Start at the current number.
+LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+
+# Critical values to be used.
+NOTIFY_LEVELS=(5 10 15 30)
+
+# Check the state every X seconds.
+SLEEP_TIME_S=60
+
+while true; do
+	bat_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
+	bat_status=$(cat /sys/class/power_supply/BAT1/status)
+
+	if [[ "$bat_status" == "Charging" ]]; then
+		sleep $SLEEP_TIME_S
+		LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+		continue
+	fi
+
+	for notify_capacity in ${NOTIFY_LEVELS[@]}; do
+		if (( $bat_capacity < $notify_capacity && $notify_capacity < $LAST_CAPACITY )); then
+			notify-send -u critical "Low Battery" "$bat_capacity% battery remaining."
+			LAST_CAPACITY=$bat_capacity
+		fi
+	done
+
+	sleep $SLEEP_TIME_S
+done
