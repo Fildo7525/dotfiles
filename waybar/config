@@ -62,11 +62,11 @@
 	/* ===== Modules Center ===== */
 	"clock": {
 		"timezone": "Europe/Copenhagen",
-		"tooltip-format": "<big>{:%Y}</big>\n<tt><small>{calendar}</small></tt>",
-		"format": "<big>{:%H:%M}</big>",
-		"format-alt": "<big>{:%H:%M	%Y-%m-%d}</big>",
-		"on-click-middle": "gnome-calendar",
 		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"locale": "en_GB.UTF-8",
+		"format": "<big>{:%H:%M}</big>",
+		"format-alt": "<big>{:%H:%M	%d.%m.%Y}</big>",
+		"on-click-middle": "gnome-calendar",
 		"calendar": {
 			"mode": "month",
 			"mode-mon-col": 3,
