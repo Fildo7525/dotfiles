@@ -1,5 +1,7 @@
 [mgr]
 keymap = [
+	{ on = "<C-o>", run  = 'shell "$SHELL" --block --confirm', desc = "Open shell here"},
+
 	{ on = "<Esc>", run = "escape", desc = "Exit visual mode, clear selected, or cancel search" },
 	{ on = "<C-e>", run = "escape", desc = "Exit visual mode, clear selected, or cancel search" },
 	{ on = "<C-[>", run = "escape", desc = "Exit visual mode, clear selected, or cancel search" },
