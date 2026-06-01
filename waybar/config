@@ -178,6 +178,7 @@
 	"pulseaudio#output": {
 		"format": "{volume} {icon}",
 		"format-bluetooth": "{volume} {icon} ",
+		"format-muted": "󰝟",
 		"format-bluetooth-muted": "󰝟 ",
 		"max-volume": 153,
 		"format-icons": {
