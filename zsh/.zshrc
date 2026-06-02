@@ -36,8 +36,11 @@ zinit light romkatv/powerlevel10k
 
 # * Commandline
 zinit light zsh-users/zsh-completions
+zinit ice lucid wait'0'
 zinit light zsh-users/zsh-autosuggestions
+zinit ice lucid wait'0'
 zinit light zsh-users/zsh-syntax-highlighting
+zinit ice lucid wait'0'
 zinit light hlissner/zsh-autopair
 
 # * zsh-fzf-history-search
@@ -45,12 +48,25 @@ zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
 
 # * fzf-tab
+zinit ice lucid wait'0'
 zinit light Aloxaf/fzf-tab
 zstyle ":completion::git-checkout:" sort false
 zstyle ':completion::descriptions' format '[%d]'
 zstyle ':completion:' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' special-dirs true
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+
+# zsh-completions needs to load before compinit, so keep it synchronous:
+zinit light zsh-users/zsh-completions
+
+autoload -Uz +X bashcompinit && bashcompinit
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C  # skip security check, use cache
+fi
+
 
 # export HISTFILE=~/.zshhistory
 # export HISTFILESIZE=1000000000
@@ -153,7 +169,14 @@ fzf-nvim-widget() {
 		return 0
 
 	elif [[ -f $file ]]; then
-		$EDITOR $(realpath $file)
+		rpth=$(realpath "$PWD/$file")
+		dir=$(dirname $rpth)
+
+		echo $dir
+		cd "$dir"
+		zle accept-line
+
+		$EDITOR ${file##$(dirname $rpth)/}
 		return 0
 	fi
 
@@ -162,7 +185,7 @@ fzf-nvim-widget() {
 
 fzf-cd() {
 	local dir
-	dir=$(fd --type=d . '/home/fildo/' | fzf) || return 0
+	dir=$(fd --type=d . $HOME | fzf) || return 0
 	cd "$dir" || return
 	zle accept-line
 }
@@ -205,8 +228,16 @@ export LESS="--RAW-CONTROL-CHARS"
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+function nvm() {
+	unset -f nvm node npm npx
+	[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+	[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+	nvm "$@"
+}
+
+function node() { nvm; node "$@"; }
+function npm()  { nvm; npm "$@"; }
+function npx()  { nvm; npx "$@"; }
 
 local PATH_EXTEND=(
 	"$HOME/.cargo/bin"
@@ -259,16 +290,14 @@ fi
 
 # Load bash completion functions
 fpath+=~/.zfunc
-autoload -Uz +X bashcompinit && bashcompinit
-autoload -Uz +X compinit && compinit
-
-if [[ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh ]]; then
-	source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
-
-	# argcomplete for ros2 & colcon
-	eval "$(register-python-argcomplete ros2)"
-	eval "$(register-python-argcomplete colcon)"
+_argcomplete_cache="$HOME/.cache/zsh-argcomplete-ros2-colcon.zsh"
+if [[ ! -f "$_argcomplete_cache" || "$_argcomplete_cache" -ot "$(which ros2)" ]]; then
+	{
+		register-python-argcomplete ros2
+		register-python-argcomplete colcon
+	} > "$_argcomplete_cache" 2>/dev/null
 fi
+[[ -f "$_argcomplete_cache" ]] && source "$_argcomplete_cache"
 
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
@@ -324,10 +353,11 @@ function foxglove() {
 }
 
 # This needs to be at the end of the file due to compinit
-autoload -Uz compinit
 zstyle ':completion:*' menu select
 
 alias frx="MOZ_ENABLE_WAYLAND=1 firefox --new-instance"
-export PATH="$PATH:$HOME/Documents/bluetui/target/release:$HOME/develop/flutter/bin:$HOME/.surrealdb"
 export ANDROID_HOME=$HOME/.android_home
 
+if [[ "$XDG_SESSION_TYPE" -eq "wayland" ]]; then
+	QT_QPA_PLATFORM=wayland
+fi
