@@ -16,13 +16,6 @@ M.monitors = {
 		bitdepth = 10,
 	},
 	{
-		output = "DP-9",
-		mode = "1920x1080",
-		position = "1920x0",
-		scale = 1,
-		bitdepth = 10,
-	},
-	{
 		output = "HDMI-A-1",
 		mode = "1920x1080",
 		position = "1920x0",
