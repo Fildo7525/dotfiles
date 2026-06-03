@@ -79,6 +79,21 @@ hl.device({
 	sensitivity = -0.5,
 })
 
+-- This is how to make thisone work with the "One by Wacom":
+--
+-- $ yay -S opentabletdriver
+-- $ echo "blacklist wacom" | sudo tee /etc/modprobe.d/no-wacom.conf
+-- $ sudo mkinitcpio -P
+-- $ systemctl --user enable --now opentabletdriver
+--
+-- # Now reboot
+--
+-- If needed change the name or the output.
+hl.device({
+	name = "opentabletdriver-virtual-artist-tablet",
+	output = "DP-9",
+})
+
 
 -- ###################
 -- ### KEYBINDINGS ###
