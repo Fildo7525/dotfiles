@@ -147,7 +147,8 @@ hl.window_rule({
 hl.window_rule({
 	name = "move-spotify",
 	match = {
-		initial_class = "spotify",
+		-- Detected using `hyprctl clients`.
+		class = "Spotify",
 	},
 
 	monitor = "eDP-1",
