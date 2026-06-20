@@ -170,3 +170,5 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- In your hyprland.conf
 hl.bind(mainMod("Space"), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout"))
 
+-- Gnome apps
+hl.bind(mainMod('G'), hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=GNOME gnome-control-center"))
