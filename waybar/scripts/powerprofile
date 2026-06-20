@@ -24,9 +24,9 @@ reverse_dir() {
 }
 
 declare -A profile_options=(
-	["power-saver"]="	Power Saver"
-	["balanced"]="	Balanced"
-	["performance"]="󰊗	Performance"
+	["power-saver"]=" Power Saver"
+	["balanced"]=" Balanced"
+	["performance"]="󰊗 Performance"
 )
 
 declare -A reverse_profile_options=$(reverse_dir profile_options)
