@@ -344,3 +344,6 @@ export PATH="$PATH:$HOME/Documents/bluetui/target/release:$HOME/develop/flutter/
 # Edit current command line in $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
+
+export PATH=/opt/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
