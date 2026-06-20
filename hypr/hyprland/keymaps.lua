@@ -1,9 +1,9 @@
 
--- ###################
--- ### KEYBINDINGS ###
--- ###################
+-------------------
+--- KEYBINDINGS ---
+-------------------
 
--- # See https://wiki.hypr.land/Configuring/Keywords/
+-- See https://wiki.hypr.land/Configuring/Keywords/
 -- local mainMod = "ALT" --Sets "ALT" key as main modifier
 -- local altMod = "SUPER"
 
@@ -42,29 +42,29 @@ local switch_win = "pkill rofi || ~/.config/rofi/launch window"
 local file_menu = "pkill rofi || ~/.config/rofi/launch filebrowser"
 local locked = false
 
--- # Use rofi to show clipboard history
+-- Use rofi to show clipboard history
 hl.bind(mainMod("period"), hl.dsp.exec_cmd("~/.config/waybar/scripts/clipboard choose"))
 
--- # Switch keyboard layout
+-- Switch keyboard layout
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("hyprctl switchxkblayout current next"))
 
--- # Take a screenshot of the entire screen
+-- Take a screenshot of the entire screen
 hl.bind(altMod("S"), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot full"))
 
--- # Take a screenshot of a selected region
+-- Take a screenshot of a selected region
 hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot region"))
 
--- # Open Sway Notification Client
+-- Open Sway Notification Client
 hl.bind(mainMod({"SHIFT", "N"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
 
--- # Enter zenmode with the focused window.
+-- Enter zenmode with the focused window.
 hl.bind(mainMod("M"), hl.dsp.window.fullscreen({mode = "maximized", action = "toggle"}))
 
--- # Open rofi in custom mode.
+-- Open rofi in custom mode.
 hl.bind(mainMod("TAB"), hl.dsp.exec_cmd(switch_win))
 hl.bind(mainMod("F"), hl.dsp.exec_cmd(file_menu))
 
--- # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
+-- Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
 
 hl.bind(mainMod({"SHIFT", "C"}), hl.dsp.exec_cmd("~/.config/hypr/scripts/reload"))
 hl.bind(mainMod({"SHIFT", "F"}), hl.dsp.window.float({ action = "toggle" }))
@@ -74,20 +74,20 @@ hl.bind(mainMod("E"), hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod("P"), hl.dsp.window.pseudo()) -- dwindle
 hl.bind(mainMod("Q"), hl.dsp.window.kill())
 hl.bind(mainMod("Return"), hl.dsp.exec_cmd(terminal))
--- # hl.bind(mainMod, \, togglesplit, # dwindle
+-- hl.bind(mainMod, \, togglesplit, # dwindle
 
--- # Mute and lock the system
+-- Mute and lock the system
 hl.bind(altMod("L"), function()
 	hl.dispatch(hl.dsp.exec_cmd("loginctl lock-session"))
 	hl.dispatch(hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 1 && hyprlock"))
 end)
 
--- # To switch between windows in a floating workspace:
--- # Works with Monocle layout
+-- To switch between windows in a floating workspace:
+-- Works with Monocle layout
 hl.bind(mainMod("prior"), hl.dsp.layout("cycleprev"))
 hl.bind(mainMod("next"), hl.dsp.layout("cyclenext"))
 
--- # Works in Master layout
+-- Works in Master layout
 hl.bind(mainMod({"SHIFT", "M"}), hl.dsp.layout("swapwithmaster"))
 
 hl.bind(mainMod("w"), hl.dsp.exec_raw("~/.config/hypr/scripts/tabbed_worspace"))
@@ -161,12 +161,12 @@ hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURC
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { repeating = true })
 
--- # Requires playerctl
+-- Requires playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
--- # In your hyprland.conf
+-- In your hyprland.conf
 hl.bind(mainMod("Space"), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout"))
 
