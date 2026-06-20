@@ -67,7 +67,6 @@ else
   compinit -C  # skip security check, use cache
 fi
 
-
 # export HISTFILE=~/.zshhistory
 # export HISTFILESIZE=1000000000
 # export HISTSIZE=1000000000
@@ -155,7 +154,6 @@ fzf-nvim-widget() {
 					&& echo "change-prompt(hidden> )+reload(fd --hidden .)" \
 					|| echo "change-prompt(> )+reload(fd .)"') || return 0
 
-
 	if [[ -d $file ]]; then
 		dir=$(realpath "${file%/}")
 
@@ -207,7 +205,6 @@ fzf-cd() {
 
 zle -N fzf-nvim-widget
 zle -N fzf-cd
-
 
 # Edit current command line in $EDITOR
 autoload edit-command-line
@@ -273,7 +270,7 @@ local PATH_EXTEND=(
 	"$HOME/node_modules/.bin/"
 	"$SDL2_INCLUDE_DIRS"
 	"/bin"
-	"/opt/ros/humble/bin"
+	"/opt/ros/jazzy/bin"
 	"/sbin"
 	"/snap/bin"
 	"/usr/bin"
@@ -318,7 +315,6 @@ fi
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
 
 # export TERM="xterm-256color"
-
 
 #########################
 # 	Helper functions 	#
