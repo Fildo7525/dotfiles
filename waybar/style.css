@@ -264,11 +264,13 @@ widget > label {
 }
 
 #battery.discharging.warning {
-	color: @yellow;
+	background-color: @yellow;
+	color: @crust;
 }
 
 #battery.discharging.critical {
-	color: @red;
+	background-color: @red;
+	color: @crust;
 }
 
 #custom-power {
