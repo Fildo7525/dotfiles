@@ -31,6 +31,9 @@
 	],
 
 	/* ===== Modules Left ===== */
+	"hyprland/workspaces": {
+		"show-special": true,
+	},
 	"group/hardware": {
 		"modules": [
 			"cpu",
