@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+INTERVAL=1
+REPEATS=1
+
+while [[ "${1:-}" == -* ]]; do
+	case "$1" in
+		-i)
+			INTERVAL="$2"
+			shift 2
+			;;
+		-r)
+			REPEATS="$2"
+			shift 2
+			;;
+		--)
+			shift
+			break
+			;;
+		*)
+			echo "Unknown option: $1" >&2
+			exit 1
+			;;
+	esac
+done
+
+if [[ $# -eq 0 ]]; then
+	CMD="hyprctl getoption general:layout | grep \"str\" | awk '{print \$2}'"
+else
+	CMD=("$@")
+fi
+
+
+echo "Watching command: \"${CMD[*]}\"  (every ${INTERVAL} with $REPEATS repeats). Press Ctrl+C to stop." >&2
+
+last_output=""
+count_repeats=0
+
+
+while true; do
+	output="$(bash -c "${CMD[@]}" 2>&1)"
+
+	if [[ "$output" != "$last_output" ]]; then
+		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
+		count_repeats=0
+
+	elif [[ $count_repeats -le $REPEATS ]]; then
+		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
+		count_repeats=$((count_repeats + 1))
+
+	else
+		printf '{"text":"","alt":"","class":"layout"}\n'
+
+	fi
+
+	last_output="$output"
+	sleep "$INTERVAL"
+done

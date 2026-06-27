@@ -11,6 +11,7 @@
 	// Choose the order of the modules
 	"modules-left": [
 		"hyprland/workspaces",
+		"custom/layout",
 		"group/hardware",
 		"hyprland/submap",
 	],
@@ -33,6 +34,11 @@
 	/* ===== Modules Left ===== */
 	"hyprland/workspaces": {
 		"show-special": true,
+	},
+	"custom/layout": {
+		"hide-empty-text": true,
+		"exec": "~/.config/waybar/scripts/layout -i 1",
+		"return-type": "json",
 	},
 	"group/hardware": {
 		"modules": [
