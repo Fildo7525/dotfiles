@@ -86,6 +86,10 @@ widget > label {
 	background-color: @red;
 }
 
+#workspaces button.special {
+	background-color: @maroon;
+}
+
 /* =========================
 	 Left modules
 	 ========================= */
@@ -143,11 +147,38 @@ widget > label {
 	 ========================= */
 
 #bluetooth {
+	color: @text;
+}
+
+#bluetooth.off {
 	color: @red;
 }
 
-#bluetooth.disconnected {
-	color: @surface2;
+#bluetooth.discoverable {
+	color: @yellow;
+}
+
+#bluetooth.discovering {
+	animation: discovering-pulse 1s ease-in-out infinite alternate;
+}
+
+#bluetooth.pairable {
+	color: @green;
+}
+
+#bluetooth.connected {
+	color: @green;
+}
+
+@keyframes discovering-pulse {
+	0% {
+		background-color: @text;
+		color: @crust
+	}
+	100% {
+		background-color: @maroon;
+		color: @crust
+	}
 }
 
 /* =========================
