@@ -22,5 +22,3 @@ case $LAYOUT in
 		echo "$LAYOUT"
 		;;
 esac
-
-pkill -RTMIN+2 waybar

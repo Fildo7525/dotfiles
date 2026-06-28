@@ -66,17 +66,21 @@ get_active_workspace() {
 
 case "$input" in
 	"exec")
-		printf '{"text":"%s","alt":"%s","class":"%s"}\n' "$profile" "$profile" "$profile"
+		printf '{"text":"%s","alt":"%s","text":"%s","class":"%s"}\n' "$profile" "$profile" "$profile" "$profile"
 		;;
 
 	"next")
 		profile=$(get_pp_state 1)
 		powerprofilesctl set "$profile"
+
+		pkill -RTMIN+3 waybar
 		;;
 
 	"previous")
 		profile=$(get_pp_state -1)
 		powerprofilesctl set "$profile"
+
+		pkill -RTMIN+3 waybar
 		;;
 
 	"menu")
@@ -98,10 +102,11 @@ case "$input" in
 		if [[ -n "$choice" ]]; then
 			powerprofilesctl set "${reverse_profile_options[$choice]}"
 		fi
+
+		pkill -RTMIN+3 waybar
 		;;
 	*)
 		echo "Unknown command: $input"
 		;;
 esac
 
-pkill -RTMIN+1 waybar

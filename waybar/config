@@ -226,12 +226,14 @@
 			"balanced": "",
 			"power-saver": "",
 		},
+		"tooltip": true,
+		"tooltip-format": "{}",
 		"exec": "~/.config/waybar/scripts/powerprofile",
 		"on-click": "~/.config/waybar/scripts/powerprofile menu",
 		"on-scroll-up": "~/.config/waybar/scripts/powerprofile previous",
 		"on-scroll-down": "~/.config/waybar/scripts/powerprofile next",
 		"return-type": "json",
-		"interval": 1,
+		"signal": 3,
 	},
 	"custom/power": {
 		"format" : "⏻",
@@ -254,7 +256,9 @@
 		"exec": "~/.config/waybar/scripts/conservation",
 		"on-click": "~/.config/waybar/scripts/conservation toggle",
 		"return-type": "json",
-		"interval": 1,
+		"tooltip": true,
+		"tooltip-format": "{}",
+		"signal": 2,
 	},
 	"battery": {
 		"states": {
@@ -267,13 +271,13 @@
 		"format-plugged": "{capacity}% ",
 		"tooltip-format": "{timeTo}",
 		"format-icons": ["", "", "", "", ""],
-		"interval": 30,
+		"interval": 1,
 	},
 	"custom/language": {
 		"format": "{} ",
 		"exec": "~/.config/waybar/scripts/language",
 		"tooltip": false,
-		"interval": 1,
+		"signal": 4,
 	},
 	"custom/clipboard": {
 		"format": "{}",
