@@ -156,6 +156,10 @@ widget > label {
 	color: @text;
 }
 
+#bluetooth.on {
+	color: @text;
+}
+
 #bluetooth.off {
 	color: @red;
 }
@@ -169,7 +173,7 @@ widget > label {
 }
 
 #bluetooth.pairable {
-	color: @green;
+	color: @teal;
 }
 
 #bluetooth.connected {
@@ -244,7 +248,7 @@ widget > label {
 }
 
 #custom-powerprofile.power-saver {
-	color: @green;
+	color: @blue;
 }
 
 #custom-conservation {
