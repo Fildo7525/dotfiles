@@ -42,17 +42,16 @@ count_repeats=0
 while true; do
 	output="$(bash -c "${CMD[@]}" 2>&1)"
 
-	if [[ "$output" != "$last_output" ]]; then
-		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
-		count_repeats=0
+	if [[ "$output" == "$last_output" ]]; then
+		printf '{"text":"","alt":"","class":"layout"}\n'
 
 	elif [[ $count_repeats -le $REPEATS ]]; then
 		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
 		count_repeats=$((count_repeats + 1))
 
 	else
-		printf '{"text":"","alt":"","class":"layout"}\n'
-
+		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
+		count_repeats=0
 	fi
 
 	last_output="$output"
