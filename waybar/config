@@ -140,7 +140,7 @@
 		"interval": 2,
 		"tooltip": true,
 		"tooltip-format": "{ifname}\n{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
-		"on-click-middle": "SHELL=/usr/bin/bash; nmcli device wifi rescan; foot -a nmtui nmtui",
+		"on-click-middle": "SHELL=/usr/bin/bash; iwctl station wlan0 scan; kitty impala",
 		"on-click-right": "~/.config/waybar/scripts/wifi toggle",
 	},
 	"bluetooth": {

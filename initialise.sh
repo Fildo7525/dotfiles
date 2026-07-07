@@ -23,6 +23,7 @@ sudo pacman -Sy --noconfirm \
 	hypridle \
 	hyprlock \
 	hyprpaper \
+	impala \
 	jq \
 	lazygit \
 	ncdu \
