@@ -268,11 +268,13 @@ widget > label {
 }
 
 #battery.discharging.warning {
+	border-radius:	8px 8px 8px 8px;
 	background-color: @yellow;
 	color: @crust;
 }
 
 #battery.discharging.critical {
+	border-radius:	8px 8px 8px 8px;
 	background-color: @red;
 	color: @crust;
 }
