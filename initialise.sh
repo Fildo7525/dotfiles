@@ -12,6 +12,7 @@ sudo pacman -Syu
 sudo pacman -R dunst
 sudo pacman -Sy --noconfirm \
 	base-devel \
+	blueman \
 	btop \
 	cliphist \
 	cmake \
@@ -28,6 +29,7 @@ sudo pacman -Sy --noconfirm \
 	lazygit \
 	ncdu \
 	npm \
+	pavucontrol \
 	ripgrep \
 	rust \
 	swaync \
