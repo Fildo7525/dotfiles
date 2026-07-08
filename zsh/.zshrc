@@ -231,7 +231,7 @@ local PATH_EXTEND=(
 	"$HOME/.surrealdb"
 	"$HOME/Applications"
 	"$HOME/Documents/bluetui/target/release"
-	"$HOME/Documents/sourcing/Project-Builder/build"
+	"$HOME/Desktop/Cpp/Project-Builder/build"
 	"$HOME/Documents/sourcing/bin"
 	"$HOME/Documents/sourcing/lazygit"
 	"$HOME/develop/flutter/bin"
