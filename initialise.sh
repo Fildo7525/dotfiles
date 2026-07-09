@@ -30,6 +30,7 @@ sudo pacman -Sy --noconfirm \
 	ncdu \
 	npm \
 	pavucontrol \
+	qalculate-gtk \
 	ripgrep \
 	rust \
 	swaync \
