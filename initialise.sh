@@ -13,6 +13,7 @@ sudo pacman -R dunst
 sudo pacman -Sy --noconfirm \
 	base-devel \
 	blueman \
+	brightnessctl \
 	btop \
 	cliphist \
 	cmake \
