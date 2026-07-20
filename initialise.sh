@@ -22,6 +22,7 @@ sudo pacman -Sy --noconfirm \
 	fd \
 	fzf \
 	git \
+	gnome-calendar \
 	hypridle \
 	hyprlock \
 	hyprpaper \
