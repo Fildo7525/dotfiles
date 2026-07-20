@@ -42,6 +42,10 @@ sudo pacman -Sy --noconfirm \
 	zathura-pdf-mupdf \
 	zsh
 
+# The original locale is set to en_US.UTF-8 this adds a new locale for en_GB so that the calendar
+# can start with monday.
+sudo sh -c "echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen"
+sudo locale-gen
 
 # Change the default Farnhite temperature setting to Celsius.
 gsettings set org.gnome.GWeather4 temperature-unit centigrade
