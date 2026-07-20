@@ -28,6 +28,7 @@ sudo pacman -Sy --noconfirm \
 	hyprpaper \
 	impala \
 	jq \
+	kdeconnect \
 	lazygit \
 	ncdu \
 	npm \
