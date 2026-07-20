@@ -186,3 +186,21 @@ hl.bind(mainMod('G'), hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=GNOME gnome-control-c
 
 -- Gnome apps
 hl.bind(mainMod('B'), hl.dsp.exec_cmd("blueman-manager"))
+
+-- Switch to a submap called `resize`.
+hl.bind(mainMod('R'), hl.dsp.submap("resize"))
+hl.define_submap("resize", function()
+
+	-- Set repeating binds for resizing the active window.
+	hl.bind("right", hl.dsp.window.resize({ x = 20, y = 0, relative = true}), { repeating = true })
+	hl.bind("left", hl.dsp.window.resize({ x = -20, y = 0, relative = true}), { repeating = true })
+	hl.bind("up", hl.dsp.window.resize({ x = 0, y = 20, relative = true}), { repeating = true })
+	hl.bind("down", hl.dsp.window.resize({ x = 0, y = -20, relative = true}), { repeating = true })
+
+	-- Use `reset` to go back to the global submap
+	hl.bind("escape", hl.dsp.submap("reset"))
+	hl.bind(mainMod('R'), hl.dsp.submap("reset"))
+
+end)
+
+-- Keybinds further down will be global again...
