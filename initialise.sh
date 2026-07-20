@@ -20,6 +20,7 @@ sudo pacman -Sy --noconfirm \
 	doxygen \
 	exa \
 	fd \
+	flameshot \
 	fzf \
 	git \
 	gnome-calendar \
