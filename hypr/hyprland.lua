@@ -39,6 +39,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("~/.config/hypr/scripts/batter_notifier")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store") -- Stores only text data
 	hl.exec_cmd("wl-paste --type image --watch cliphist store") -- Stores only image data
+
+	hl.exec_cmd("kdeconnectd")
+	hl.exec_cmd("kdeconnect-indicator")
 end)
 
 -- #############################
