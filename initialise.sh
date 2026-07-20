@@ -42,6 +42,10 @@ sudo pacman -Sy --noconfirm \
 	zathura-pdf-mupdf \
 	zsh
 
+
+# Change the default Farnhite temperature setting to Celsius.
+gsettings set org.gnome.GWeather4 temperature-unit centigrade
+
 cargo install bob-nvim
 bob use nightly
 
