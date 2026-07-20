@@ -50,10 +50,10 @@ hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("hyprctl switchxkblayout current n
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+4 waybar"))
 
 -- Take a screenshot of the entire screen
-hl.bind(altMod("S"), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot full"))
+hl.bind(altMod("S"), hl.dsp.exec_cmd("flameshot full"))
 
 -- Take a screenshot of a selected region
-hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot region"))
+hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("flameshot gui"))
 
 -- Open Sway Notification Client
 hl.bind(mainMod({"SHIFT", "N"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
