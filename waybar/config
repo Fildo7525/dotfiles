@@ -53,20 +53,20 @@
 	"cpu": {
 		"format": "{usage}% ",
 		"tooltip": true,
-		"on-click-middle": "SHELL=/usr/bin/bash foot -a btop btop",
+		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"memory": {
 		"format": "{}% ",
 		"tooltip": true,
 		"tooltip-format": "Percentage: {percentage}%\nUsed: {used} GiB\nAvailable: {avail} GiB\nTotal: {total} GiB\n\nSwap Percentage: {swapPercentage}%\nSwap Used: {swapUsed} GiB\nSwap Available: {swapAvail} GiB\nSwap Total: {swapTotal} GiB",
-		"on-click-middle": "SHELL=/usr/bin/bash foot -a btop btop",
+		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 	"custom/disk": {
 		"exec": "~/.config/waybar/scripts/disk",
 		"tooltip": true,
 		"return-type": "json",
 		"interval": 3600,
-		"on-click-middle": "SHELL=/usr/bin/bash foot -a btop btop",
+		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop",
 	},
 
 	/* ===== Modules Center ===== */
@@ -76,7 +76,7 @@
 		"return-type": "json",
 		"max-length": 20,
 		"on-click": "playerctl -p spotify play-pause",
-		"on-click-right": "killall spotify",
+		"on-click-middle": "killall spotify",
 		"smooth-scrolling-threshold": 10,
 		"on-scroll-up" : "playerctl -p spotify next",
 		"on-scroll-down" : "playerctl -p spotify previous",
@@ -88,7 +88,7 @@
 		"locale": "en_GB.UTF-8",
 		"format": "<big>{:%H:%M}</big>",
 		"format-alt": "<big>{:%H:%M	%d.%m.%Y}</big>",
-		"on-click-middle": "gnome-calendar",
+		"on-click-right": "gnome-calendar",
 		"calendar": {
 			"mode": "month",
 			"mode-mon-col": 3,
@@ -141,8 +141,8 @@
 		"interval": 2,
 		"tooltip": true,
 		"tooltip-format": "{ifname}\n{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
-		"on-click-middle": "SHELL=/usr/bin/bash; iwctl station wlan0 scan; kitty impala",
-		"on-click-right": "~/.config/waybar/scripts/wifi toggle",
+		"on-click-right": "SHELL=/usr/bin/bash; iwctl station wlan0 scan; kitty nmtui",
+		"on-click-middle": "~/.config/waybar/scripts/wifi toggle",
 	},
 	"bluetooth": {
 		"format": "{icon}",
@@ -152,8 +152,8 @@
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
 		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-		"on-click-right": "~/.config/waybar/scripts/bluetooth toggle",
-		"on-click-middle": "blueman-manager",
+		"on-click-middle": "~/.config/waybar/scripts/bluetooth toggle",
+		"on-click-right": "blueman-manager",
 		"format-icons": {
 			"disabled": " 󰂲",
 			"off": "󰂲",
@@ -178,8 +178,8 @@
 		"format-source-bluetooth": "{volume}  ",
 		"format-source-bluetooth-muted": "󰍭 ",
 		"format": "{format_source}",
-		"on-click-middle": "pavucontrol",
-		"on-click-right": "~/.config/waybar/scripts/volume source toggle",
+		"on-click-right": "pavucontrol",
+		"on-click-middle": "~/.config/waybar/scripts/volume source toggle",
 		"on-scroll-up": "~/.config/waybar/scripts/volume source up",
 		"on-scroll-down": "~/.config/waybar/scripts/volume source down",
 		"tooltip": false,
@@ -199,8 +199,8 @@
 				"",
 			]
 		},
-		"on-click-middle": "pavucontrol",
-		"on-click-right": "~/.config/waybar/scripts/volume sink toggle",
+		"on-click-right": "pavucontrol",
+		"on-click-middle": "~/.config/waybar/scripts/volume sink toggle",
 		"on-scroll-up": "~/.config/waybar/scripts/volume sink up",
 		"on-scroll-down": "~/.config/waybar/scripts/volume sink down",
 		"tooltip": false
