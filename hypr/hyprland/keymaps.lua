@@ -163,7 +163,7 @@ hl.bind("XF86Calculator", hl.dsp.exec_cmd("qalculate-gtk"), { repeating = true }
 
 hl.on("window.open", function(w)
 	if w ~= nil and w.title == "Qalculate!" then
-		hl.dispatch(hl.dsp.window.float({ action = "set" }))
+		hl.dispatch(hl.dsp.window.float({ last = true }))
 		hl.dispatch(hl.dsp.window.center({ window = w }))
 		hl.dispatch(hl.dsp.window.resize({ x = 800, y = 600, relative = false, window = w }))
 	end
