@@ -338,9 +338,6 @@ function foxglove() {
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 
-alias frx="MOZ_ENABLE_WAYLAND=1 firefox --new-instance"
-export PATH="$PATH:$HOME/Documents/bluetui/target/release:$HOME/develop/flutter/bin:$HOME/.surrealdb"
-
 # Edit current command line in $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
