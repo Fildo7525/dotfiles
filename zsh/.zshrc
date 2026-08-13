@@ -239,6 +239,7 @@ local PATH_EXTEND=(
 	"$SDL2_INCLUDE_DIRS"
 	"/bin"
 	"/opt/ros/humble/bin"
+	"/opt/cuda/bin"
 	"/sbin"
 	"/snap/bin"
 	"/usr/bin"
@@ -342,5 +343,4 @@ zstyle ':completion:*' menu select
 autoload edit-command-line
 zle -N edit-command-line
 
-export PATH=/opt/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
