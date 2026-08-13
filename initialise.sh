@@ -41,7 +41,6 @@ sudo pacman -Sy --noconfirm \
 	tree-sitter-cli \
 	waybar \
 	zathura \
-	zathura-pdf-mupdf \
 	zsh
 
 # The original locale is set to en_US.UTF-8 this adds a new locale for en_GB so that the calendar
