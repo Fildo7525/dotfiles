@@ -63,8 +63,8 @@ fi
 ########################
 log "Distributing configs"
 if [[ ! -e ~/.zshrc ]]; then
-	ln -s "$(pwd)/zsh/.zshrc" ~/.zshrc
-	ln -s "$(pwd)/zsh/.LESS_TERMCAP" ~/.LESS_TERMCAP
+	ln -sf "$(pwd)/zsh/.zshrc" ~/.zshrc
+	ln -sf "$(pwd)/zsh/.LESS_TERMCAP" ~/.LESS_TERMCAP
 fi
 
 
