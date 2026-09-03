@@ -180,3 +180,9 @@ hl.workspace_rule({
 	on_created_empty = "spotify-launcher",
 	monitor = "eDP-1",
 })
+
+hl.workspace_rule({
+	workspace = "special:magic",
+	gaps_out = 25,
+})
+
