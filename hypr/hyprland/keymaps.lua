@@ -56,7 +56,8 @@ hl.bind(altMod("S"), hl.dsp.exec_cmd("flameshot full"))
 hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("flameshot gui"))
 
 -- Open Sway Notification Client
-hl.bind(mainMod({"SHIFT", "N"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod({"N"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod({"SHIFT", "D"}), hl.dsp.exec_cmd("swaync-client -d"))
 
 -- Enter zenmode with the focused window.
 hl.bind(mainMod("M"), hl.dsp.window.fullscreen({mode = "maximized", action = "toggle"}))
