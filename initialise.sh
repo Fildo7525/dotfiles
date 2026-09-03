@@ -38,6 +38,7 @@ sudo pacman -Sy --noconfirm \
 	ripgrep \
 	rust \
 	swaync \
+	swayosd \
 	tree-sitter-cli \
 	waybar \
 	zathura \
