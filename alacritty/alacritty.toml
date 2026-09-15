@@ -32,7 +32,7 @@ foreground = "#a9b1d6"
 shape = "Block"
 
 [font]
-size = 13.5
+size = 11.5
 
 [font.bold]
 family = "BitstromWera Nerd Font Mono"
@@ -118,7 +118,7 @@ args = ["new-session", "-A", "-D", "-s", " Home"]
 
 [window]
 dynamic_title = true
-opacity = 0.85
+opacity = 0.95
 startup_mode = "Windowed"
 title = "Alacritty"
 decorations = "Full"
