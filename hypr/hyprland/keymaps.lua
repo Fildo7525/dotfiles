@@ -63,7 +63,8 @@ hl.bind(mainMod({"SHIFT", "D"}), hl.dsp.exec_cmd("swaync-client -d"))
 hl.bind(mainMod("M"), hl.dsp.window.fullscreen({mode = "maximized", action = "toggle"}))
 
 -- Open rofi in custom mode.
-hl.bind(mainMod("TAB"), hl.dsp.exec_cmd(switch_win))
+-- hl.bind(mainMod("TAB"), hl.dsp.exec_cmd(switch_win))
+hl.bind(mainMod("TAB"), require("hyprland.layout").overview)
 hl.bind(mainMod("F"), hl.dsp.exec_cmd(file_menu))
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
