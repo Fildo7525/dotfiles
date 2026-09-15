@@ -50,10 +50,10 @@ hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("hyprctl switchxkblayout current n
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+4 waybar"))
 
 -- Take a screenshot of the entire screen
-hl.bind(altMod("S"), hl.dsp.exec_cmd("flameshot full"))
+hl.bind(altMod("S"), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot full"))
 
 -- Take a screenshot of a selected region
-hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("flameshot gui"))
+hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot region"))
 
 -- Open Sway Notification Client
 hl.bind(mainMod({"N"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
@@ -71,7 +71,8 @@ hl.bind(mainMod("F"), hl.dsp.exec_cmd(file_menu))
 hl.bind(mainMod({"SHIFT", "C"}), hl.dsp.exec_cmd("~/.config/hypr/scripts/reload"))
 hl.bind(mainMod({"SHIFT", "F"}), hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod({"SHIFT", "Q"}), hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
-hl.bind(mainMod("D"), hl.dsp.exec_cmd(menu))
+
+hl.bind(mainMod("Space"), hl.dsp.exec_cmd(menu))
 hl.bind(mainMod("E"), hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod("P"), hl.dsp.window.pseudo()) -- dwindle
 hl.bind(mainMod("Q"), hl.dsp.window.kill())
@@ -145,6 +146,9 @@ hl.bind(mainMod({"SHIFT", "0"}), hl.dsp.window.move({ workspace = "10"}))
 hl.bind(mainMod("S"), hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod({"SHIFT", "S"}), hl.dsp.window.move({ workspace = "special:magic" }))
 
+hl.bind(mainMod("o"), hl.dsp.workspace.toggle_special("overview"))
+
+
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod("mouse_down") , hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod("next"), hl.dsp.focus({ workspace = "e+1" }))
@@ -180,7 +184,8 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
 -- In your hyprland.conf
-hl.bind(mainMod("Space"), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout"))
+hl.bind(mainMod({"SHIFT", "bracketright"}), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout next"))
+hl.bind(mainMod({"SHIFT", "bracketleft"}), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout prev"))
 
 -- Gnome apps
 hl.bind(mainMod('G'), hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=GNOME gnome-control-center"))
@@ -203,5 +208,15 @@ hl.define_submap("resize", function()
 	hl.bind(mainMod('R'), hl.dsp.submap("reset"))
 
 end)
+
+local function clear_notifications()
+	local notifications = hl.notification.get()
+
+	for _, notif in ipairs(notifications) do
+		notif:dismiss()
+	end
+end
+
+hl.bind(mainMod({"SHIFT", "backslash"}), function() clear_notifications() end)
 
 -- Keybinds further down will be global again...
