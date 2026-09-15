@@ -1,21 +1,55 @@
 #!/usr/bin/env bash
 
-layout=$(hyprctl getoption general:layout | grep "str" | awk '{print $2}')
-new_layout=""
-case "$layout" in
-	dwindle)
-		new_layout="master"
+help() {
+	"switchlayout next|prev"
+}
+
+reverse_assoc() {
+	local -n src="$1"
+	local -n dst="$2"
+
+	for key in "${!src[@]}"; do
+		dst["${src[$key]}"]="$key"
+	done
+}
+
+motion=1
+case $1 in
+	next)
+		motion=1
 		;;
-	master)
-		new_layout="monocle"
-		;;
-	monocle)
-		new_layout="dwindle"
+	prev)
+		motion=-1
 		;;
 	*)
-		new_layout="dwindle"
+		help 1>&2
+		exit 1
 		;;
 esac
 
 
+layout=$(hyprctl getoption general:layout | grep "str" | awk '{print $2}')
+declare -A layouts
+layouts["dwindle"]=0
+layouts["master"]=1
+layouts["monocle"]=2
+layouts["lua:grid"]=3
+
+declare -A layouts_reversed
+reverse_assoc layouts layouts_reversed
+
+if [[ ! -n ${layouts[$layout]:-} ]]; then
+	hyprctl eval "hl.config({ general = { layout = \"dwindle\"}})"
+	exit 0
+fi
+
+l_num=${layouts["$layout"]:-}
+l_num=$(((l_num + motion + 4) % 4))
+
+# notify-send "L_NUM" "$l_num"
+
+new_layout=${layouts_reversed[$l_num]}
+
+# notify-send "new_layout" "$new_layout"
 hyprctl eval "hl.config({ general = { layout = \"$new_layout\"}})"
+
