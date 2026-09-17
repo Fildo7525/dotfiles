@@ -187,9 +187,4 @@ hl.workspace_rule({
 	gaps_out = 25,
 })
 
-hl.workspace_rule({
-	workspace = "special:overview",
-	gaps_out = 25,
-})
-
 require("hyprland.layout")

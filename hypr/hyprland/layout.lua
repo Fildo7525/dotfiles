@@ -1,4 +1,10 @@
-function serialize_table(t, name)
+
+hl.workspace_rule({
+	workspace = "special:overview",
+	gaps_out = 25,
+})
+
+local function serialize_table(t, name)
 	if type(t) ~= "table" then return tostring(t) end
 
 	local res = {}
