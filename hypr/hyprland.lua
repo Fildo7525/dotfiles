@@ -37,7 +37,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("swayosd-server")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("~/.config/hypr/scripts/batter_notifier")
+	hl.exec_cmd("~/.config/hypr/scripts/battery_notifier")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store") -- Stores only text data
 	hl.exec_cmd("wl-paste --type image --watch cliphist store") -- Stores only image data
 	hl.exec_cmd("[[ -x steam ]] || steam -silent -vgui ")
