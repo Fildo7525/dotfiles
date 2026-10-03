@@ -357,6 +357,8 @@ if [[ ! -z "$KITTY" ]]; then
 		fi
 
 		sockdir="${XDG_CACHE_HOME:-$HOME/.cache}/nvim/servers"
+		theme_file="${XDG_CACHE_HOME:-$HOME/.cache}/nvim/theme"
+		echo "$scheme" > $theme_file
 
 		sent=0
 
