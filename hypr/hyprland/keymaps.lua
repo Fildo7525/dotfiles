@@ -49,6 +49,8 @@ hl.bind(mainMod("period"), hl.dsp.exec_cmd("~/.config/waybar/scripts/clipboard c
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("hyprctl switchxkblayout current next"))
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+4 waybar"))
 
+hl.bind(mainMod("F11"), hl.dsp.exec_cmd("pkill -SIGUSR1 waybar"))
+
 -- Take a screenshot of the entire screen
 hl.bind(altMod("S"), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot full"))
 
