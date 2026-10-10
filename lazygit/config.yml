@@ -76,7 +76,7 @@ gui:
     optionsTextColor:
       - blue
     selectedLineBgColor:
-      - blue
+      - '#180f96'
     markedBaseCommitFgColor:
       - blue
     markedBaseCommitBgColor:
