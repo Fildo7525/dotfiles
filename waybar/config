@@ -251,8 +251,8 @@
 	"custom/conservation": {
 		"format": "{icon}",
 		"format-icons": {
-			"conserv_on": "󰂄",
-			"conserv_off": "",
+			"conserv_on": "",
+			"conserv_off": "󰝨",
 		},
 		"exec": "~/.config/waybar/scripts/conservation",
 		"on-click": "~/.config/waybar/scripts/conservation toggle",
