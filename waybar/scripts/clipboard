@@ -20,7 +20,7 @@ case "$COMMAND" in
 			| rofi \
 				-dmenu \
 				-p "Clipboard:" \
-				-theme $XDG_CONFIG_HOME/rofi/alt/clipboard.rasi \
+				-theme ${XDG_CONFIG_HOME:-$HOME/.config}/rofi/alt/clipboard.rasi \
 				-monitor $(hyprctl activeworkspace -j | jq '.id')
 			)
 
