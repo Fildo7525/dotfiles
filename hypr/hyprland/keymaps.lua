@@ -160,7 +160,9 @@ hl.bind(mainMod("prior"), hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod("mouse:272"), hl.dsp.window.drag(), { mouse = true })
+hl.bind("mouse:276", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod("mouse:273"), hl.dsp.window.resize(), { mouse = true })
+hl.bind("mouse:275", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise --max-volume 153"), { repeating = true })
