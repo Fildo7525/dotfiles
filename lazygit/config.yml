@@ -83,6 +83,10 @@ gui:
       - yellow
     unstagedChangesColor:
       - red
+    authorColors:
+      'Filip Lobpreis': '#0093ff'
+      # use blue for other authors
+      '*': '#ff0000'
   timeFormat: '02 Jan 06 15:04 MST' # https://pkg.go.dev/time#Time.Format
   screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
 keybinding:
