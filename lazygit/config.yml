@@ -27,9 +27,10 @@ git:
     # only applicable to unix users
     manualCommit: false
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
-  pagers:
+  diffRenderers:
     - colorArg: always
       useConfig: false
+      type: rawGit
   parseEmoji: false
   skipHookPrefix: WIP
   allBranchesLogCmds:
