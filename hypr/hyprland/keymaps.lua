@@ -58,7 +58,7 @@ hl.bind(altMod("S"), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot full"))
 hl.bind(altMod({"SHIFT", "S"}), hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot region"))
 
 -- Open Sway Notification Client
-hl.bind(mainMod({"N"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod({"i"}), hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod({"SHIFT", "D"}), hl.dsp.exec_cmd("swaync-client -d"))
 
 -- Enter zenmode with the focused window.
