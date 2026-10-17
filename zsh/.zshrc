@@ -115,8 +115,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #	Aliases 	 #
 ##################
 alias cpp="cd ~/Desktop/Cpp/"
-alias cvm_off="echo 0 | sudo tee -a /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-alias cvm_on="echo 1 | sudo tee -a /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+alias cvm_off="$HOME/Documents/dotfiles/conservation_switcher 0"
+alias cvm_on="$HOME/Documents/dotfiles/conservation_switcher 1"
 alias get_idf='. $HOME/Documents/STU/LS/TP/esp-idf/export.sh'
 alias gf="git fetch -pt --all"
 alias gk="gitk --all &"
@@ -301,15 +301,8 @@ fi
 [[ -f /opt/ros/jazzy/setup.zsh ]] && source /opt/ros/jazzy/setup.zsh
 
 # Load bash completion functions
-fpath+=~/.zfunc
-_argcomplete_cache="$HOME/.cache/zsh-argcomplete-ros2-colcon.zsh"
-if [[ ! -f "$_argcomplete_cache" || "$_argcomplete_cache" -ot "$(which ros2)" ]]; then
-	{
-		register-python-argcomplete ros2
-		register-python-argcomplete colcon
-	} > "$_argcomplete_cache" 2>/dev/null
-fi
-[[ -f "$_argcomplete_cache" ]] && source "$_argcomplete_cache"
+eval "$(register-python-argcomplete ros2)"
+eval "$(register-python-argcomplete colcon)"
 
 # To enable screenshot sound run this command
 # cd /usr/share/sounds/freedesktop/stereo && sudo mv screensho-sound.oga camera-shutter.oga
@@ -331,7 +324,7 @@ function y() {
 }
 
 # Foxglove
-FOXGLOVE_DIRS="$HOME/work/Muslingevagt/ros2_ws:$HOME/work/Muslingevagt/boat_sim_vrx/vrx:$HOME/SDU/EiT/EiRT-AscenD-Robotics/ros2_ws"
+FOXGLOVE_DIRS="$HOME/ess/ws"
 function foxglove() {
 	# Kill any existing foxglove processes
 	kill -9 $(ps aux | grep foxglove | awk '{print $2}') 2> /dev/null
