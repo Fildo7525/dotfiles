@@ -1,85 +1,105 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# We do not want to start at a specific number. Start at the current number.
-LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
-
-# Critical values to be used.
-declare -A NOTIFY_LEVELS
-
-INVISIBE_CURSOR="\033[?25l"
-WARN="\033[38;5;208m"
-FATAL="\033[38;5;196m"
-NORMAL="\033[0m"
-
-LEVELS=(5 10 15 30)
-for lvl in ${LEVELS[@]}
-do
-	if (( $lvl < 30 )); then
-		NOTIFY_LEVELS[$lvl]=$FATAL
-	else
-		NOTIFY_LEVELS[$lvl]=$WARN
-	fi
-done
-
-pid=-1
-watching=0
-
-# Check the state every X seconds.
+BAT=/sys/class/power_supply/BAT1
+AC=/sys/class/power_supply/ACAD
+LEVELS=(30 15 10 5)		  # keep in descending order
 SLEEP_TIME_S=59
+SELF=$(readlink -f "$0")
 
-setup_watch() {
-	udevadm monitor --udev --subsystem-match=power_supply |
-	while read -r _ _ event _; do
-		[[ $event == change ]] || continue
-		if [[ $(cat /sys/class/power_supply/ACAD/online) == 1 ]]; then
-			# CHARGING
-			watching=0
-			if (( $pid != -1 )); then
-				kill -9 $pid 2> /dev/null
-			fi
-		else
-			# DISCHARGING
-			watching=1
-		fi
+# ---------- popup renderer (runs inside kitty) ----------
+render_popup() {
+	local cap=$1 rgb title
+	if   (( cap <= 10 )); then rgb="243;139;168"; title="BATTERY CRITICAL"
+	elif (( cap <= 20 )); then rgb="250;179;135"; title="BATTERY LOW"
+	else					   rgb="249;226;175"; title="BATTERY LOW"
+	fi
+
+	local rows cols
+	rows=$(tput lines); cols=$(tput cols)
+
+	local width=24 filled=$(( cap * 24 / 100 ))
+	(( filled < 1 )) && filled=1
+	local bar="" i
+	for (( i = 0; i < width; i++ )); do
+		(( i < filled )) && bar+="█" || bar+="░"
 	done
+
+	local fg=$'\e[38;2;'"$rgb"'m' dim=$'\e[38;2;108;112;134m'
+	local bold=$'\e[1m' reset=$'\e[0m'
+
+	center() {   # center <visible-length> <text>
+		printf '%*s%s\n' $(( (cols - $1) / 2 )) '' "$2"
+	}
+
+	printf '\e[?25l\e[2J\e[H'					   # hide cursor, clear
+	printf '\n%.0s' $(seq 1 $(( (rows - 7) / 2 )))  # vertical centering
+
+	center ${#title} "${fg}${bold}${title}${reset}"
+	echo
+	center $(( ${#cap} + 1 )) "${fg}${bold}${cap}%${reset}"
+	echo
+	center "$width" "${fg}${bar}${reset}"
+	echo
+	center 24 "${dim}press any key to dismiss${reset}"
+
+	read -rsn1
 }
 
-setup_watch &
+if [[ $1 == --popup ]]; then
+	render_popup "$2"
+	exit
+fi
 
-while true; do
-	bat_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
-	bat_status=$(cat /sys/class/power_supply/BAT1/status)
+# ---------- main script ----------
+pid=""
+last_level=999
 
-	if [[ "$watching" == "0" ]]; then
-		sleep $SLEEP_TIME_S
-		LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
-		continue
+close_popup() {
+	[[ -n $pid ]] && kill "$pid" 2>/dev/null
+	pid=""
+}
+trap close_popup EXIT
+
+show_popup() {
+	local cap=$1
+	close_popup
+	notify-send -u critical "Low Battery" "$cap% battery remaining."
+	kitty --class battery-popup \
+		  --title "Battery-Notifier" \
+		  -o font_size=22 \
+		  -o background=#1e1e2e \
+		  -o background_opacity=0.95 \
+		  -o hide_window_decorations=yes \
+		  -o confirm_os_window_close=0 \
+		  -o cursor_blink_interval=0 \
+		  "$SELF" --popup "$cap" &
+	pid=$!
+}
+
+check() {
+	if [[ $(<"$AC/online") == 1 ]]; then
+		close_popup
+		last_level=999
+		return
 	fi
 
-	for notify_capacity in ${LEVELS[@]}; do
-		if (( $bat_capacity <= $notify_capacity )); then
-			notify-send -u critical "Low Battery" "$bat_capacity% battery remaining."
-			if (( $pid != -1 )); then
-				kill -9 $pid 2> /dev/null
-			fi
-
-			kitty \
-				--name "Battery notification" \
-				--title "Battery-Notifier" \
-				--override font_size=120 \
-				--hold sh -c \
-					"echo -e \"$INVISIBE_CURSOR ${NOTIFY_LEVELS[$notify_capacity]} $(cat /sys/class/power_supply/BAT1/capacity)% $NORMAL\"; read; kitten @ close-window" &
-
-			sleep 1
-
-			pid=$(hyprctl clients -j | jq -r ".[] | select(.title == \"Battery-Notifier\") | .pid")
-
-			LAST_CAPACITY=$bat_capacity
-
-			break
-		fi
+	local cap hit="" lvl
+	cap=$(<"$BAT/capacity")
+	for lvl in "${LEVELS[@]}"; do
+		(( cap <= lvl )) && hit=$lvl
 	done
 
-	sleep $SLEEP_TIME_S
+	if [[ -n $hit ]] && (( hit < last_level )); then
+		last_level=$hit
+		show_popup "$cap"
+	fi
+}
+
+exec 3< <(udevadm monitor --udev --subsystem-match=power_supply)
+
+while true; do
+	check
+	# if the return status is higher than 128 it was terminated by a signal
+	read -t "$SLEEP_TIME_S" -r _ <&3 || (( $? > 128 )) || sleep "$SLEEP_TIME_S"
 done
 

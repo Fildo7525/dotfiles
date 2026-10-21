@@ -25,14 +25,16 @@ hl.window_rule({
 	no_focus = true
 })
 
-hl.window_rule(({
-	name = "battery-notification-float",
-	match = {
-		title = "Battery-Notifier",
-	},
-	center = true,
+hl.window_rule({
+	name = "battery-popup",
+	match = { class = "^(battery-popup)$" },
+
 	float = true,
-}))
+	center = true,
+	size = "520 320",
+	border_size = 2,
+	pin = true,
+})
 
 -- Hyprland-run windowrule
 hl.window_rule({
