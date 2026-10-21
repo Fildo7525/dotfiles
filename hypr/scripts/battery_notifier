@@ -4,10 +4,11 @@
 LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
 
 # Critical values to be used.
-NOTIFY_LEVELS=(5 10 15 30)
+NOTIFY_LEVELS=(5 10 15 50)
+pid=-1
 
 # Check the state every X seconds.
-SLEEP_TIME_S=60
+SLEEP_TIME_S=9
 
 while true; do
 	bat_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
@@ -20,8 +21,22 @@ while true; do
 	fi
 
 	for notify_capacity in ${NOTIFY_LEVELS[@]}; do
-		if (( $bat_capacity < $notify_capacity && $notify_capacity < $LAST_CAPACITY )); then
+		if (( $bat_capacity < $notify_capacity )); then
 			notify-send -u critical "Low Battery" "$bat_capacity% battery remaining."
+			if (( $pid != -1 )); then
+				kill -9 $pid 2> /dev/null
+			fi
+
+			kitty \
+				--name "Battery notification" \
+				--title "Battery-Notifier" \
+				--hold sh -c \
+					"cat /sys/class/power_supply/BAT1/capacity; read; kitten @ close-window" &
+
+			sleep 1
+
+			pid=$(hyprctl clients -j | jq -r ".[] | select(.title == \"Battery-Notifier\") | .pid")
+
 			LAST_CAPACITY=$bat_capacity
 		fi
 	done
