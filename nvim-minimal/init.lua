@@ -86,6 +86,9 @@ keymap("n", "<leader>bw", ":w <bar> :Bdelete! %d <CR>", opts) -- buffer writing
 keymap("n", "<leader>bd", ":bd<CR>", opts) -- buffer delete force
 keymap("n", "<leader>bD", ":Bdelete!<CR>", opts) -- buffer delete force
 
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -98,6 +101,9 @@ keymap("i", "jk", "<ESC>", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+-- Allow multicursor yank
+vim.cmd("let @+=@\"")
 
 -- Visual Block --
 keymap("v", "p", function()
@@ -126,4 +132,5 @@ keymap("n", "<ESC>", "", opts)
 keymap('n', "<leader>e", "<cmd>Lexplore<CR>", opts)
 
 vim.cmd.packadd("nvim.undotree")
+vim.cmd.packadd("nvim.difftool")
 
