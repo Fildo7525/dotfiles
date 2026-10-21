@@ -4,11 +4,27 @@
 LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
 
 # Critical values to be used.
-NOTIFY_LEVELS=(5 10 15 50)
+declare -A NOTIFY_LEVELS
+
+INVISIBE_CURSOR="\033[?25l"
+WARN="\033[38;5;208m"
+FATAL="\033[38;5;196m"
+NORMAL="\033[0m"
+
+LEVELS=(5 10 15 30)
+for lvl in ${LEVELS[@]}
+do
+	if (( $lvl < 30 )); then
+		NOTIFY_LEVELS[$lvl]=$FATAL
+	else
+		NOTIFY_LEVELS[$lvl]=$WARN
+	fi
+done
+
 pid=-1
 
 # Check the state every X seconds.
-SLEEP_TIME_S=9
+SLEEP_TIME_S=59
 
 while true; do
 	bat_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
@@ -17,11 +33,14 @@ while true; do
 	if [[ "$bat_status" == "Charging" ]]; then
 		sleep $SLEEP_TIME_S
 		LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+		if (( $pid != -1 )); then
+			kill -9 $pid 2> /dev/null
+		fi
 		continue
 	fi
 
-	for notify_capacity in ${NOTIFY_LEVELS[@]}; do
-		if (( $bat_capacity < $notify_capacity )); then
+	for notify_capacity in ${LEVELS[@]}; do
+		if (( $bat_capacity <= $notify_capacity )); then
 			notify-send -u critical "Low Battery" "$bat_capacity% battery remaining."
 			if (( $pid != -1 )); then
 				kill -9 $pid 2> /dev/null
@@ -30,14 +49,17 @@ while true; do
 			kitty \
 				--name "Battery notification" \
 				--title "Battery-Notifier" \
+				--override font_size=120 \
 				--hold sh -c \
-					"cat /sys/class/power_supply/BAT1/capacity; read; kitten @ close-window" &
+					"echo -e \"$INVISIBE_CURSOR ${NOTIFY_LEVELS[$notify_capacity]} $(cat /sys/class/power_supply/BAT1/capacity)% $NORMAL\"; read; kitten @ close-window" &
 
 			sleep 1
 
 			pid=$(hyprctl clients -j | jq -r ".[] | select(.title == \"Battery-Notifier\") | .pid")
 
 			LAST_CAPACITY=$bat_capacity
+
+			break
 		fi
 	done
 

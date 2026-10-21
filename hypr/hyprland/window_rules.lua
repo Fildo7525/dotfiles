@@ -25,6 +25,15 @@ hl.window_rule({
 	no_focus = true
 })
 
+hl.window_rule(({
+	name = "battery-notification-float",
+	match = {
+		title = "Battery-Notifier",
+	},
+	center = true,
+	float = true,
+}))
+
 -- Hyprland-run windowrule
 hl.window_rule({
 	name = "move-hyprland-run",
