@@ -22,20 +22,37 @@ do
 done
 
 pid=-1
+watching=0
 
 # Check the state every X seconds.
 SLEEP_TIME_S=59
+
+setup_watch() {
+	udevadm monitor --udev --subsystem-match=power_supply |
+	while read -r _ _ event _; do
+		[[ $event == change ]] || continue
+		if [[ $(cat /sys/class/power_supply/ACAD/online) == 1 ]]; then
+			# CHARGING
+			watching=0
+			if (( $pid != -1 )); then
+				kill -9 $pid 2> /dev/null
+			fi
+		else
+			# DISCHARGING
+			watching=1
+		fi
+	done
+}
+
+setup_watch &
 
 while true; do
 	bat_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
 	bat_status=$(cat /sys/class/power_supply/BAT1/status)
 
-	if [[ "$bat_status" == "Charging" ]]; then
+	if [[ "$watching" == "0" ]]; then
 		sleep $SLEEP_TIME_S
 		LAST_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
-		if (( $pid != -1 )); then
-			kill -9 $pid 2> /dev/null
-		fi
 		continue
 	fi
 
@@ -65,3 +82,4 @@ while true; do
 
 	sleep $SLEEP_TIME_S
 done
+
