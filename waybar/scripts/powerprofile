@@ -4,6 +4,8 @@ input="${1:-exec}"
 profile=$(powerprofilesctl get)
 profiles=("power-saver" "balanced" "performance")
 
+CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}
+
 print_dict() {
 	local -n dict=$1  # Use nameref to pass the associative array by reference
 	for key in "${!dict[@]}"; do
@@ -94,7 +96,7 @@ case "$input" in
 		choice=$(printf "%s\n%s\n%s\n" "${options[@]}" \
 			| rofi \
 				-dmenu \
-				-theme $XDG_CONFIG_HOME/rofi/alt/powerprofile.rasi \
+				-theme $CONFIG/rofi/alt/powerprofile.rasi \
 				-selected-row $((current_index)) \
 				-monitor $(get_active_workspace)
 			)
