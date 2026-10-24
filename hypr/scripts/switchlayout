@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 help() {
-	"switchlayout next|prev"
+	echo "switchlayout next|prev"
 }
 
 reverse_assoc() {
@@ -27,6 +27,12 @@ case $1 in
 		;;
 esac
 
+source $HOME/.config/waybar/scripts/util
+WAYBAR_LAYER="custom/layout"
+LAYOUT_SIGNAL=$(get_signal $WAYBAR_LAYER)
+if [[ -z $LAYOUT_SIGNAL ]]; then
+	echo "No signal detected to notify $WAYBAR_LAYER" >&2
+fi
 
 layout=$(hyprctl getoption general:layout | grep "str" | awk '{print $2}')
 declare -A layouts
@@ -40,6 +46,7 @@ reverse_assoc layouts layouts_reversed
 
 if [[ ! -n ${layouts[$layout]:-} ]]; then
 	hyprctl eval "hl.config({ general = { layout = \"dwindle\"}})"
+	[[ -z $LAYOUT_SIGNAL ]] || pkill -RTMIN+$LAYOUT_SIGNAL waybar
 	exit 0
 fi
 
@@ -52,4 +59,5 @@ new_layout=${layouts_reversed[$l_num]}
 
 # notify-send "new_layout" "$new_layout"
 hyprctl eval "hl.config({ general = { layout = \"$new_layout\"}})"
+[[ -z $LAYOUT_SIGNAL ]] || pkill -RTMIN+$LAYOUT_SIGNAL waybar
 
