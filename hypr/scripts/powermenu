@@ -10,12 +10,14 @@ get_active_workspace() {
 	return
 }
 
+XDG_PATH=${XDG_CONFIG_HOME:-$HOME/.config}
+
 chosen=$(printf "\tSuspend\n󰒲\tHibernate\n<span color='#ff6b6b'>\tShutdown</span>\n\tReboot" \
 	| rofi \
 		-dmenu \
 		-p "Power" \
 		-markup-rows \
-		-theme $XDG_CONFIG_HOME/rofi/alt/powermenu.rasi \
+		-theme $XDG_PATH/rofi/alt/powermenu.rasi \
 		-monitor $(get_active_workspace) \
 	| awk '{print $2}' \
 	| tr "[:upper:]" "[:lower:]"
