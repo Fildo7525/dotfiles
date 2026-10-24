@@ -345,9 +345,9 @@ zle -N edit-command-line
 
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 
-if [[ ! -z "$KITTY" ]]; then
-	theme() {
-		scheme="${1:?usage: nvim-colorscheme <scheme>}"
+theme() {
+	scheme="${1:?usage: nvim-colorscheme <scheme>}"
+	if [[ ! -z "$KITTY" ]]; then
 		if [[ "$scheme" == "light" ]]; then
 			scheme="catppuccin-latte"
 			cp ~/.config/kitty/themes/latte.conf ~/.config/kitty/current-theme.conf
@@ -355,28 +355,29 @@ if [[ ! -z "$KITTY" ]]; then
 			scheme="catppuccin-mocha"
 			cp ~/.config/kitty/themes/mocha.conf ~/.config/kitty/current-theme.conf
 		fi
+	fi
 
-		sockdir="${XDG_CACHE_HOME:-$HOME/.cache}/nvim/servers"
-		theme_file="${XDG_CACHE_HOME:-$HOME/.cache}/nvim/theme"
-		echo "$scheme" > $theme_file
+	sockdir="${XDG_CACHE_HOME:-$HOME/.cache}/nvim/servers"
+	theme_file="${XDG_CACHE_HOME:-$HOME/.cache}/nvim/theme"
+	echo "$scheme" > $theme_file
 
-		sent=0
+	sent=0
 
-		for sock in "$sockdir"/nvim-*.sock; do
-			[ -S "$sock" ] || continue
+	for sock in "$sockdir"/nvim-*.sock; do
+		[ -S "$sock" ] || continue
 
-			# Probe: stale sockets from crashed instances look identical on disk.
-			if ! nvim --server "$sock" --remote-expr "1" >/dev/null 2>&1; then
-				rm -f "$sock"
-				continue
-			fi
+		# Probe: stale sockets from crashed instances look identical on disk.
+		if ! nvim --server "$sock" --remote-expr "1" >/dev/null 2>&1; then
+			rm -f "$sock"
+			continue
+		fi
 
-			if nvim --server "$sock" \
-					--remote-expr "execute('colorscheme $scheme')" >/dev/null 2>&1; then
-				sent=$((sent + 1))
-			else
-				printf 'failed: %s\n' "$sock" >&2
-			fi
-		done
-	}
-fi
+		if nvim --server "$sock" \
+				--remote-expr "execute('colorscheme $scheme')" >/dev/null 2>&1; then
+			sent=$((sent + 1))
+		else
+			printf 'failed: %s\n' "$sock" >&2
+		fi
+	done
+}
+
