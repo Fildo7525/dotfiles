@@ -2,11 +2,11 @@
 
 waybar_tooltip()
 {
-    echo "$1" | while read -r line; do
-        count="${#line}"
-        [ "$count" -lt 69 ] && line="${line}$(printf "%$((69 - count))s")"
-        printf '%s' "$line "
-    done
+	echo "$1" | while read -r line; do
+		count="${#line}"
+		[ "$count" -lt 69 ] && line="${line}$(printf "%$((69 - count))s")"
+		printf '%s' "$line "
+	done
 }
 
 text=$(df -h /home | tail -1 | awk '{print $5 " "}')

@@ -4,6 +4,9 @@ input="${1:-exec}"
 profile=$(powerprofilesctl get)
 profiles=("power-saver" "balanced" "performance")
 
+CURRENT_DIR=$(realpath ${BASH_SOURCE[0]%/*})
+WAYBAR_LAYER="custom/powerprofile"
+
 CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}
 
 print_dict() {
@@ -66,6 +69,12 @@ get_active_workspace() {
 	return
 }
 
+source $CURRENT_DIR/util
+PROFILE_SIGNAL=$(get_signal $WAYBAR_LAYER)
+if [[ -z $PROFILE_SIGNAL ]]; then
+	echo "No signal detected to notify $WAYBAR_LAYER" >&2
+fi
+
 case "$input" in
 	"exec")
 		printf '{"text":"%s","alt":"%s","text":"%s","class":"%s"}\n' "$profile" "$profile" "$profile" "$profile"
@@ -75,14 +84,14 @@ case "$input" in
 		profile=$(get_pp_state 1)
 		powerprofilesctl set "$profile"
 
-		pkill -RTMIN+3 waybar
+		pkill -RTMIN+$PROFILE_SIGNAL waybar
 		;;
 
 	"previous")
 		profile=$(get_pp_state -1)
 		powerprofilesctl set "$profile"
 
-		pkill -RTMIN+3 waybar
+		pkill -RTMIN+$PROFILE_SIGNAL waybar
 		;;
 
 	"menu")
@@ -105,7 +114,7 @@ case "$input" in
 			powerprofilesctl set "${reverse_profile_options[$choice]}"
 		fi
 
-		pkill -RTMIN+3 waybar
+		pkill -RTMIN+$PROFILE_SIGNAL waybar
 		;;
 	*)
 		echo "Unknown command: $input"

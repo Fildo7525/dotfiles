@@ -1,19 +1,41 @@
 #!/usr/bin/env bash
 
 set -uo pipefail
+CURRENT_DIR=$(realpath ${BASH_SOURCE[0]%/*})
+WAYBAR_LAYER="custom/layout"
 
-INTERVAL=1
-REPEATS=1
+CACHE_FILE=$HOME/.cache/waybar/layout
+if [[ ! -e $CACHE_FILE ]]; then
+	mkdir -p ${CACHE_FILE%/*}
+	bash -c "$CMD" > $CACHE_FILE
+fi
+
+help() {
+	printf "Usage:"
+	printf "\t${BASH_SOURCE[0]}"
+	printf "\t\t-t [timeout]\tTimeout after showing the new layout name."
+	printf "\t\t-i\tPoke waybar to show the layout information."
+}
+
+
+source $CURRENT_DIR/util
+LAYOUT_SIGNAL=$(get_signal $WAYBAR_LAYER)
+if [[ -z $LAYOUT_SIGNAL ]]; then
+	echo "No signal detected to notify $WAYBAR_LAYER" >&2
+fi
+
+TIMEOUT=1
 
 while [[ "${1:-}" == -* ]]; do
 	case "$1" in
-		-i)
-			INTERVAL="$2"
+		-t)
+			TIMEOUT="$2"
 			shift 2
 			;;
-		-r)
-			REPEATS="$2"
-			shift 2
+		-i)
+			echo '' > $CACHE_FILE
+			pkill -RTMIN+$LAYOUT_SIGNAL waybar
+			exit 0
 			;;
 		--)
 			shift
@@ -21,6 +43,7 @@ while [[ "${1:-}" == -* ]]; do
 			;;
 		*)
 			echo "Unknown option: $1" >&2
+			help >&2
 			exit 1
 			;;
 	esac
@@ -32,28 +55,17 @@ else
 	CMD=("$@")
 fi
 
+last_output=$(cat $CACHE_FILE)
+new_output="$(bash -c "${CMD[@]}" 2>&1)"
 
-echo "Watching command: \"${CMD[*]}\"  (every ${INTERVAL} with $REPEATS repeats). Press Ctrl+C to stop." >&2
+if [[ "$new_output" == "$last_output" ]]; then
+	# Waybar displays the data after the script finishes, so we need to wait when we want to clear the view.
+	sleep $TIMEOUT
+	printf '{"text":"","alt":"","class":"layout"}\n'
 
-last_output=""
-count_repeats=0
+else
+	echo $new_output > $CACHE_FILE
+	printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$new_output" "$new_output"
+	pkill -RTMIN+$LAYOUT_SIGNAL waybar
+fi
 
-
-while true; do
-	output="$(bash -c "${CMD[@]}" 2>&1)"
-
-	if [[ "$output" == "$last_output" ]]; then
-		printf '{"text":"","alt":"","class":"layout"}\n'
-
-	elif [[ $count_repeats -le $REPEATS ]]; then
-		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
-		count_repeats=$((count_repeats + 1))
-
-	else
-		printf '{"text":"%s","alt":"%s","class":"layout"}\n' "$output" "$output"
-		count_repeats=0
-	fi
-
-	last_output="$output"
-	sleep "$INTERVAL"
-done

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+get_signal() {
+	SIGNAL=$(jq -r \
+		'to_entries[] | select(.value | type == "object" and has("signal")) | "\(.key)\t\(.value.signal)"' \
+		~/.config/waybar/config | grep $1 | awk '{ print $2 }')
+
+	echo $SIGNAL
+}
+

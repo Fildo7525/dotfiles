@@ -104,10 +104,10 @@ class PlayerManager:
         # or else show the first paused player
         # or else show nothing
         current_player = self.get_first_playing_player()
-        print(current_player.props.metadata)
+        # print(current_player.props.metadata)
         logger.info(f"Metadata: {current_player.props.metadata}")
         if current_player is not None:
-            print(current_player.props.metadata)
+            # print(current_player.props.metadata)
             self.on_metadata_changed(current_player, current_player.props.metadata)
         else:
             self.clear_output()
