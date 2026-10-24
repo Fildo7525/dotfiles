@@ -8,17 +8,16 @@
 	"gtk-layer-shell": true,
 	"spacing": 1,
 
-	// Choose the order of the modules
 	"modules-left": [
 		"hyprland/workspaces",
 		"custom/layout",
 		"group/hardware",
-		"hyprland/submap",
+		"hyprland/submap"
 	],
 	"modules-center": [
 		"custom/spotify",
 		"clock",
-		"custom/notification",
+		"custom/notification"
 	],
 	"modules-right": [
 		"network",
@@ -28,48 +27,47 @@
 		"group/power",
 		"custom/language",
 		"custom/clipboard",
-		"tray",
+		"tray"
 	],
 
-	/* ===== Modules Left ===== */
 	"hyprland/workspaces": {
 		"show-special": true,
-		"special-visible-only": true,
+		"special-visible-only": true
 	},
 	"custom/layout": {
 		"hide-empty-text": true,
-		"exec": "~/.config/waybar/scripts/layout -i 1",
+		"exec": "~/.config/waybar/scripts/layout -t 1",
 		"return-type": "json",
+		"signal": 5
 	},
 	"group/hardware": {
 		"modules": [
 			"cpu",
 			"memory",
-			"custom/disk",
+			"custom/disk"
 		],
 		"separator": "|",
-		"orientation": "horizontal",
+		"orientation": "horizontal"
 	},
 	"cpu": {
 		"format": "{usage}% ",
 		"tooltip": true,
-		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop",
+		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop"
 	},
 	"memory": {
 		"format": "{}% ",
 		"tooltip": true,
 		"tooltip-format": "Percentage: {percentage}%\nUsed: {used} GiB\nAvailable: {avail} GiB\nTotal: {total} GiB\n\nSwap Percentage: {swapPercentage}%\nSwap Used: {swapUsed} GiB\nSwap Available: {swapAvail} GiB\nSwap Total: {swapTotal} GiB",
-		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop",
+		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop"
 	},
 	"custom/disk": {
 		"exec": "~/.config/waybar/scripts/disk",
 		"tooltip": true,
 		"return-type": "json",
 		"interval": 3600,
-		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop",
+		"on-click-right": "SHELL=/usr/bin/bash foot -a btop btop"
 	},
 
-	/* ===== Modules Center ===== */
 	"custom/spotify": {
 		"format": "{}",
 		"escape": true,
@@ -80,7 +78,7 @@
 		"smooth-scrolling-threshold": 10,
 		"on-scroll-up" : "playerctl -p spotify next",
 		"on-scroll-down" : "playerctl -p spotify previous",
-		"exec": "~/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null",
+		"exec": "~/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null"
 	},
 	"clock": {
 		"timezone": "Europe/Copenhagen",
@@ -99,9 +97,9 @@
 				"days": "<span color='#b4befe'><b>{}</b></span>",
 				"weeks": "<span color='#a6e3a1'><b>W{}</b></span>",
 				"weekdays": "<span color='#fab387'><b>{}</b></span>",
-				"today": "<span color='#f38ba8'><b><u>{}</u></b></span>",
-			},
-		},
+				"today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+			}
+		}
 	},
 	"custom/notification": {
 		"tooltip": true,
@@ -114,19 +112,17 @@
 			"inhibited-notification": "󰂛",
 			"inhibited-none": "󰪑",
 			"dnd-inhibited-notification": "󰂛",
-			"dnd-inhibited-none": "󰪑",
+			"dnd-inhibited-none": "󰪑"
 		},
 		"return-type": "json",
 		"exec-if": "which swaync-client",
 		"exec": "swaync-client -swb",
 		"on-click": "swaync-client -t -sw",
 		"on-click-right": "swaync-client -d -sw",
-		"escape": true,
+		"escape": true
 	},
 
-	/* ===== Modules Right ===== */
 	"network": {
-		// "interface": "wlp2*", // (Optional) To force the use of this interface
 		"format": " {bandwidthUpBytes}  {bandwidthDownBytes} {icon}",
 		"format-disconnected": "󰌙 󰖪",
 		"format-disabled": " 󰖪",
@@ -136,13 +132,13 @@
 			"ethernet": "󰈁",
 			"linked": "",
 			"disconnected": "󰖪",
-			"disabled": "󰖪",
+			"disabled": "󰖪"
 		},
 		"interval": 2,
 		"tooltip": true,
 		"tooltip-format": "{ifname}\n{essid} @ {frequency} MHz \nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}% {signaldBm}dBm\nGateway: {gwaddr}",
 		"on-click-right": "SHELL=/usr/bin/bash; iwctl station wlan0 scan; kitty nmtui",
-		"on-click-middle": "~/.config/waybar/scripts/wifi toggle",
+		"on-click-middle": "~/.config/waybar/scripts/wifi toggle"
 	},
 	"bluetooth": {
 		"format": "{icon}",
@@ -161,16 +157,16 @@
 			"connected": "",
 			"discoverable": "󰂱",
 			"discovering": "󰂰",
-			"pairable": "",
+			"pairable": ""
 		}
 	},
 	"group/pulseaudio": {
 		"modules": [
 			"pulseaudio#output",
-			"pulseaudio#input",
+			"pulseaudio#input"
 		],
 		"separator": "|",
-		"orientation": "horizontal",
+		"orientation": "horizontal"
 	},
 	"pulseaudio#input": {
 		"format-source": "{volume} ",
@@ -183,7 +179,7 @@
 		"on-scroll-up": "~/.config/waybar/scripts/volume source up",
 		"on-scroll-down": "~/.config/waybar/scripts/volume source down",
 		"tooltip": false,
-		"interval": 20,
+		"interval": 20
 	},
 	"pulseaudio#output": {
 		"format": "{volume} {icon}",
@@ -196,7 +192,7 @@
 				"",
 				"",
 				"",
-				"",
+				""
 			]
 		},
 		"on-click-right": "pavucontrol",
@@ -208,24 +204,24 @@
 	"backlight": {
 		"device": "acpi_video1",
 		"format": "{percent}% {icon}",
-		"format-icons": ["", "", "", "", "", "", "", "", ""],
+		"format-icons": ["", "", "", "", "", "", "", "", ""]
 	},
 	"group/power": {
 		"modules": [
 			"custom/powerprofile",
 			"custom/conservation",
 			"battery",
-			"custom/power",
+			"custom/power"
 		],
 		"separator": "|",
-		"orientation": "horizontal",
+		"orientation": "horizontal"
 	},
 	"custom/powerprofile": {
 		"format": "{icon}",
 		"format-icons": {
 			"performance": "󰊗",
 			"balanced": "",
-			"power-saver": "",
+			"power-saver": ""
 		},
 		"tooltip": true,
 		"tooltip-format": "{}",
@@ -234,7 +230,7 @@
 		"on-scroll-up": "~/.config/waybar/scripts/powerprofile previous",
 		"on-scroll-down": "~/.config/waybar/scripts/powerprofile next",
 		"return-type": "json",
-		"signal": 3,
+		"signal": 3
 	},
 	"custom/power": {
 		"format" : "⏻",
@@ -245,40 +241,40 @@
 			"shutdown": "shutdown",
 			"reboot": "reboot",
 			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate",
-		},
+			"hibernate": "systemctl hibernate"
+		}
 	},
 	"custom/conservation": {
 		"format": "{icon}",
 		"format-icons": {
 			"conserv_on": "",
-			"conserv_off": "󰝨",
+			"conserv_off": "󰝨"
 		},
 		"exec": "~/.config/waybar/scripts/conservation",
 		"on-click": "~/.config/waybar/scripts/conservation toggle",
 		"return-type": "json",
 		"tooltip": true,
 		"tooltip-format": "{}",
-		"signal": 2,
+		"signal": 2
 	},
 	"battery": {
 		"states": {
 			"good": 55,
 			"warning": 30,
-			"critical": 15,
+			"critical": 15
 		},
 		"format": "{capacity}% {icon}",
 		"format-charging": "{capacity}% 󰂄",
 		"format-plugged": "{capacity}% ",
 		"tooltip-format": "{timeTo}",
 		"format-icons": ["", "", "", "", ""],
-		"interval": 1,
+		"interval": 1
 	},
 	"custom/language": {
 		"format": "{} ",
 		"exec": "~/.config/waybar/scripts/language",
 		"tooltip": false,
-		"signal": 4,
+		"signal": 4
 	},
 	"custom/clipboard": {
 		"format": "{}",
@@ -287,7 +283,7 @@
 		"exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
 		"interval": 3600,
 		"on-click": "~/.config/waybar/scripts/clipboard choose",
-		"on-click-right": "cliphist wipe",
+		"on-click-right": "cliphist wipe"
 	},
 	"tray": {
 		"icon-size": 21,
