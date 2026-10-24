@@ -42,12 +42,15 @@ local switch_win = "pkill rofi || ~/.config/rofi/launch window"
 local file_menu = "pkill rofi || ~/.config/rofi/launch filebrowser"
 local locked = false
 
+local WAYBAR_SINGALS = require("hyprland.util").get_signals()
+
 -- Use rofi to show clipboard history
 hl.bind(mainMod("period"), hl.dsp.exec_cmd("~/.config/waybar/scripts/clipboard choose"))
 
+
 -- Switch keyboard layout
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("hyprctl switchxkblayout current next"))
-hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+4 waybar"))
+hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+" .. WAYBAR_SINGALS["custom/language"] .. " waybar"))
 
 hl.bind(mainMod("F11"), hl.dsp.exec_cmd("pkill -SIGUSR1 waybar"))
 
@@ -191,6 +194,7 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- In your hyprland.conf
 hl.bind(mainMod({"SHIFT", "bracketright"}), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout next"))
 hl.bind(mainMod({"SHIFT", "bracketleft"}), hl.dsp.exec_raw("~/.config/hypr/scripts/switchlayout prev"))
+hl.bind(mainMod({"F1"}), hl.dsp.exec_raw("~/.config/waybar/scripts/layout -i"))
 
 -- Gnome apps
 hl.bind(mainMod('G'), hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=GNOME gnome-control-center"))
@@ -200,13 +204,18 @@ hl.bind(mainMod('B'), hl.dsp.exec_cmd("blueman-manager"))
 
 -- Switch to a submap called `resize`.
 hl.bind(mainMod('R'), hl.dsp.submap("resize"))
+-- hl.dispatch(hl.dsp.global())
+		-- col = {
+		-- 	active_border = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45, },
+		-- 	inactive_border = "rgba(595959aa)",
+		-- },
 hl.define_submap("resize", function()
 
 	-- Set repeating binds for resizing the active window.
-	hl.bind("right", hl.dsp.window.resize({ x = 20, y = 0, relative = true}), { repeating = true })
-	hl.bind("left", hl.dsp.window.resize({ x = -20, y = 0, relative = true}), { repeating = true })
-	hl.bind("up", hl.dsp.window.resize({ x = 0, y = 20, relative = true}), { repeating = true })
-	hl.bind("down", hl.dsp.window.resize({ x = 0, y = -20, relative = true}), { repeating = true })
+	hl.bind("l", hl.dsp.window.resize({ x = 20, y = 0, relative = true}), { repeating = true })
+	hl.bind("h", hl.dsp.window.resize({ x = -20, y = 0, relative = true}), { repeating = true })
+	hl.bind("k", hl.dsp.window.resize({ x = 0, y = 20, relative = true}), { repeating = true })
+	hl.bind("j", hl.dsp.window.resize({ x = 0, y = -20, relative = true}), { repeating = true })
 
 	-- Use `reset` to go back to the global submap
 	hl.bind("escape", hl.dsp.submap("reset"))
