@@ -43,6 +43,7 @@ local file_menu = "pkill rofi || ~/.config/rofi/launch filebrowser"
 local locked = false
 
 local WAYBAR_SINGALS = require("hyprland.util").get_signals()
+-- hl.notification({name="Signals: " .. unpack(WAYBAR_SINGALS), timeout = 10000 })
 
 -- Use rofi to show clipboard history
 hl.bind(mainMod("period"), hl.dsp.exec_cmd("~/.config/waybar/scripts/clipboard choose"))
@@ -50,7 +51,10 @@ hl.bind(mainMod("period"), hl.dsp.exec_cmd("~/.config/waybar/scripts/clipboard c
 
 -- Switch keyboard layout
 hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("hyprctl switchxkblayout current next"))
-hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+" .. WAYBAR_SINGALS["custom/language"] .. " waybar"))
+if not WAYBAR_SINGALS["custom/language"] then
+	local signal = WAYBAR_SINGALS["custom/language"] or 5
+	hl.bind(mainMod("backspace"), hl.dsp.exec_cmd("pkill -RTMIN+" .. signal .. " waybar"))
+end
 
 hl.bind(mainMod("F11"), hl.dsp.exec_cmd("pkill -SIGUSR1 waybar"))
 
