@@ -111,5 +111,6 @@ require("hyprland.keymaps")
 -- ##############################
 
 require("hyprland.window_rules")
+require("hyprland.workspace_rules")
 
 require("hyprland.layout")

@@ -68,20 +68,3 @@ hl.window_rule({
 	workspace = "9",
 })
 
-hl.workspace_rule({
-	workspace = "9",
-	default_name = "",
-	on_created_empty = "gnome-calendar"
-})
-
-hl.workspace_rule({
-	workspace = "10",
-	default_name = "",
-	on_created_empty = "spotify-launcher",
-	monitor = "eDP-1",
-})
-
-hl.workspace_rule({
-	workspace = "special:magic",
-	gaps_out = 25,
-})
