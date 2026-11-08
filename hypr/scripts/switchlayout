@@ -61,3 +61,6 @@ new_layout=${layouts_reversed[$l_num]}
 hyprctl eval "hl.config({ general = { layout = \"$new_layout\"}})"
 [[ -z $LAYOUT_SIGNAL ]] || pkill -RTMIN+$LAYOUT_SIGNAL waybar
 
+if [[ "$new_layout" == "master" ]]; then
+	hyprctl dispatch "hl.dsp.layout(\"swapwithmaster\")"
+fi
